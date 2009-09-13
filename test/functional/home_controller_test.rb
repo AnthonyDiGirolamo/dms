@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class HomesControllerTest < ActionController::TestCase
+class HomeControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:homes)
+    assert_not_nil assigns(:home)
   end
 end
