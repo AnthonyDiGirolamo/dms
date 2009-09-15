@@ -1,0 +1,8 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true]
+	"User" [shape=Mrecord, label="{User|login :string\lname :string\lemail :string\lcrypted_password :string\lsalt :string\lcreated_at :datetime\lupdated_at :datetime\lremember_token :string\lremember_token_expires_at :datetime\lactivation_code :string\lactivated_at :datetime\lstate :string\ldeleted_at :datetime\l}"]
+	"UserObserver" [shape=record, label="{UserObserver|}"]
+	"UserMailer" [shape=record, label="{UserMailer|}"]
+	"ActiveRecord::Observer" -> "UserObserver" [label="", arrowhead="none", arrowtail="onormal"]
+	"ActionMailer::Base" -> "UserMailer" [label="", arrowhead="none", arrowtail="onormal"]
+}

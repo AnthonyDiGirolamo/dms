@@ -1,0 +1,8 @@
+digraph controllers_diagram {
+	graph[overlap=false, splines=true]
+	"UsersController" [shape=Mrecord, label="{UsersController|activate\lcreate\ldestroy\lnew\lpurge\lsuspend\lunsuspend\l|find_user\l|\l}"]
+	"HomeController" [shape=Mrecord, label="{HomeController|index\l|\l|\l}"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|\l|filter_parameters\l|\l}"]
+	"SessionsController" [shape=Mrecord, label="{SessionsController|create\ldestroy\lnew\l|note_failed_signin\l|\l}"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|\l|filter_parameters\l|\l}"]
+}
