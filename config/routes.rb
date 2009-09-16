@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+#  map.resources :shares
+#  map.resources :audits
+#  map.resources :roles
+#  map.resources :departments
 #  map.resources :documents
 
   map.home '', :controller => 'home', :action => 'index'

@@ -5,3 +5,6 @@ railroad -o doc/state.dot -A
 dot -Tpng doc/full_models.dot > doc/full_models.png
 neato -Tpng doc/controller.dot > doc/controller.png
 dot -Tpng doc/state.dot > doc/state.png
+dot -Tsvg doc/full_models.dot > doc/full_models.svg
+neato -Tsvg doc/controller.dot > doc/controller.svg
+dot -Tsvg doc/state.dot > doc/state.svg
