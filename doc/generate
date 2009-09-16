@@ -1,0 +1,7 @@
+#!/bin/sh
+railroad -o doc/full_models.dot -M
+railroad -o doc/controller.dot -C
+railroad -o doc/state.dot -A
+dot -Tpng doc/full_models.dot > doc/full_models.png
+neato -Tpng doc/controller.dot > doc/controller.png
+dot -Tpng doc/state.dot > doc/state.png
