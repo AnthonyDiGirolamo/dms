@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: MyString
+  action: MyString
+  time: 2009-09-15 13:41:11
+
+two:
+  user: MyString
+  action: MyString
+  time: 2009-09-15 13:41:11
