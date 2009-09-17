@@ -138,3 +138,9 @@ end
 #   run "cp #{db_config} #{release_path}/config/database.yml"
 # end
 
+desc "Symlink the database config file from shared directory to current release directory."
+task :symlink_database_yml do
+  run "ln -nsf #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+end
+after 'deploy:update_code' , 'symlink_database_yml'
+
