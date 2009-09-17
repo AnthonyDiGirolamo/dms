@@ -1,0 +1,13 @@
+---
+#prefix: /asuglobal
+cwd: /var/www/rails/dms/current
+address: 127.0.0.1
+port: 8000
+environment: production
+pid_file: log/mongrel.pid
+log_file: log/mongrel.log
+servers: 4
+docroot: public
+user: adigiro
+group: adigiro
+
