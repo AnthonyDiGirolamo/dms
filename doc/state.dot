@@ -6,7 +6,10 @@ subgraph cluster_user {
   user_deleted [label=deleted ];
   user_active [label=active ];
   user_pending [label=pending , peripheries = 2];
-  user_passive [label=passive ];}	"user_passive" -> "user_pending" [label="register", fontsize=10]
+  user_passive [label=passive ];}	"user_suspended" -> "user_active" [label="unsuspend", fontsize=10]
+	"user_suspended" -> "user_pending" [label="unsuspend", fontsize=10]
+	"user_suspended" -> "user_passive" [label="unsuspend", fontsize=10]
+	"user_passive" -> "user_pending" [label="register", fontsize=10]
 	"user_pending" -> "user_active" [label="activate", fontsize=10]
 	"user_passive" -> "user_deleted" [label="delete", fontsize=10]
 	"user_pending" -> "user_deleted" [label="delete", fontsize=10]
@@ -15,7 +18,4 @@ subgraph cluster_user {
 	"user_passive" -> "user_suspended" [label="suspend", fontsize=10]
 	"user_pending" -> "user_suspended" [label="suspend", fontsize=10]
 	"user_active" -> "user_suspended" [label="suspend", fontsize=10]
-	"user_suspended" -> "user_active" [label="unsuspend", fontsize=10]
-	"user_suspended" -> "user_pending" [label="unsuspend", fontsize=10]
-	"user_suspended" -> "user_passive" [label="unsuspend", fontsize=10]
 }
