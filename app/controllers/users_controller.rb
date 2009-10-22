@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   
-  # Protect these actions behind an admin login
-  # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_user, :only => [:show, :suspend, :unsuspend, :destroy, :purge]
   require_role "administrator", :for_all_except => [:new, :create, :activate]
 
@@ -15,7 +13,7 @@ class UsersController < ApplicationController
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
     if success && @user.errors.empty?
-      redirect_back_or_default(home_path)
+      redirect_back_or_default(root_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
@@ -34,10 +32,10 @@ class UsersController < ApplicationController
       redirect_to '/login'
     when params[:activation_code].blank?
       flash[:error] = "The activation code was missing.  Please follow the URL from your email."
-      redirect_back_or_default(home_path)
+      redirect_back_or_default(root_path)
     else 
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
-      redirect_back_or_default(home_path)
+      redirect_back_or_default(root_path)
     end
   end
 
@@ -64,11 +62,24 @@ class UsersController < ApplicationController
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
   # supply their old password along with a new one to update it, etc.
+  def index
+    get_users
+    render :action => 'list'
+  end
+
   def show
+  end
+
+  def list
+    get_users
   end
 
 protected
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def get_users
+    @users = User.paginate :page => params[:page], :order => 'login ASC', :per_page => 25
   end
 end

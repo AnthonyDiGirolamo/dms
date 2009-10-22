@@ -5,10 +5,9 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :departments
 #  map.resources :documents
 
-  map.home '', :controller => 'home', :action => 'index'
-  map.home '/', :controller => 'home', :action => 'index'
+  map.root :controller => 'home'
 
-  map.resources :users, :member => { :show => :get, :suspend => :put, :unsuspend => :put, :purge => :delete }
+  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
   map.resource :session
 
   map.login '/login', :controller => 'sessions', :action => 'new'
