@@ -5,3 +5,19 @@
 #   
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
+
+roles = Role.create [
+  {:name => 'administrator'},
+  {:name => 'employee'},
+  {:name => 'manager'},
+  {:name => 'corporate'}
+]
+
+depts = Department.create [
+  {:name => 'Human Resources'},
+  {:name => 'Logistics and Supply'},
+  {:name => 'IT Support'},
+  {:name => 'Sales'},
+  {:name => 'Research and Development'}
+]
+

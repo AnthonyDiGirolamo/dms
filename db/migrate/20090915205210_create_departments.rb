@@ -9,6 +9,8 @@ class CreateDepartments < ActiveRecord::Migration
       t.integer :department_id
       t.integer :user_id
     end
+    add_index :departments_users, :department_id
+    add_index :departments_users, :user_id
   end
 
   def self.down
