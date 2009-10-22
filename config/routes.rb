@@ -13,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.register '/register', :controller => 'users', :action => 'create'
+  map.register '/register', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
 
