@@ -12,6 +12,7 @@ module Authorization
         acts_as_state_machine :initial => :pending
         state :passive
         state :pending, :enter => :make_activation_code
+        #state :notified
         state :active,  :enter => :do_activate
         state :suspended
         state :deleted, :enter => :do_delete
@@ -20,6 +21,10 @@ module Authorization
           transitions :from => :passive, :to => :pending, :guard => Proc.new {|u| !(u.crypted_password.blank? && u.password.blank?) }
         end
         
+        #event :notify do
+          #transitions :from => :pending, :to => :notified
+        #end
+
         event :activate do
           transitions :from => :pending, :to => :active 
         end
