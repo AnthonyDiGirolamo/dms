@@ -1,4 +1,10 @@
-<%= will_paginate @users %>
+<div class="pagination">
+  <%= will_paginate @users, :container => false %>
+  <div clas="page_info">
+    <p><%= page_entries_info @users %></p>
+  </div>
+</div>
+
 <table border="0" cellspacing="0" cellpadding="5">
   <tr>
     <th>Login</th>
