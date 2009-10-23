@@ -83,6 +83,6 @@ protected
   end
 
   def get_users
-    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
+    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 2
   end
 end
