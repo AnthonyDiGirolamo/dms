@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :find_user, :only => [:show, :suspend, :unsuspend, :destroy, :purge]
+  before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
   require_role "administrator", :for_all_except => [:new, :create, :activate]
 
   def new
@@ -74,12 +74,15 @@ class UsersController < ApplicationController
     get_users
   end
 
+  def edit
+  end
+
 protected
   def find_user
     @user = User.find(params[:id])
   end
 
   def get_users
-    @users = User.paginate :page => params[:page], :order => 'login ASC', :per_page => 25
+    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
   end
 end

@@ -1,4 +1,34 @@
-<li>
-  <%= h user.login %>
-  <%= h user.state %>
-</li>
+<tr>
+  <td>
+    <%= h user.login %>
+  </td>
+  <td>
+    <%= h user.email %>
+  </td>
+  <td>
+    <% if !user.created_at.nil? -%> 
+    <%= h user.created_at.strftime("%m/%d/%y %I:%M %p") %>
+    <% end -%>
+  </td>
+  <td>
+    <% if !user.updated_at.nil? -%> 
+    <%= h user.updated_at.strftime("%m/%d/%y %I:%M %p") %>
+    <% end -%>
+  </td>
+  <td>
+    <% if !user.activated_at.nil? -%> 
+    <%= h user.activated_at.strftime("%m/%d/%y %I:%M %p") %>
+    <% end -%>
+  </td>
+  <td>
+    <%= h user.state %>
+  </td>
+  <td>
+    <%= h number_to_human_size(user.quota) %>
+  </td>
+  <td>
+    <% for role in user.roles %>
+      <%= h role.name %>
+    <% end %>
+  </td>
+</tr>

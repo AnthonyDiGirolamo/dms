@@ -1,4 +1,8 @@
 admin_role:
-  name: admin
-user_role:
-  name: user
+  name: administrator
+employee_role:
+  name: employee
+manager_role:
+  name: manager
+corporate_role:
+  name: corporate

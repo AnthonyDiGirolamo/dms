@@ -1,7 +1,12 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+HR:
+  name: Human Resources
 
-two:
-  name: MyString
+Logistics:
+  name: Logistics and Supply
+
+IT:
+  name: IT Support
+
+RD:
+  name: Research and Development
