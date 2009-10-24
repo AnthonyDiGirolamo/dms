@@ -20,6 +20,13 @@
   </li>
 <% end -%>
 
+<% if not @user.departments.empty? -%>
+  <li><b>Department:</b>
+  <% for department in @user.departments %>
+    <%= h department.name %>
+  <% end %>
+  </li>
+<% end -%>
 </ul>
 
 <% if not @requests.nil? -%> 
@@ -29,7 +36,7 @@
     Role: <%= h request.role.name %>
     <% end %>
     <% if not request.department_id.nil? -%>
-    Department: <%= h request.department.name %>
+      <br/>Department: <%= h request.department.name %>
     <% end %>
   <% end %>
 <% end %>

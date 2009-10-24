@@ -60,15 +60,14 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  # There's no page here to update or destroy a user.  If you add those, be
-  # smart -- make sure you check that the visitor is authorized to do so, that they
-  # supply their old password along with a new one to update it, etc.
-
   def show
     @requests = UserRequest.find_all_by_user_id_and_state current_user.id, "pending", :include => [ :role, :department ]
   end
 
   def edit
+    # allow changing name
+    # what else?
+    #   submit new requests
   end
 
   def index
