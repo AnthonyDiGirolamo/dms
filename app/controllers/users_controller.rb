@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @roles = Role.find :all, :order => 'name ASC'
   end
  
   def create
@@ -12,11 +13,12 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
-    if success && @user.errors.empty?
+    if success && @user.errors.empty? # also check that role name is valid
+      # submit role request here using params[:role][:name]
       redirect_back_or_default(root_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      flash[:error]  = "There was an error setting up that account.  Please try again."
       render :action => 'new'
     end
   end
