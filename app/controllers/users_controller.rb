@@ -1,20 +1,20 @@
 class UsersController < ApplicationController
-  
+
   before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
-  require_role "administrator", :for_all_except => [:new, :create, :activate]
+  before_filter :all_roles, :only => [:edit, :new, :create]
+  require_role "administrator", :for_all_except => [:new, :create, :activate, :show]
 
   def new
     @user = User.new
-    @roles = Role.find :all, :order => 'name ASC'
   end
- 
+
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
-    if success && @user.errors.empty? # also check that role name is valid
-      # submit role request here using params[:role][:name]
+    if success && @user.errors.empty? && valid_role?(params[:role][:name])
+      # submit role user_request here using params[:role][:name]
       redirect_back_or_default(root_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
@@ -34,19 +34,19 @@ class UsersController < ApplicationController
     when params[:activation_code].blank?
       flash[:error] = "The activation code was missing.  Please follow the URL from your email."
       redirect_back_or_default(root_path)
-    else 
+    else
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
       redirect_back_or_default(root_path)
     end
   end
 
   def suspend
-    @user.suspend! 
+    @user.suspend!
     redirect_to users_path
   end
 
   def unsuspend
-    @user.unsuspend! 
+    @user.unsuspend!
     redirect_to users_path
   end
 
@@ -59,31 +59,55 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_path
   end
-  
+
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
   # supply their old password along with a new one to update it, etc.
-  def index
-    get_users
-    render :action => 'list'
-  end
 
   def show
-  end
-
-  def list
-    get_users
+    @requests = UserRequest.find_all_by_user_id_and_state current_user.id, "pending", :include => [ :role, :department ]
   end
 
   def edit
   end
 
+  def index
+    all_users
+    render :action => 'all'
+  end
+
+  def all
+    all_users
+  end
+
+  def pending
+    users_by_state "pending"
+  end
+
+  def active
+    users_by_state "active"
+  end
+
 protected
+
+  def all_roles
+    @roles = Role.find :all, :order => 'name ASC'
+  end
+
+  def valid_role?(role_name)
+    Role.find_by_name role_name
+  end
+
   def find_user
     @user = User.find(params[:id])
   end
 
-  def get_users
-    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 2
+  def all_users
+    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
   end
+
+  def users_by_state(state)
+    @users = User.paginate_by_state state, :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
+  end
+
 end

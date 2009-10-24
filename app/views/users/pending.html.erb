@@ -1,7 +1,7 @@
 <div class="pagination">
   <%= will_paginate @users, :container => false %>
   <div clas="page_info">
-    <p><%= page_entries_info @users %></p>
+    <p><%= page_entries_info @users, :entry => 'pending user' %></p>
   </div>
 </div>
 
@@ -16,5 +16,5 @@
     <th>Quota</th>
     <th>Role(s)</th>
   </tr>
-  <%= render :partial => 'user', :collection => @users %>
+  <%= render :partial => 'user_row', :collection => @users %>
 </table>

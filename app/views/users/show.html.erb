@@ -1,1 +1,35 @@
-<%= render :partial => 'user', :object => @user %>
+<h2><%= h @user.name %></h2>
+<ul>
+  <li><b>User Name:</b>
+  <%= h @user.login %></li>
+
+  <li><b>Status:</b>
+  <%= h @user.state %></li>
+
+  <li><b>Email:</b>
+  <%= h @user.email %></li>
+
+  <li><b>Quota:</b>
+  <%= h number_to_human_size(@user.quota) %></li>
+
+<% if not @user.roles.empty? -%>
+  <li><b>Role:</b>
+  <% for role in @user.roles %>
+    <%= h role.name %>
+  <% end %>
+  </li>
+<% end -%>
+
+</ul>
+
+<% if not @requests.nil? -%> 
+<p><h3>Pending Requests:</h3></p>
+  <% for request in @requests %>
+    <% if not request.role_id.nil? -%>
+    Role: <%= h request.role.name %>
+    <% end %>
+    <% if not request.department_id.nil? -%>
+    Department: <%= h request.department.name %>
+    <% end %>
+  <% end %>
+<% end %>

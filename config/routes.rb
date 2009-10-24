@@ -7,7 +7,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => 'home'
 
-  map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
+  map.resources :users,
+    :member => { :suspend => :put, :unsuspend => :put, :purge => :delete},
+    :collection => { :all => :get, :pending => :get }
   map.resource :session
 
   map.login '/login', :controller => 'sessions', :action => 'new'

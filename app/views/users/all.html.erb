@@ -1,0 +1,20 @@
+<div class="pagination">
+  <%= will_paginate @users, :container => false %>
+  <div clas="page_info">
+    <p><%= page_entries_info @users %></p>
+  </div>
+</div>
+
+<table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <th>Login</th>
+    <th>Email</th>
+    <th>Created</th>
+    <th>Updated</th>
+    <th>Activated</th>
+    <th>State</th>
+    <th>Quota</th>
+    <th>Role(s)</th>
+  </tr>
+  <%= render :partial => 'user_row', :collection => @users %>
+</table>

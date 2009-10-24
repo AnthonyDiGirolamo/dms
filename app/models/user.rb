@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
     (@_list.include?(role_in_question.to_s) )
   end
 
-  has_many :requests
+  has_many :user_requests
   has_many :documents
   has_many :audits
   has_many :shares #, :class_name => "Share", :foreign_key => "owner_id"
