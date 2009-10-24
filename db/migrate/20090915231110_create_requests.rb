@@ -1,6 +1,6 @@
 class CreateRequests < ActiveRecord::Migration
   def self.up
-    create_table :requests do |t|
+    create_table :user_requests do |t|
 	  t.integer :user_id
 	  t.integer :role_id
 	  t.integer :department_id
@@ -9,6 +9,6 @@ class CreateRequests < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :requests
+    drop_table :user_requests
   end
 end
