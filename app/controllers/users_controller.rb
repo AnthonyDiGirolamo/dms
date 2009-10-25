@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
 
+  before_filter :login_required, :except => [:new, :create, :activate ]
+  require_role "administrator", :for_all_except => [:new, :create, :activate, :show, :edit ]
+
+  # For pre-loading the /users/:id parameter in a URL
   before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
-
-  before_filter :all_roles, :all_departments, :only => [:edit, :new, :create]
-
-  require_role "administrator", :for_all_except => [:new, :create, :activate, :show]
+  # For pre-loading role and department names
+  before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
 
   def new
     @user = User.new
