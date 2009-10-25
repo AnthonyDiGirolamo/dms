@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
-  before_filter :all_roles, :only => [:edit, :new, :create]
+
+  before_filter :all_roles, :all_departments, :only => [:edit, :new, :create]
+
   require_role "administrator", :for_all_except => [:new, :create, :activate, :show]
 
   def new
@@ -10,11 +12,27 @@ class UsersController < ApplicationController
 
   def create
     logout_keeping_session!
+
+    # check for valid role/department names
+    role = get_role_by_name(params[:role][:name])
+    department = get_department_by_name(params[:department][:name])
+    if role.nil? or department.nil?
+      flash[:error]  = "There was an error setting up that account.  Please try again."
+      render :action => 'new'
+    end
+
+    # create user, check for validity
     @user = User.new(params[:user])
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
-    if success && @user.errors.empty? && valid_role?(params[:role][:name])
-      # submit role user_request here using params[:role][:name]
+    if success && @user.errors.empty?
+      # create role/dept request
+      request = UserRequest.create
+      request.user_id = @user.id
+      request.role_id = role.id
+      request.department_id = department.id
+      request.save!
+
       redirect_back_or_default(root_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
@@ -93,8 +111,16 @@ protected
     @roles = Role.find :all, :order => 'name ASC'
   end
 
-  def valid_role?(role_name)
-    Role.find_by_name role_name
+  def all_departments
+    @departments = Department.find :all, :order => 'name ASC'
+  end
+
+  def get_role_by_name(name)
+    Role.find_by_name name
+  end
+
+  def get_department_by_name(name)
+    Department.find_by_name name
   end
 
   def find_user

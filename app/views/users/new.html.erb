@@ -34,5 +34,17 @@
 <% end %>
 </p>
 
+<p>
+<b>Department</b><br/>
+<% for department in @departments %>
+<% if department == @departments.first %>
+<%= radio_button "department", "name", department.name, :checked => true %>
+<% else %>
+<%= radio_button "department", "name", department.name %>
+<% end %>
+<%= h department.name %><br/>
+<% end %>
+</p>
+
 <p><%= submit_tag 'Sign up' %></p>
 <% end -%>
