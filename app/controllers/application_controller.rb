@@ -3,9 +3,7 @@
 
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
-  # You can move this into a different controller, if you wish.  This module gives you the require_role helpers, and others.
   include RoleRequirementSystem
-
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -15,12 +13,25 @@ class ApplicationController < ActionController::Base
 
   # All requests will attempt to get
   # the user’s local timezone
-  before_filter :set_user_time_zone
+  prepend_before_filter :set_user_time_zone
 
-  private
+private
 
   def set_user_time_zone
     Time.zone = current_user.time_zone if logged_in?
   end
 
+  def session_expire
+    if session[:expires_at].nil? or session[:expires_at] < Time.now
+      logout_killing_session!
+      flash[:error] = 'Your session expired. Please, login again.'
+      redirect_to login_path
+    end
+  end
+
+  def update_activity_time
+    session[:expires_at] = 20.minutes.from_now
+  end
+
 end
+

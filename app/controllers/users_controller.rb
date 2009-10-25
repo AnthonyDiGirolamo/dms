@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  prepend_before_filter :session_expire, :update_activity_time, :except => [:new, :create, :activate]
+
   before_filter :login_required, :except => [:new, :create, :activate ]
   require_role "administrator", :for_all_except => [:new, :create, :activate, :show, :edit ]
 
@@ -81,6 +83,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @time = session[:expires_at]
     @requests = UserRequest.find_all_by_user_id current_user.id, :include => [ :role, :department ], :order => 'created_at ASC'
   end
 
