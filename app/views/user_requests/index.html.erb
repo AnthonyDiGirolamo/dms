@@ -1,0 +1,18 @@
+<div class="pagination">
+  <%= will_paginate @user_requests, :container => false %>
+  <div clas="page_info">
+    <p><%= page_entries_info @user_requests %></p>
+  </div>
+</div>
+
+<table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <th>Created</th>
+    <th>User</th>
+    <th>Role</th>
+    <th>Department</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+  <%= render :partial => 'request_row', :collection => @user_requests %>
+</table>

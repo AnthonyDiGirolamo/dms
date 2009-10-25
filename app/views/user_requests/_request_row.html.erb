@@ -1,0 +1,26 @@
+<tr>
+  <td>
+    <% if !request_row.created_at.nil? -%> 
+    <%= h request_row.created_at.strftime("%m/%d/%y %I:%M %p") %>
+    <% end -%>
+  </td>
+  <td>
+    <%= h request_row.user.login %>
+  </td>
+  <td>
+    <% if !request_row.role.nil? -%> 
+    <%= h request_row.role.name %>
+    <% end -%>
+  </td>
+  <td>
+    <% if !request_row.department.nil? -%> 
+    <%= h request_row.department.name %>
+    <% end -%>
+  </td>
+  <td>
+    <%= h request_row.state %>
+  </td>
+  <td>
+    approve | reject
+  </td>
+</tr>
