@@ -5,20 +5,23 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :departments
 #  map.resources :documents
 
-  map.root :controller => 'home'
+  map.root :controller => 'home', :conditions => { :method => :get }
 
   map.resources :users,
     :member => { :suspend => :put, :unsuspend => :put, :purge => :delete},
     :collection => { :all => :get, :pending => :get }
   map.resource :session
 
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.register '/register', :controller => 'users', :action => 'new'
-  map.activate '/activate', :controller => 'users', :action => 'activate'
-  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.login '/login', :controller => 'sessions', :action => 'new', :conditions => { :method => :get }
+  map.logout '/logout', :controller => 'sessions', :action => 'destroy', :conditions => { :method => :get }
+  map.register '/register', :controller => 'users', :action => 'new', :conditions => { :method => :get }
+  map.activate '/activate', :controller => 'users', :action => 'activate', :conditions => { :method => :get }
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :conditions => { :method => :get }
 
-  map.user_requests '/user_requests', :controller => 'user_requests', :action => 'index'
+  map.user_requests '/user_requests', :controller => 'user_requests', :action => 'index', :conditions => { :method => :get }
+  map.approve_user_request '/user_requests/:id/approve', :controller => 'user_requests', :action => 'approve', :conditions => { :method => :put }
+  map.reject_user_request '/user_requests/:id/reject', :controller => 'user_requests', :action => 'reject', :conditions => { :method => :put }
+
 
   # The priority is based upon order of creation: first created -> highest priority.
 

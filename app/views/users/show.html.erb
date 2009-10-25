@@ -30,13 +30,37 @@
 </ul>
 
 <% if not @requests.nil? -%> 
-<p><h3>Pending Requests:</h3></p>
+<p><h3>Requests:</h3></p>
+<table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <th>Request Date</th>
+    <th>Requested Permissions</th>
+    <th>Updated</th>
+    <th>Status</th>
+  </tr>
   <% for request in @requests %>
-    <% if not request.role_id.nil? -%>
-    Role: <%= h request.role.name %>
-    <% end %>
-    <% if not request.department_id.nil? -%>
-      <br/>Department: <%= h request.department.name %>
-    <% end %>
+    <tr>
+      <td>
+        <%= h request.created_at.strftime("%m/%d/%y %I:%M %p") %>
+      </td>
+      <td>
+        <% if not request.role_id.nil? -%>
+          Role: <%= h request.role.name.humanize %>
+        <% end %>
+        <% if not request.role_id.nil? and not request.department_id.nil? %>
+          <br/>
+        <% end %>
+        <% if not request.department_id.nil? -%>
+          Department: <%= h request.department.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= h request.updated_at.strftime("%m/%d/%y %I:%M %p") %>
+      </td>
+      <td>
+        <%= h request.state.humanize %>
+      </td>
+    </tr>
   <% end %>
+</table>
 <% end %>

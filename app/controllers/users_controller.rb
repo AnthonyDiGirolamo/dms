@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @requests = UserRequest.find_all_by_user_id_and_state current_user.id, "pending", :include => [ :role, :department ]
+    @requests = UserRequest.find_all_by_user_id current_user.id, :include => [ :role, :department ], :order => 'created_at ASC'
   end
 
   def edit

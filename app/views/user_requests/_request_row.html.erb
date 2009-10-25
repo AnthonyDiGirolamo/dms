@@ -9,7 +9,7 @@
   </td>
   <td>
     <% if !request_row.role.nil? -%> 
-    <%= h request_row.role.name %>
+    <%= h request_row.role.name.humanize %>
     <% end -%>
   </td>
   <td>
@@ -18,9 +18,10 @@
     <% end -%>
   </td>
   <td>
-    <%= h request_row.state %>
+    <%= h request_row.state.humanize %>
   </td>
   <td>
-    approve | reject
+    <%= link_to "approve", approve_user_request_path(:id => request_row.id), :method => :put %>
+    <%= link_to "reject", reject_user_request_path(:id => request_row.id), :method => :put %>
   </td>
 </tr>
