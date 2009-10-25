@@ -22,7 +22,7 @@ private
   end
 
   def session_expire
-    if session[:expires_at].nil? or session[:expires_at] < Time.now
+    if session[:expires_at].nil? or session[:expires_at] < Time.now.to_i
       logout_killing_session!
       flash[:error] = 'Your session expired. Please, login again.'
       redirect_to login_path
@@ -30,7 +30,7 @@ private
   end
 
   def update_activity_time
-    session[:expires_at] = 20.minutes.from_now
+    session[:expires_at] = 20.minutes.from_now.to_i
   end
 
 end
