@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       request = UserRequest.create
       request.user_id = @user.id
       request.role_id = role.id
-      request.department_id = department.id
+      request.department_id = department.id unless role.name == "administrator"
       request.save!
 
       redirect_back_or_default(root_path)

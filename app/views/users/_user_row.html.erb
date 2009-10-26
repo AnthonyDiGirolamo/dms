@@ -6,6 +6,9 @@
     <%= h user_row.email %>
   </td>
   <td>
+    <%= h user_row.name %>
+  </td>
+  <td>
     <% if !user_row.created_at.nil? -%> 
     <%= h user_row.created_at.strftime("%m/%d/%y %I:%M %p") %>
     <% end -%>

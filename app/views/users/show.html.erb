@@ -35,7 +35,7 @@
   <tr>
     <th>Request Date</th>
     <th>Requested Permissions</th>
-    <th>Updated</th>
+    <%#<th>Updated</th>%>
     <th>Status</th>
   </tr>
   <% for request in @requests %>
@@ -54,11 +54,12 @@
           Department: <%= h request.department.name %>
         <% end %>
       </td>
-      <td>
-        <%= h request.updated_at.strftime("%m/%d/%y %I:%M %p") %>
-      </td>
+      <%#<td>%>
+        <%# h request.updated_at.strftime("%m/%d/%y %I:%M %p") %>
+      <%#</td>%>
       <td>
         <%= h request.state.humanize %>
+        on <%= h request.updated_at.strftime("%m/%d/%y") %>
       </td>
     </tr>
   <% end %>
