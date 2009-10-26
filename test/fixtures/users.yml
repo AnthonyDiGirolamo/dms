@@ -2,6 +2,7 @@
 quentin:
   id:                        1
   login:                     quentin
+  name:                      Quentin
   email:                     quentin@example.com
   salt:                      356a192b7913b04c54574d18c28d46e6395428ab # SHA1('0')
   crypted_password:          42c5e4c03f4eda05b18fdc076ab73f7793a38429 # 'monkey'
@@ -15,6 +16,7 @@ quentin:
 aaron:
   id:                        2
   login:                     aaron
+  name:                      Aaron
   email:                     aaron@example.com
   salt:                      da4b9237bacccdf19c0760cab7aec4a8359010b0 # SHA1('1')
   crypted_password:          cf8c558cdd48ca25edd04e26a4e7d1ee2a13fe26 # 'monkey'
@@ -23,7 +25,6 @@ aaron:
   remember_token:            
   activation_code:           1b6453892473a467d07372d45eb05abc2031647a
   activated_at:              
-
   state:                     pending
 
 
@@ -34,19 +35,22 @@ old_password_holder:
   salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
   crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
   created_at:                <%= 1.days.ago.to_s :db %>
-
+  remember_token_expires_at: 
+  remember_token:            
   activation_code:           
   activated_at:              <%= 5.days.ago.to_s :db %>
-
-
   state:                     active
 
 admin:
-  id: 4
-  login: admin
-  email: admin@example.com
-  salt: 7e3041ebc2fc05a40c60028e2c4901a81035d3cd
-  crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
-  # activation_code: adminscode # only if you're activating new signups
-  created_at: <%= 1.days.ago.to_s :db %>
-  roles: admin
+  id:                        4
+  login:                     admin
+  email:                     admin@example.com
+  salt:                      7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+  crypted_password:          00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+  created_at:                <%= 1.days.ago.to_s :db %>
+  remember_token_expires_at: 
+  remember_token:            
+  activation_code:           
+  activated_at:              <%= 12.hours.ago.to_s :db %>
+  state:                     active
+  roles:                     administrator
