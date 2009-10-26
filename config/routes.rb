@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.resources :departments
 #  map.resources :documents
 
-  map.root :controller => 'home', :conditions => { :method => :get }
+  map.root :controller => 'home'
 
   map.resources :users,
     :member => { :suspend => :put, :unsuspend => :put, :purge => :delete},

@@ -1,8 +1,8 @@
-admin_role:
+admin:
   name: administrator
-employee_role:
+employee:
   name: employee
-manager_role:
+manager:
   name: manager
-corporate_role:
+corporate:
   name: corporate
