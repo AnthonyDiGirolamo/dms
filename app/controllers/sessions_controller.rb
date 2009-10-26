@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       # Protects against session fixation attacks, causes request forgery
       # protection if user resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
-      # reset_session
+      reset_session
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
@@ -37,6 +37,6 @@ protected
   # Track failed login attempts
   def note_failed_signin
     flash[:error] = "Couldn't log you in as '#{params[:login]}'"
-    logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
+    logger.warn "Failed login for '#{params[:login]}' '#{params[:password]}' from #{request.remote_ip} at #{Time.now.utc}"
   end
 end

@@ -17,13 +17,21 @@ class ApplicationController < ActionController::Base
 
 private
 
+#  def handle_remember_cookie
+#    if logged_in? and valid_remember_cookie?
+#      unless current_user.remember_token_expires_at > Time.now
+#        logout_keeping_session!
+#      end
+#    end
+#  end
+
   def set_user_time_zone
     Time.zone = current_user.time_zone if logged_in?
   end
 
   def session_expire
     if session[:expires_at].nil? or session[:expires_at] < Time.now.to_i
-      logout_killing_session!
+      logout_keeping_session!
       flash[:error] = 'Your session expired. Please, login again.'
       redirect_to login_path
     end
