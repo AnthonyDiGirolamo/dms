@@ -4,7 +4,7 @@ html {
   margin: 0;
   padding: 0;
   background: #999;
-  font: normal 76% "Lucida Grande", Verdana, Helvetica, sans-serif; }
+  font: normal 76% Verdana, Helvetica, sans-serif; }
 
 body {
   margin: 2em;
@@ -24,7 +24,7 @@ h2 {
 
 pre {
   font-size: 13px;
-  font-family: Monaco, "DejaVu Sans Mono", "Bitstream Vera Mono", "Courier New", monospace; }
+  font-family: "DejaVu Sans Mono", "Bitstream Vera Mono", "Courier New", monospace; }
 
 .pagination {
   text-align: center;
