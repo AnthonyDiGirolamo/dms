@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   map.user_requests '/user_requests', :controller => 'user_requests', :action => 'index', :conditions => { :method => :get }
   map.approve_user_request '/user_requests/:id/approve', :controller => 'user_requests', :action => 'approve', :conditions => { :method => :put }
   map.reject_user_request '/user_requests/:id/reject', :controller => 'user_requests', :action => 'reject', :conditions => { :method => :put }
+  map.revoke_user_request '/user_requests/:id/revoke', :controller => 'user_requests', :action => 'revoke', :conditions => { :method => :put }
 
 
   # The priority is based upon order of creation: first created -> highest priority.

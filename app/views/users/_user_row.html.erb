@@ -31,7 +31,12 @@
   </td>
   <td>
     <% for role in user_row.roles %>
-      <%= h role.name %>
+      <%= h role.name.humanize %>
+    <% end %>
+  </td>
+  <td>
+    <% for department in user_row.departments %>
+      <%= h department.name %>
     <% end %>
   </td>
 </tr>

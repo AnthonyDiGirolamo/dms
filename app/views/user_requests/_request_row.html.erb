@@ -19,9 +19,23 @@
   </td>
   <td>
     <%= h request_row.state.humanize %>
+    on <%= h request_row.updated_at.strftime("%m/%d/%y") %>
   </td>
   <td>
+    <% if request_row.state != "approved" -%>
     <%= link_to "approve", approve_user_request_path(:id => request_row.id), :method => :put %>
+    <% else -%>
+      approve
+    <% end -%>
+    <% if request_row.state != "rejected" -%>
     <%= link_to "reject", reject_user_request_path(:id => request_row.id), :method => :put %>
+    <% else -%>
+      reject
+    <% end -%>
+    <% if request_row.state != "revoked" -%>
+    <%= link_to "revoke", revoke_user_request_path(:id => request_row.id), :method => :put %>
+    <% else -%>
+      revoke
+    <% end -%>
   </td>
 </tr>

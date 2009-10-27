@@ -133,11 +133,11 @@ protected
   end
 
   def all_users
-    @users = User.paginate :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
+    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => 'login ASC', :per_page => 25
   end
 
   def users_by_state(state)
-    @users = User.paginate_by_state state, :page => params[:page], :include => [:roles], :order => 'login ASC', :per_page => 25
+    @users = User.paginate_by_state state, :page => params[:page], :include => [:roles, :departments], :order => 'login ASC', :per_page => 25
   end
 
 end
