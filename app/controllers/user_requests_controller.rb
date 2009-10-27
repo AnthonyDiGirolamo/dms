@@ -50,7 +50,12 @@ class UserRequestsController < ApplicationController
 private
 
   def find_request
-    @user_request = UserRequest.find(params[:id])
+    begin
+      @user_request = UserRequest.find(params[:id])
+    rescue
+      flash[:error] = "That request does not exist."
+      redirect_to user_requests_path
+    end
   end
 
 end

@@ -129,7 +129,12 @@ protected
   end
 
   def find_user
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue
+      flash[:error] = 'That user does not exist.'
+      redirect_back_or_default(users_path)
+    end
   end
 
   def all_users
