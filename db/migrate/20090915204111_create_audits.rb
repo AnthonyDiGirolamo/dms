@@ -4,7 +4,6 @@ class CreateAudits < ActiveRecord::Migration
 	  t.integer :document_id
 	  t.integer :user_id
       t.string :action
-      t.datetime :time
 
       t.timestamps
     end
