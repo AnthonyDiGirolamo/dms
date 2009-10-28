@@ -17,7 +17,7 @@
 <% if not @user.roles.empty? -%>
   <li><b>Role:</b>
   <% for role in @user.roles %>
-    <%= h role.name %>
+    <%= h role.name.humanize %>
   <% end %>
   </li>
 <% end -%>

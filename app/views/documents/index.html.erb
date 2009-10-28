@@ -1,7 +1,12 @@
-<h1>Listing documents</h1>
+<%= render :partial => 'user_bar' %>
+
+<h1>Documents</h1>
 
 <table>
   <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Size</th>
   </tr>
 
 <% @documents.each do |document| %>

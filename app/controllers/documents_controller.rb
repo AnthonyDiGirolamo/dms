@@ -1,5 +1,13 @@
 class DocumentsController < ApplicationController
 
+  prepend_before_filter :login_required, :session_expire, :update_activity_time
+  require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
+
+  # For pre-loading the /users/:id parameter in a URL
+  #before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
+  # For pre-loading role and department names
+  #before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
+
   SEND_FILE_METHOD = :default
 
   def download
@@ -24,93 +32,54 @@ class DocumentsController < ApplicationController
     send_file(path, send_file_options)
   end
 
-  # GET /documents
-  # GET /documents.xml
   def index
-    @documents = Document.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @documents }
-    end
+    @documents = current_user.documents
   end
 
-  # GET /documents/1
-  # GET /documents/1.xml
   def show
-    @document = Document.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @document }
-    end
+    @document = current_user.documents.find_by_id(params[:id])
   end
 
-  # GET /documents/new
-  # GET /documents/new.xml
   def new
-    @document = Document.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @document }
-    end
+    @document = current_user.documents.new
   end
 
-  # GET /documents/1/edit
   def edit
-    @document = Document.find(params[:id])
+    @document = current_user.documents.find_by_id(params[:id])
   end
 
-  # POST /documents
-  # POST /documents.xml
   def create
-    @document = Document.new(params[:document])
+    @document = current_user.documents.new(params[:document])
 
-    respond_to do |format|
-      if @document.save
-        mime = @document.determine_mime_type
-        @document.document_content_type = mime unless mime.nil?
-        @document.real_mime_type = mime unless mime.nil?
-        @document.save
+    if @document.save
+      mime = @document.determine_mime_type
+      @document.document_content_type = mime unless mime.nil?
+      @document.real_mime_type = mime unless mime.nil?
+      @document.save
 
-        flash[:notice] = 'Document was successfully created.'
-        format.html { redirect_to(@document) }
-        format.xml  { render :xml => @document, :status => :created, :location => @document }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
-      end
+      flash[:notice] = 'Document was successfully created.'
+      redirect_to(@document)
+    else
+      render :action => "new"
     end
   end
 
-  # PUT /documents/1
-  # PUT /documents/1.xml
   def update
-    @document = Document.find(params[:id])
+    @document = current_user.documents.find_by_id(params[:id])
 
-    respond_to do |format|
-      if @document.update_attributes(params[:document])
-        flash[:notice] = 'Document was successfully updated.'
-        format.html { redirect_to(@document) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @document.errors, :status => :unprocessable_entity }
-      end
+    if @document.update_attributes(params[:document])
+      flash[:notice] = 'Document was successfully updated.'
+      redirect_to(@document)
+    else
+      render :action => "edit"
     end
   end
 
-  # DELETE /documents/1
-  # DELETE /documents/1.xml
   def destroy
-    @document = Document.find(params[:id])
+    @document = current_user.documents.find_by_id(params[:id])
     @document.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(documents_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(documents_url)
   end
 
 end

@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
 
-  prepend_before_filter :session_expire, :update_activity_time, :except => [:new, :create, :activate]
-
-  before_filter :login_required, :except => [:new, :create, :activate ]
+  prepend_before_filter :login_required, :session_expire, :update_activity_time, :except => [:new, :create, :activate]
   require_role "administrator", :for_all_except => [:new, :create, :activate, :show, :edit ]
 
   # For pre-loading the /users/:id parameter in a URL
