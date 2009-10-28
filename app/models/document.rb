@@ -4,15 +4,21 @@ class Document < ActiveRecord::Base
   has_many :audits
   has_many :shares
 
+  attr_accessible :name, :comment, :document
+  validates_presence_of :name
+
   has_attached_file :document,
                     :url => '/:class/:id/download/:style.:extension',
                     :path => ':rails_root/assets/:class/:id_partition/:style.:extension'
 
   validates_attachment_presence :document
-  validates_attachment_content_type :document, :content_type => [ 'text/plain' ]
+  validates_attachment_content_type :document, 
+    :content_type => [ 'text/plain', 'application/pdf',
+      'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
+      'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet',
+      'application/vnd.oasis.opendocument.presentation',
+      'image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff', 'image/x-xcf', 'image/x-psd' ]
   validates_attachment_size :document, :less_than => 20.megabytes
-
-  attr_accessible :name, :comment, :document
 
   before_post_process :dont_process
 
@@ -21,8 +27,11 @@ class Document < ActiveRecord::Base
   end
 
   def determine_mime_type
-    path = self.document.path.sub(/#{RAILS_ROOT}/, "\.")
-    %x[file -br --mime-type #{path}].sub(/\n$/, "")
+    # Using file command
+    # path = self.document.path.sub(/#{RAILS_ROOT}/, "\.")
+    # %x[file -br --mime-type #{path}].sub(/\n$/, "")
+    # Using mimetype-fu
+    mime = File.mime_type?(self.document.path)
   end
 
 private

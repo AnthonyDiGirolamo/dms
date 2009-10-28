@@ -1,3 +1,4 @@
-<%= h @document.real_mime_type %>
+<p><%= h @document.comment %></p>
+<p><%= h @document.real_mime_type %></p>
 <%= link_to 'Edit', edit_document_path(@document) %> |
 <%= link_to 'Back', documents_path %>
