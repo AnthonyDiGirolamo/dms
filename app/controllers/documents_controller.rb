@@ -10,13 +10,17 @@ class DocumentsController < ApplicationController
     head(:bad_request) and return unless File.exist?(path) && params[:format].to_s == File.extname(path).gsub(/^\.+/, '')
 
     send_file_options = { :type => document.document.content_type }
+    #send_file_options[:filename] = document.document_file_name.sub(/\....$/, "." + File.extensions.index(document.document.content_type).to_s)
+    file_name = ActiveSupport::Inflector::titleize(document.name).gsub(/ /, "")
+    file_name = ActiveSupport::Inflector::underscore(file_name).gsub(/ /, "")
+    #send_file_options[:filename] = file_name + "." + File.extensions.index(document.document.content_type).to_s
+    send_file_options[:filename] = file_name + File.extname(document.document.path).to_s
 
     case SEND_FILE_METHOD
       when :apache then send_file_options[:x_sendfile] = true
       when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type]) and return
     end
 
-    send_file_options[:filename] = document.document_file_name.sub(/\....$/, "." + File.extensions.index(document.document.content_type).to_s)
     send_file(path, send_file_options)
   end
 

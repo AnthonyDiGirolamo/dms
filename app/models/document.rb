@@ -22,7 +22,7 @@ class Document < ActiveRecord::Base
 
   def determine_mime_type
     path = self.document.path.sub(/#{RAILS_ROOT}/, "\.")
-    %x[file -br --mime #{path}].sub(/\n$/, "")
+    %x[file -br --mime-type #{path}].sub(/\n$/, "")
   end
 
 private
