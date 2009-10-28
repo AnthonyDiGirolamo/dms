@@ -1,10 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-#  map.resources :shares
-#  map.resources :audits
-#  map.resources :roles
-#  map.resources :departments
-#  map.resources :documents
-
   map.root :controller => 'home'
 
   map.resources :users,
@@ -23,6 +17,8 @@ ActionController::Routing::Routes.draw do |map|
   map.reject_user_request '/user_requests/:id/reject', :controller => 'user_requests', :action => 'reject', :conditions => { :method => :put }
   map.revoke_user_request '/user_requests/:id/revoke', :controller => 'user_requests', :action => 'revoke', :conditions => { :method => :put }
 
+  map.connect '/documents/:id/download/:style.:format', :controller => 'documents', :action => 'download', :conditions => { :method => :get }
+  map.resources :documents
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -42,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments
