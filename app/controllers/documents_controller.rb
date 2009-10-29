@@ -17,12 +17,15 @@ class DocumentsController < ApplicationController
     path = document.document.path(params[:style])
     head(:bad_request) and return unless File.exist?(path) && params[:format].to_s == File.extname(path).gsub(/^\.+/, '')
 
+    # Use the content type set by paperclip
     send_file_options = { :type => document.document.content_type }
-    #send_file_options[:filename] = document.document_file_name.sub(/\....$/, "." + File.extensions.index(document.document.content_type).to_s)
+    # Create a title based on document.name
     file_name = ActiveSupport::Inflector::titleize(document.name).gsub(/ /, "")
     file_name = ActiveSupport::Inflector::underscore(file_name).gsub(/ /, "")
-    #send_file_options[:filename] = file_name + "." + File.extensions.index(document.document.content_type).to_s
-    send_file_options[:filename] = file_name + File.extname(document.document.path).to_s
+    # Use mimetype_fu to get the proper extension
+    send_file_options[:filename] = file_name + "." + document.file_extension
+    # Use the original extension
+    #send_file_options[:filename] = file_name + File.extname(document.document.path).to_s
 
     case SEND_FILE_METHOD
       when :apache then send_file_options[:x_sendfile] = true
@@ -52,10 +55,10 @@ class DocumentsController < ApplicationController
     @document = current_user.documents.new(params[:document])
 
     if @document.save
-      mime = @document.determine_mime_type
-      @document.document_content_type = mime unless mime.nil?
-      @document.real_mime_type = mime unless mime.nil?
-      @document.save
+      #mime = @document.determine_mime_type
+      #@document.document_content_type = mime unless mime.nil?
+      #@document.real_mime_type = mime unless mime.nil?
+      #@document.save
 
       flash[:notice] = 'Document was successfully created.'
       redirect_to(@document)

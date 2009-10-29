@@ -12,7 +12,7 @@ class Document < ActiveRecord::Base
                     :path => ':rails_root/assets/:class/:id_partition/:style.:extension'
 
   validates_attachment_presence :document
-  validates_attachment_content_type :document, 
+  validates_attachment_content_type :document,
     :content_type => [ 'text/plain', 'application/pdf',
       'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
       'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet',
@@ -26,13 +26,21 @@ class Document < ActiveRecord::Base
     true
   end
 
-  def determine_mime_type
-    # Using file command
-    # path = self.document.path.sub(/#{RAILS_ROOT}/, "\.")
-    # %x[file -br --mime-type #{path}].sub(/\n$/, "")
-    # Using mimetype-fu
-    mime = File.mime_type?(self.document.path)
+  def file_extension
+    if self.document.content_type == "text/plain"
+      "txt"
+    else
+      File.extensions.index( self.document.content_type ).to_s
+    end
   end
+
+#  def determine_mime_type
+#    # Using file command
+#    path = self.document.path.sub(/{RAILS_ROOT}/, "\.")
+#    %x[file -br --mime-type {path}].sub(/\n$/, "")
+#    # Using mimetype-fu
+#    mime = File.mime_type?(self.document.path)
+#  end
 
 private
 

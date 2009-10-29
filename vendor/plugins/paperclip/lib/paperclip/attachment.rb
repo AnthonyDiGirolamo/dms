@@ -75,10 +75,13 @@ module Paperclip
       self.clear
 
       return nil if uploaded_file.nil?
-
       @queued_for_write[:original]   = uploaded_file.to_tempfile
       instance_write(:file_name,       uploaded_file.original_filename.strip.gsub(/[^A-Za-z\d\.\-_]+/, '_'))
-      instance_write(:content_type,    uploaded_file.content_type.to_s.strip)
+      # Use mimetype-fu plugin if it's installed
+      content_type = File.mime_type?(@queued_for_write[:original].path)
+      content_type = uploaded_file.content_type if content_type.nil? or content_type == "unknown/unknown"
+
+      instance_write(:content_type,    content_type.to_s.strip)
       instance_write(:file_size,       uploaded_file.size.to_i)
       instance_write(:updated_at,      Time.now)
 
