@@ -8,11 +8,10 @@ class File
          mime = EXTENSIONS[File.extname(file.path).gsub('.','').downcase.to_sym]
        end
      elsif file.class == String
-       unless RUBY_PLATFORM.include? 'mswin32'
          mime = `file --mime-type -br #{file}`.strip
-       else
-         mime = EXTENSIONS[(file[file.rindex('.')+1, file.size]).downcase.to_sym]
-       end
+         if mime == "application/octet-stream" or mime == "application/zip"
+           mime = EXTENSIONS[(file[file.rindex('.')+1, file.size]).downcase.to_sym]
+         end
      elsif file.class == StringIO
        temp = File.open(Dir.tmpdir + '/upload_file.' + Process.pid.to_s, "wb")
        temp << file.string
@@ -31,6 +30,17 @@ class File
      end
    end
 
+  def self.mime_type_ext(file, ext)
+    mime = `file --mime-type -br #{file}`.strip
+    if mime == "application/octet-stream" or mime == "application/zip"
+      mime = EXTENSIONS[ext.downcase.to_sym]
+    end
+    if mime
+      return mime
+    else
+      'unknown/unknown'
+    end
+  end
   
   def self.extensions
     EXTENSIONS

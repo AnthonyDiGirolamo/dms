@@ -17,7 +17,8 @@ class Document < ActiveRecord::Base
       'application/msword', 'application/vnd.ms-excel', 'application/vnd.ms-powerpoint',
       'application/vnd.oasis.opendocument.text', 'application/vnd.oasis.opendocument.spreadsheet',
       'application/vnd.oasis.opendocument.presentation',
-      'image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff', 'image/x-xcf', 'image/x-psd' ]
+      'image/jpeg', 'image/gif', 'image/png', 'image/bmp', 'image/tiff', 'image/x-xcf', 'image/x-psd',
+      'image/x-ms-bmp', 'image/vnd.adobe.photoshop', 'image/svg+xml' ]
   validates_attachment_size :document, :less_than => 20.megabytes
 
   before_post_process :dont_process
