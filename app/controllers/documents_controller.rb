@@ -36,6 +36,8 @@ class DocumentsController < ApplicationController
   end
 
   def index
+    @user = current_user
+    @used_space = current_user.documents.sum(:document_file_size)
     @documents = current_user.documents
   end
 
@@ -53,17 +55,16 @@ class DocumentsController < ApplicationController
 
   def create
     @document = current_user.documents.new(params[:document])
-
-    if @document.save
-      #mime = @document.determine_mime_type
-      #@document.document_content_type = mime unless mime.nil?
-      #@document.real_mime_type = mime unless mime.nil?
-      #@document.save
-
-      flash[:notice] = 'Document was successfully created.'
-      redirect_to(@document)
+    if current_user.documents.sum(:document_file_size) < current_user.quota
+      if @document.save
+        flash[:notice] = 'Document was successfully created.'
+        redirect_to(@document)
+      else
+        render :action => "new"
+      end
     else
-      render :action => "new"
+      flash[:error] = 'Uploading this document will exceeded your quota.'
+      render :action => "index"
     end
   end
 
