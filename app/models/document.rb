@@ -28,10 +28,25 @@ class Document < ActiveRecord::Base
   end
 
   def file_extension
-    if self.document.content_type == "text/plain"
-      "txt"
+    # Use original
+    file = self.document_file_name
+    ext = file[file.rindex('.')+1, file.size].downcase
+
+    if EXTENSIONS[ext.to_sym] != self.document_content_type
+
+      # Determine new extension
+      if self.document.content_type == "text/plain"
+        return "txt"
+      elsif self.document.content_type == "image/x-ms-bmp"
+        return "bmp"
+      elsif self.document.content_type == "image/vnd.adobe.photoshop"
+        return "psd"
+      else
+        return File.extensions.index( self.document.content_type ).to_s
+      end
+
     else
-      File.extensions.index( self.document.content_type ).to_s
+      return ext
     end
   end
 
