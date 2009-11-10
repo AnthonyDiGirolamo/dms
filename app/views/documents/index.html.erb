@@ -1,10 +1,12 @@
 <%= render :partial => 'layouts/user_bar' %>
 
-<h2>My Documents</h2>
+
+<h2>
+  <%= image_tag("icons/16x16/documents.png", :size => "16x16", :alt => "Documents Icon") %> My Documents
+</h2>
 
 <p>
-
-<%= link_to "#{image_tag("icons/16x16/plus-white.png", :size => "16x16", :alt => "New Document", :border => 0)} New document", new_document_path %>
+<%= link_to "#{image_tag("icons/16x16/document--plus.png", :size => "16x16", :alt => "New Document", :border => 0)} New document", new_document_path %>
 </p>
 
 <table border="0" cellspacing="0" cellpadding="5">
@@ -17,8 +19,8 @@
 <% @documents.each do |document| %>
   <tr>
     <td>
-      <%= image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Icon") %>
-      <b><%= h document.name %></b>
+      <%= image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
+      <%= h document.name %>
     <%#<td>%>
       <%# h document.document_content_type %>
     <%#</td>%>

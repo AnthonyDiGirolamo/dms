@@ -3,8 +3,8 @@ class DocumentsController < ApplicationController
   prepend_before_filter :login_required, :session_expire, :update_activity_time
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
-  # For pre-loading the /users/:id parameter in a URL
-  #before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
+  # For pre-loading the /document/:id parameter in a URL
+  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy]
   # For pre-loading role and department names
   #before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
 
@@ -41,16 +41,8 @@ class DocumentsController < ApplicationController
     @documents = current_user.documents
   end
 
-  def show
-    @document = current_user.documents.find_by_id(params[:id])
-  end
-
   def new
     @document = current_user.documents.new
-  end
-
-  def edit
-    @document = current_user.documents.find_by_id(params[:id])
   end
 
   def create
@@ -68,9 +60,13 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def update
-    @document = current_user.documents.find_by_id(params[:id])
+  def show
+  end
 
+  def edit
+  end
+
+  def update
     if @document.update_attributes(params[:document])
       flash[:notice] = 'Document was successfully updated.'
       redirect_to(@document)
@@ -80,10 +76,14 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    @document = current_user.documents.find_by_id(params[:id])
     @document.destroy
 
     redirect_to(documents_url)
   end
 
+private
+
+  def find_document_by_id
+    @document = current_user.documents.find_by_id(params[:id])
+  end
 end
