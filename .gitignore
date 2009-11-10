@@ -1,0 +1,4 @@
+assets/
+config/database.yml
+log/
+public/stylesheets
