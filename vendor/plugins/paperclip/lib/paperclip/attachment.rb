@@ -79,7 +79,11 @@ module Paperclip
       instance_write(:file_name,       uploaded_file.original_filename.strip.gsub(/[^A-Za-z\d\.\-_]+/, '_'))
       # Use mimetype-fu plugin if it's installed
       file = uploaded_file.original_filename
-      ext = file[file.rindex('.')+1, file.size]
+      if file.rindex('.')
+        ext = file[file.rindex('.')+1, file.size]
+      else
+        ext = ""
+      end
       content_type = File.mime_type_ext(@queued_for_write[:original].path, ext)
       content_type = uploaded_file.content_type if content_type.nil? or content_type == "unknown/unknown"
 

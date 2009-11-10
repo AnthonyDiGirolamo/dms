@@ -1,36 +1,38 @@
-<%= render :partial => 'user_bar' %>
+<%= render :partial => 'layouts/user_bar' %>
 
-<h1>Documents</h1>
+<h2>My Documents</h2>
 
-<p> You are currently using <%= h number_to_human_size(@used_space) %>
-(<%= h number_to_percentage(@used_space.to_f / @user.quota.to_f, :precision => 2) %>)
-of your <%= h number_to_human_size(@user.quota) %> quota. </p>
+<p>
+
+<%= link_to "#{image_tag("icons/16x16/plus-white.png", :size => "16x16", :alt => "New Document", :border => 0)} New document", new_document_path %>
+</p>
 
 <table border="0" cellspacing="0" cellpadding="5">
   <tr>
     <th>Name</th>
-    <th>Type</th>
+    <%#<th>Type</th>%>
     <th>Size</th>
   </tr>
 
 <% @documents.each do |document| %>
   <tr>
     <td>
+      <%= image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Icon") %>
       <b><%= h document.name %></b>
-    <td>
-      <%= h document.document_content_type %>
-    </td>
+    <%#<td>%>
+      <%# h document.document_content_type %>
+    <%#</td>%>
     <td>
       <%= h number_to_human_size(document.document_file_size) %>
     </td>
-    <td><%= link_to 'Show', document %></td>
-    <td><%= link_to 'Edit', edit_document_path(document) %></td>
-    <td><%= link_to 'Destroy', document, :confirm => 'Are you sure?', :method => :delete %></td>
-    <td><%= link_to 'Download', document.document.url %></td>
+    <td><%= link_to 'Show', document %> <br/>
+        <%= link_to 'Edit', edit_document_path(document) %></td>
+    <td><%= link_to 'Destroy', document, :confirm => 'Are you sure?', :method => :delete %> <br/>
+        <%= link_to 'Download', document.document.url %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New document', new_document_path %>
+<p> You are currently using <%= h number_to_human_size(@used_space) %>
+(<%= h number_to_percentage(@used_space.to_f / @user.quota.to_f, :precision => 2) %>)
+of your <%= h number_to_human_size(@user.quota) %> quota. </p>

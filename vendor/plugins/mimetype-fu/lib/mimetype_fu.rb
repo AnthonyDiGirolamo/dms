@@ -33,7 +33,11 @@ class File
   def self.mime_type_ext(file, ext)
     mime = `file --mime-type -br #{file}`.strip
     if mime == "application/octet-stream" or mime == "application/zip"
-      mime = EXTENSIONS[ext.downcase.to_sym]
+      if ext == ""
+        mime = nil
+      else
+        mime = EXTENSIONS[ext.downcase.to_sym]
+      end
     end
     if mime
       return mime

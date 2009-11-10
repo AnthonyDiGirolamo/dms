@@ -1,8 +1,7 @@
 class UserRequestsController < ApplicationController
 
-  prepend_before_filter :session_expire, :update_activity_time
+  prepend_before_filter :login_required, :session_expire, :update_activity_time
 
-  before_filter :login_required
   before_filter :find_request, :only => [:approve, :reject, :revoke]
   require_role "administrator"
 

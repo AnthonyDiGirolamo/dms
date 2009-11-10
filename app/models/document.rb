@@ -50,6 +50,27 @@ class Document < ActiveRecord::Base
     end
   end
 
+  def mime_icon
+    mime = self.document_content_type
+    if mime == 'application/msword' or mime == 'application/vnd.oasis.opendocument.text'
+      return 'document-word.png'
+    elsif mime == 'application/vnd.ms-excel' or mime == 'application/vnd.oasis.opendocument.spreadsheet'
+      return 'document-excel.png'
+    elsif mime == 'application/vnd.ms-powerpoint' or mime == 'application/vnd.oasis.opendocument.presentation'
+      return 'document-powerpoint.png'
+    elsif mime == 'image/x-psd' or mime == 'image/vnd.adobe.photoshop'
+      return 'document-photoshop-image.png'
+    elsif mime == 'text/plain'
+      return 'document-text.png'
+    elsif mime[0,5] == 'image'
+      return 'document-image.png'
+    elsif mime == 'application/pdf'
+      return 'document-pdf.png'
+    else
+      return 'document.png'
+    end
+  end
+
 #  def determine_mime_type
 #    # Using file command
 #    path = self.document.path.sub(/{RAILS_ROOT}/, "\.")
