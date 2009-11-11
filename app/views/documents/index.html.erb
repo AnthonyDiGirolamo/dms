@@ -1,13 +1,12 @@
 <%= render :partial => 'layouts/user_bar' %>
 
-
 <h2>
-  <%= image_tag("icons/16x16/documents.png", :size => "16x16", :alt => "Documents Icon") %> My Documents
+  <%# image_tag("icons/16x16/documents.png", :size => "16x16", :alt => "Documents Icon") %> My Documents
 </h2>
 
 <%= link_to "New document", new_document_path, :class => 'document_new action' %>
 
-<table border="0" cellspacing="0" cellpadding="7">
+<table border="0" cellspacing="0" cellpadding="6">
   <tr>
     <th>Name</th>
     <%#<th>Type</th>%>

@@ -54,12 +54,12 @@ body {
 h1 {
   font-size: 2em;
   font-weight: normal;
-  margin: 0 0 1em 0;
+  /*margin: 0 0 1em 0;*/
 }
 
 h2 {
   font-size: 1.4em;
-  margin: 1em 0 .5em 0;
+  /*margin: 1em 0 .5em 0;*/
 }
 
 a {
@@ -78,26 +78,40 @@ pre {
   font-family: "DejaVu Sans Mono", "Bitstream Vera Mono", "Courier New", monospace;
 }
 
-div#button {
-  margin: 1em;
-  padding: 1em;
-  background-color: gray;
-  width: 9em;
-  height: 2em;
-  line-height: 2em;
-  text-align: center;
-  border:2px solid #000;
+/*div#button {*/
+  /*margin: 1em;*/
+  /*padding: 1em;*/
+  /*background-color: gray;*/
+  /*width: 9em;*/
+  /*height: 2em;*/
+  /*line-height: 2em;*/
+  /*text-align: center;*/
+  /*border:2px solid #000;*/
 
-  :hover {
-    border-color: #AAA;
-    background-color: lightgray;
-  }
+  /*:hover {*/
+    /*border-color: #AAA;*/
+    /*background-color: lightgray;*/
+  /*}*/
+/*}*/
+
+#float_right {
+  float: right;
 }
 
 a.action {
   padding: 5px 2px 5px 20px;
   background-repeat: no-repeat;
   background-position: center left;
+  font-weight: bold;
+
+  :hover {
+    color: white; 
+    background-color: @SkyBlue2; 
+  }
+}
+
+.document_index {
+  background-image: url(/images/icons/16x16/documents-text.png);
 }
 .document_new {
   background-image: url(/images/icons/16x16/document--plus.png);
@@ -112,11 +126,24 @@ a.action {
   background-image: url(/images/icons/16x16/document--arrow.png);
 }
 
+.user_index {
+  background-image: url(/images/icons/16x16/users.png);
+}
 .user_show {
   background-image: url(/images/icons/16x16/user-silhouette.png);
 }
+.user_login {
+  background-image: url(/images/icons/16x16/door-open-in.png);
+}
 .user_logout {
   background-image: url(/images/icons/16x16/door-open-out.png);
+}
+.user_new {
+  background-image: url(/images/icons/16x16/user--plus.png);
+}
+
+.request_index {
+  background-image: url(/images/icons/16x16/question-white.png);
 }
 
 .pagination {
