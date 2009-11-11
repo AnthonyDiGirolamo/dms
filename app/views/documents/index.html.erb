@@ -5,9 +5,10 @@
   <%= image_tag("icons/16x16/documents.png", :size => "16x16", :alt => "Documents Icon") %> My Documents
 </h2>
 
-<p>
-<%= link_to "#{image_tag("icons/16x16/document--plus.png", :size => "16x16", :alt => "New Document", :border => 0)} New document", new_document_path %>
-</p>
+<div id="button" class="new">
+  <%= link_to "New document", new_document_path %>
+<%##{image_tag("icons/16x16/document--plus.png", :size => "16x16", :alt => "New Document", :border => 0)} %>
+</div>
 
 <table border="0" cellspacing="0" cellpadding="5">
   <tr>
