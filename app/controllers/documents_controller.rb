@@ -76,8 +76,12 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
-    @document.destroy
-
+    begin
+      @document.destroy
+      flash[:notice] = 'Document was successfully destroyed.'
+    rescue
+      flash[:error] = 'Unable to destroy that document.'
+    end
     redirect_to(documents_url)
   end
 

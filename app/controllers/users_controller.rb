@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     users_by_state "active"
   end
 
-protected
+private
 
   def all_roles
     @roles = Role.find :all, :order => 'name ASC'
@@ -128,11 +128,19 @@ protected
 
   def find_user
     begin
-      @user = User.find(params[:id])
+      if user_admin?
+        @user = User.find(params[:id])
+      else
+        @user = current_user
+      end
     rescue
       flash[:error] = 'That user does not exist.'
       redirect_back_or_default(users_path)
     end
+  end
+
+  def user_admin?
+    current_user.roles.first.name == "administrator"
   end
 
   def all_users
