@@ -1,11 +1,16 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
-<h2>
-  <%# image_tag("icons/16x16/documents.png", :size => "16x16", :alt => "Documents Icon") %> My Documents
-</h2>
+<div id="float_right">
+Using <%= h number_to_human_size(@used_space) %>
+of <%= h number_to_human_size(@user.quota) %>
+(<%= h number_to_percentage(@used_space.to_f / @user.quota.to_f, :precision => 2) %>)
+</div>
 
-<%= link_to "New document", new_document_path, :class => 'document_new action' %>
+<ul class="toolbar">
+<li class="title">My Documents</li>
+<li><%= link_to "New document", new_document_path, :class => 'document_new action' %></li>
+</ul>
 
 <table border="0" cellspacing="0" cellpadding="6">
   <tr>
@@ -33,6 +38,3 @@
 <% end %>
 </table>
 
-<p> You are currently using <%= h number_to_human_size(@used_space) %>
-(<%= h number_to_percentage(@used_space.to_f / @user.quota.to_f, :precision => 2) %>)
-of your <%= h number_to_human_size(@user.quota) %> quota. </p>

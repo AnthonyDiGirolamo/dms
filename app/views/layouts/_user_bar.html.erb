@@ -16,10 +16,12 @@
   <% end -%>
 
 <% else -%>
-
+  Not logged in! Register or login to the right.
+  <div id="float_right">
   <%# link_to_login_with_IP 'Not logged in', :style => 'border: none;' %>
   <%= link_to "Log in",  login_path,  { :title => "Log in", :class => 'action user_login' } %>
   <%= link_to "Register", register_path, { :title => "Create an account", :class => 'action user_new' } %>
+  </div>
 
 <% end -%>
 
