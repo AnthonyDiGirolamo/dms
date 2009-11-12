@@ -74,7 +74,6 @@ a {
 pre {
   background-color: @Aluminium1;
   padding: 10px;
-  font-size: 11px;
   font-family: "DejaVu Sans Mono", "Bitstream Vera Mono", "Courier New", monospace;
 }
 
@@ -93,6 +92,32 @@ pre {
     /*background-color: lightgray;*/
   /*}*/
 /*}*/
+
+div.message {
+}
+
+p.flash {
+  width: 75%;
+  padding: 5px;
+
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.4em;
+
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+p.notice {
+  border: 1px solid @Chameleon3;
+  background-color: @Chameleon1;
+  color: black;
+}
+p.error {
+  border: 1px solid @ScarletRed3;
+  background-color: @ScarletRed2;
+  color: white;
+  font-weight: bold;
+}
 
 #float_right {
   float: right;
@@ -198,7 +223,6 @@ a.action {
     text-align: left;
     font-weight: bold;
     padding: 5px 5px 5px 15px;
-    font-size: 12px;
     margin: -7px;
     background-color: @ScarletRed2;
     color: white;
@@ -211,7 +235,6 @@ a.action {
   }
 
   ul li {
-    font-size: 12px;
     list-style: square;
   }
 }
