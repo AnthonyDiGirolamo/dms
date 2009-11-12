@@ -30,10 +30,12 @@ of <%= h number_to_human_size(@user.quota) %>
     <td>
       <%= h number_to_human_size(document.document_file_size) %>
     </td>
-    <td><%= link_to 'Show', document %> </td>
+    <td><%= link_to 'Show', document, :class => 'document_show action' %> </td>
     <td><%= link_to 'Edit', edit_document_path(document), :class => 'document_edit action' %></td>
     <td><%= link_to 'Destroy', document, :confirm => 'Are you sure?', :method => :delete, :class => 'document_delete action'  %></td>
     <td><%= link_to 'Download', document.document.url, :class => 'document_download action' %></td>
+    <td><%= link_to 'Check-In', document.document.url, :class => 'document_checkin action' %></td>
+    <td><%= link_to 'Check-Out', document.document.url, :class => 'document_checkout action' %></td>
   </tr>
 <% end %>
 </table>

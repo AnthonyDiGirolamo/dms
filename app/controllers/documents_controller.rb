@@ -60,6 +60,12 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def checkout
+  end
+
+  def checkin
+  end
+
   def show
   end
 
