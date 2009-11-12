@@ -1,3 +1,5 @@
+/*Tango Color Palette*/
+
 @Aluminium1: #EEEEEC;
 @Aluminium2: #D3D7CF;
 @Aluminium3: #BABDB6;
@@ -59,7 +61,7 @@ h1 {
 
 h2 {
   font-size: 1.4em;
-  /*margin: 1em 0 .5em 0;*/
+  margin: 0 0 .5em 0;
 }
 
 a {
@@ -77,21 +79,17 @@ pre {
   font-family: "DejaVu Sans Mono", "Bitstream Vera Mono", "Courier New", monospace;
 }
 
-/*div#button {*/
-  /*margin: 1em;*/
-  /*padding: 1em;*/
-  /*background-color: gray;*/
-  /*width: 9em;*/
-  /*height: 2em;*/
-  /*line-height: 2em;*/
-  /*text-align: center;*/
-  /*border:2px solid #000;*/
+p.document_title {
+  display:inline;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
 
-  /*:hover {*/
-    /*border-color: #AAA;*/
-    /*background-color: lightgray;*/
-  /*}*/
-/*}*/
+div#pad_bottom {
+  padding-bottom: 10px;
+}
+
+/*Flash notice/errors*/
 
 div.message {
 }
@@ -119,6 +117,8 @@ p.error {
   font-weight: bold;
 }
 
+/*Top Bar*/
+
 div#user_bar {
   border-bottom: 1px solid @Aluminium4;
   padding-bottom: 6px;
@@ -128,6 +128,8 @@ div#user_bar {
 div#float_right {
   float: right;
 }
+
+/*Table tool bar*/
 
 ul.toolbar {
   margin: 0;
@@ -158,6 +160,8 @@ li.title {
   margin-right: 10px;
 }
 
+/*Action buttons w/ icons*/
+
 a.action {
   padding: 5px 2px 5px 20px;
   background-repeat: no-repeat;
@@ -172,6 +176,9 @@ a.action {
 
 .document_index {
   background-image: url(/images/icons/16x16/documents-text.png);
+}
+.document_share {
+  background-image: url(/images/icons/16x16/users.png);
 }
 .document_new {
   background-image: url(/images/icons/16x16/document--plus.png);
@@ -215,6 +222,8 @@ a.action {
   background-image: url(/images/icons/16x16/question-white.png);
 }
 
+/*Paging*/
+
 .pagination {
   text-align: center;
   padding: .3em;
@@ -254,6 +263,7 @@ a.action {
 	}
 }
 
+/*Error display*/
 
 #errorExplanation {
   width: 400px;

@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
   # For pre-loading the /document/:id parameter in a URL
-  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy]
+  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
   # For pre-loading role and department names
   #before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
 

@@ -63,7 +63,7 @@ class Document < ActiveRecord::Base
     elsif mime == 'text/plain'
       return 'document-text.png'
     elsif mime[0,5] == 'image'
-      return 'document-image.png'
+      return 'image.png'
     elsif mime == 'application/pdf'
       return 'document-pdf.png'
     else

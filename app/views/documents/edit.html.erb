@@ -1,12 +1,22 @@
-<h1>Editing document</h1>
+<%= render :partial => 'layouts/flash_messages' %>
 
-<% form_for(@document) do |f| %>
+<h1>Editing document</h1>
+<% form_for @document, :html => { :multipart => true } do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <p><b><%= label_tag 'name', 'Name' %></b><br/>
+  <%= f.text_field :name %></p>
+
+  <p><b><%= label_tag 'comment', 'Comments' %></b><br/>
+  <%= f.text_area :comment %></p>
+
+  <p><b><%= label_tag 'document', 'Select a file (no larger than 20 MB)' %></b><br/>
+  <%= f.file_field :document %>
+  <br/>Omiting a file will keep the original.</p>
+
+  <p><%= f.submit 'Create' %></p>
+
 <% end %>
 
 <%= link_to 'Show', @document %> |
-<%= link_to 'Back', documents_path %>
+<%= link_to 'Back', document_path(@document) %>

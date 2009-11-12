@@ -1,7 +1,26 @@
+<%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
-<p><%= h @document.name %></p>
-<p><%= h @document.comment %></p>
-<p><%= h @document.document_content_type %></p>
-<%= link_to 'Edit', edit_document_path(@document) %> |
-<%= link_to 'Back', documents_path %>
+<div id="pad_bottom">
+<ul class="toolbar">
+<li class="title">Actions</li>
+    <li><%= link_to 'Edit', edit_document_path(@document), :class => 'document_edit action' %></li>
+    <li><%= link_to 'Destroy', @document, :confirm => 'Are you sure?', :method => :delete, :class => 'document_delete action'  %></li>
+    <li><%= link_to 'Download', @document.document.url, :class => 'document_download action' %></li>
+    <li><%= link_to 'Check-In', @document.document.url, :class => 'document_checkin action' %></li>
+    <li><%= link_to 'Check-Out', @document.document.url, :class => 'document_checkout action' %></li>
+    <li><%= link_to 'Sharing', @document.document.url, :class => 'document_share action' %></li>
+</ul>
+</div>
+
+<p class="document_title">
+  <%= image_tag("icons/16x16/" + @document.mime_icon, :size => "16x16", :alt => h(@document.document_content_type) ) %>
+  <%= h @document.name %>
+</p>
+
+<% if @document.comment -%>
+  <p><%= h @document.comment %></p>
+<% end -%>
+
+<%# link_to 'Edit', edit_document_path(@document) %>
+<%# link_to 'Back', documents_path %>
