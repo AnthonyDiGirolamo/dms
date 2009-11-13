@@ -1,0 +1,35 @@
+<% no_error = @document.errors['name'].nil? -%>
+<% if no_error -%>
+  <p class="input_title">
+<% else -%>
+  <p class="input_title inline">
+<% end -%>
+<%= label_tag 'name', 'Name' %> </p>
+<%= error_message_on 'document', 'name', :css_class => "input_error_message" %>
+<p>
+  <% if no_error and !@document.errors.empty? -%> 
+  <div class="valid_field"><%= f.text_field :name, :class => 'input_field' %></div>
+  <% else -%>
+  <%= f.text_field :name, :class => 'input_field' %>
+  <% end -%>
+</p>
+
+<% no_error = @document.errors['document'].nil? -%>
+<% if no_error -%>
+  <p class="input_title">
+<% else -%>
+  <p class="input_title inline">
+<% end -%>
+<%= label_tag 'document', 'Select a file (20 MB max)' %> </p>
+<%= error_message_on 'document', 'document', :css_class => "input_error_message" %>
+<p>
+  <%= f.file_field :document %>
+</p>
+
+<p class="input_title">
+  <%= label_tag 'comment', 'Comments' %>
+</p>
+<p>
+  <%= f.text_area :comment %>
+</p>
+

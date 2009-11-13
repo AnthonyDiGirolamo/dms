@@ -299,8 +299,36 @@ a.action {
 }
 
 .fieldWithErrors {
-  padding: 2px;
-  background-color: @ScarletRed1;
-  display: table;
+  padding-left: 20px;
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-image: url(/images/icons/16x16/exclamation-red.png);
+}
+.valid_field {
+  padding-left: 20px;
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-image: url(/images/icons/16x16/tick-circle.png);
 }
 
+
+.input_title {
+  font-weight: bold;
+}
+.input_field {
+  font-size: 1.1em;
+  padding: 5px;
+  margin: 0;
+  .bordered;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+.input_error_message {
+  display:inline;
+  font-weight: bold;
+  color: @ScarletRed3;
+}
+
+textarea {
+  width: 100%;
+}
