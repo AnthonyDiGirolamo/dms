@@ -7,15 +7,22 @@
   <%= link_to "Log out", logout_path, { :title => "Log out", :class => 'action user_logout' } %>
   </div>
 
-  <% if current_user.roles.first.name == "administrator" -%>
-    <%= link_to "All Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
-    <%= link_to "Pending Users", pending_users_path,  { :title => "Manage Pending Users", :class => 'action user_index' } %>
-    <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
+  <% if current_user.roles.empty? -%>
+    You have no Permisions!
   <% else -%>
-    <%= link_to "Documents", documents_path ,  { :title => "Manage Documents", :class => 'action document_index' } %>
+
+    <% if current_user.roles.first.name == "administrator" -%>
+      <%= link_to "All Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
+      <%= link_to "Pending Users", pending_users_path,  { :title => "Manage Pending Users", :class => 'action user_index' } %>
+      <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
+    <% else -%>
+      <%= link_to "Documents", documents_path ,  { :title => "Manage Documents", :class => 'action document_index' } %>
+    <% end -%>
+
   <% end -%>
 
 <% else -%>
+
   Not logged in! Register or login to the right.
   <div id="float_right">
   <%# link_to_login_with_IP 'Not logged in', :style => 'border: none;' %>
