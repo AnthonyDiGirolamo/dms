@@ -2,12 +2,6 @@
 
 <h1>New document</h1>
 
-<% form_for @document, :html => { :multipart => true } do |f| %>
-
-  <%= render :partial => 'document_form' %>
-
-  <p><%= f.submit 'Create' %></p>
-
-<% end %>
+<%= render :partial => 'document_form', :object => @document, :as => :document %>
 
 <%= link_to 'Cancel', documents_path, :class => 'icon_cancel action' %>

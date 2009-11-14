@@ -2,12 +2,6 @@
 
 <h1>Editing document</h1>
 
-<% form_for @document, :html => { :multipart => true } do |f| %>
-
-  <%= render :partial => 'document_form' %>
-
-  <p><%= f.submit 'Update' %></p>
-
-<% end %>
+<%= render :partial => 'document_form', :object => @document, :as => :document %>
 
 <%= link_to 'Cancel', @document, :class => 'icon_cancel action' %>
