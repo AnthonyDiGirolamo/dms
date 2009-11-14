@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :user_requests
   has_many :documents
   has_many :audits
-  has_many :shares #, :class_name => "Share", :foreign_key => "owner_id"
+  has_many :shares, :class_name => "Share", :foreign_key => "owner_id"
   has_and_belongs_to_many :departments
 
   include Authentication
