@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091028015002) do
+ActiveRecord::Schema.define(:version => 20091114031051) do
 
   create_table "audits", :force => true do |t|
     t.integer  "document_id"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(:version => 20091028015002) do
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.integer  "document_updated_at"
-    t.string   "comment"
-    t.integer  "checked_out_by_id"
-    t.string   "real_mime_type"
+    t.integer  "checked_out_by"
+    t.datetime "checked_out_at"
+    t.text     "comment"
   end
 
   create_table "roles", :force => true do |t|
