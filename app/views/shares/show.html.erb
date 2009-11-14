@@ -1,3 +1,53 @@
+  <table border="0" cellspacing="0" cellpadding="5">
+    <tr>
+      <th>Login</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/magnifier.png", :size => "16x16", :alt => "Can Read?", :title => "Can Read?" %>
+      </th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/document--pencil.png", :size => "16x16", :alt => "Can Edit?", :title => "Can Edit?" %>
+      </th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/document-export.png", :size => "16x16", :alt => "Can Check-Out?", :title => "Can Check-Out?" %>
+      </th>
+    </tr>
 
-<%= link_to 'Edit', edit_share_path(@share) %> |
-<%= link_to 'Back', shares_path %>
+    <tr class="<%= cycle("odd","even") %>">
+      <td>
+        <pre><%= h @share.user.login %></pre>
+      </td>
+      <td>
+        <%= h @share.user.name %>
+      </td>
+      <td>
+        <%= h @share.user.email %>
+      </td>
+      <td class="icon">
+        <% if @share.can_read? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+      <td class="icon">
+        <% if @share.can_update? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+      <td class="icon">
+        <% if @share.can_checkout? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+    </tr>
+
+  </table>
+
+<%= link_to 'Edit', edit_document_share_path(@share) %>
+<%= link_to 'Back', @document, :class => 'icon_cancel action' %>

@@ -1,5 +1,5 @@
 <%# Color every other row %>
-<tr class="<%= cycle("even","odd") %>">
+<tr class="<%= cycle("odd","even") %>">
   <td>
     <%# link_to 'Show', document, :class => 'document_show action' %>
     <%# image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
@@ -16,7 +16,7 @@
 
   <td> <%# Indicator Icons %>
     <% if document.shares_count > 0 -%>
-      <%= image_tag("icons/16x16/users.png", :size => "16x16", :alt => "Document Type Icon") %>
+      <%= image_tag "icons/16x16/users.png", :size => "16x16", :alt => "Document Type Icon", :title => "Currently Sharing" %>
     <% end -%>
   </td>
 

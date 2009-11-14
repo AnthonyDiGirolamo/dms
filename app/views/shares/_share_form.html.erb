@@ -1,0 +1,19 @@
+<% form_for(@share, :url => (@share.new_record? ? document_shares_path : document_share_path) ) do |form| %>
+  <% form.error_messages %>
+
+  <%= form.text_field :owner_id %>
+  <%= form.text_field :user_id %>
+  <%= form.text_field :document_id %>
+
+  <input type="hidden" value="false" name="share[can_read]"/>
+  <%= check_box_tag "share[can_read]", @share.can_read?, @share.can_read? %>
+  <input type="hidden" value="false" name="share[can_read]"/>
+  <%= check_box_tag "share[can_update]", @share.can_update?, @share.can_update? %>
+  <input type="hidden" value="false" name="share[can_read]"/>
+  <%= check_box_tag "share[can_checkout]", @share.can_checkout?, @share.can_checkout? %>
+
+  <p>
+    <%= form.submit @share.new_record? ? "Create Share" : "Update Share" %>
+  </p>
+
+<% end %>

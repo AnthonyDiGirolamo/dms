@@ -1,12 +1,8 @@
-<h1>Editing share</h1>
+<%= render :partial => 'layouts/flash_messages' %>
 
-<% form_for(@share) do |f| %>
-  <%= f.error_messages %>
+<h1>Editing Share</h1>
 
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+<%= render :partial => 'share_form', :object => @share, :as => :share %>
 
-<%= link_to 'Show', @share %> |
-<%= link_to 'Back', shares_path %>
+<%# link_to 'Show', document_share_path(@share) %>
+<%= link_to 'Cancel', @document, :class => 'icon_cancel action' %>

@@ -67,17 +67,10 @@ class DocumentsController < ApplicationController
   end
 
   def show
+    @shares = @document.shares.find :all, :include => :user
   end
 
   def edit
-  end
-
-  def share
-    @share = Share.new
-  end
-
-  def create_share
-
   end
 
   def update
@@ -105,4 +98,5 @@ private
   def find_document_by_id
     @document = current_user.documents.find_by_id(params[:id])
   end
+
 end

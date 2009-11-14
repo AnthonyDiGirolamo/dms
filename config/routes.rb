@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   map.revoke_user_request '/user_requests/:id/revoke', :controller => 'user_requests', :action => 'revoke', :conditions => { :method => :put }
 
   map.connect '/documents/:id/download/:style.:format', :controller => 'documents', :action => 'download', :conditions => { :method => :get }
-  map.resources :documents, :member => { :checkout => :put, :checkin => :put }
+  map.resources :documents, :member => { :checkout => :put, :checkin => :put }, :has_many => :shares
 
   # The priority is based upon order of creation: first created -> highest priority.
 

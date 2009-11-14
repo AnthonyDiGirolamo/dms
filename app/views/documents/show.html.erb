@@ -22,5 +22,68 @@
   <p><%= h @document.comment %></p>
 <% end -%>
 
-<%# link_to 'Edit', edit_document_path(@document) %>
-<%# link_to 'Back', documents_path %>
+<% if !@shares.empty? -%>
+
+<div id="pad_bottom">
+<ul class="toolbar">
+  <li class="title">Shares</li>
+  <li><%= link_to "New share", new_document_share_path(@document), :class => 'user_new action' %></li>
+</ul>
+</div>
+
+  <table border="0" cellspacing="0" cellpadding="5">
+    <tr>
+      <th>Login</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/magnifier.png", :size => "16x16", :alt => "Can Read?", :title => "Can Read?" %>
+      </th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/document--pencil.png", :size => "16x16", :alt => "Can Edit?", :title => "Can Edit?" %>
+      </th>
+      <th class="icon_width">
+        <%= image_tag "icons/16x16/document-export.png", :size => "16x16", :alt => "Can Check-Out?", :title => "Can Check-Out?" %>
+      </th>
+    </tr>
+
+  <% @shares.each do |share| %>
+    <tr class="<%= cycle("odd","even") %>">
+      <td>
+        <%= h share.user.login %>
+        <%= link_to 'Edit', edit_document_share_path(share) %>
+      </td>
+      <td>
+        <%= h share.user.name %>
+      </td>
+      <td>
+        <%= h share.user.email %>
+      </td>
+      <td class="icon">
+        <% if share.can_read? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+      <td class="icon">
+        <% if share.can_update? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+      <td class="icon">
+        <% if share.can_checkout? -%>
+          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
+        <% else -%>
+          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
+        <% end -%>
+      </td>
+    </tr>
+  <% end -%>
+
+  </table>
+
+<% end -%>
+
