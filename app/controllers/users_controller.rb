@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     success = @user && @user.valid?
     if success && @user.errors.empty?
       # create role/dept request
-      request = UserRequest.create
+      request = UserRequest.new
       request.user_id = @user.id
       request.role_id = role.id
       request.department_id = department.id unless role.name == "administrator"

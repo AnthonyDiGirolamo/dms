@@ -81,7 +81,11 @@
 </p>
 
 <p>
-  <%= f.password_field :password, :class => 'input_field' %>
+  <% if no_error and !@user.errors.empty? -%> 
+    <div class="valid_field"><%= f.password_field :password, :class => 'input_field' %></div>
+  <% else -%>
+    <%= f.password_field :password, :class => 'input_field' %> 
+  <% end -%>
 </p>
 
 <%# Name and error message %>
@@ -97,7 +101,11 @@
 </p>
 
 <p>
-  <%= f.password_field :password_confirmation, :class => 'input_field' %>
+  <% if no_error and !@user.errors.empty? -%> 
+    <div class="valid_field"><%= f.password_field :password_confirmation, :class => 'input_field' %></div>
+  <% else -%>
+    <%= f.password_field :password_confirmation, :class => 'input_field' %> 
+  <% end -%>
 </p>
 
 <%# Time Zone %>

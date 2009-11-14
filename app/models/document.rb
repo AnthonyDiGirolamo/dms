@@ -4,8 +4,6 @@ class Document < ActiveRecord::Base
   has_many :audits
   has_many :shares
 
-  validates_associated :author
-
   attr_accessible :name, :comment, :document
   validates_presence_of :name
 
