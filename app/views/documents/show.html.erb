@@ -20,6 +20,11 @@
   <%= h @document.name %>
 </p>
 
+<p><b>Size:</b> <%= h number_to_human_size(@document.document_file_size) %> &nbsp;&nbsp;
+<b>Created:</b> <%= h format_time(@document.created_at) %> &nbsp;&nbsp;
+<b>Last Updated:</b> <%= h format_time(@document.updated_at) %>
+</p>
+
 <% if @document.comment -%>
   <p><%= h @document.comment %></p>
 <% end -%>
