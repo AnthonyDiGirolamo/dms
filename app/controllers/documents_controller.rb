@@ -4,7 +4,7 @@ class DocumentsController < ApplicationController
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
   # For pre-loading the /document/:id parameter in a URL
-  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
+  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout, :share]
   # For pre-loading role and department names
   #before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
 
@@ -70,6 +70,14 @@ class DocumentsController < ApplicationController
   end
 
   def edit
+  end
+
+  def share
+    @share = Share.new
+  end
+
+  def create_share
+
   end
 
   def update

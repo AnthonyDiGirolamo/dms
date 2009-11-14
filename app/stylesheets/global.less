@@ -229,6 +229,38 @@ a.action {
   background-image: url(/images/icons/16x16/minus-circle.png);
 }
 
+/*Table Formatting*/
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+tr {
+  height: 2em;
+  line-height: 2em;
+}
+
+a.tr_action {
+  padding: 5px 2px 5px 20px;
+  background-repeat: no-repeat;
+  background-position: center left;
+  font-weight: bold;
+
+  :hover {
+    color: white; 
+    background-color: @SkyBlue2; 
+  }
+}
+
+tr.odd { background-color: @Aluminium1; }
+tr.even { background-color: white; }
+
 /*Paging*/
 
 .pagination {
@@ -330,7 +362,6 @@ a.action {
   font-weight: bold;
   color: @ScarletRed3;
 }
-
 textarea {
   width: 100%;
 }

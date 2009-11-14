@@ -12,21 +12,26 @@ of <%= h number_to_human_size(@user.quota) %>
 <li><%= link_to "New document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
-<table border="0" cellspacing="0" cellpadding="6">
+<table border="0" cellspacing="0" cellpadding="5">
   <tr>
     <th>Name</th>
     <th>Size</th>
+    <th>Sharing?</th>
     <th>Updated</th>
   </tr>
 
 <% @documents.each do |document| %>
-  <tr>
+  <tr class="<%= cycle("even","odd") %>">
     <td>
-      <%= image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
+      <%# link_to 'Show', document, :class => 'document_show action' %> 
+      <%# image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
+      <a style="background-image: url(/images/icons/16x16/<%= document.mime_icon %>);" class="tr_action" href="/documents/<%= h document.id %>">
       <%= h document.name %>
+      </a>
+    </td>
     <td> <%= h number_to_human_size(document.document_file_size) %> </td>
+    <td><%= document.shares.count %></td>
     <td> <%= h document.updated_at.strftime("%m/%d/%y %I:%M %p") %> </td>
-    <td><%= link_to 'Show', document, :class => 'document_show action' %> </td>
   </tr>
 <% end %>
 </table>
