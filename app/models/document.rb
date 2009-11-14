@@ -1,8 +1,10 @@
 class Document < ActiveRecord::Base
   belongs_to :author, :foreign_key => "user_id"
-  belongs_to :checked_out_by, :foreign_key => "checked_out_by_id"
+  belongs_to :checked_out_by, :foreign_key => "checked_out_by"
   has_many :audits
   has_many :shares
+
+  validates_associated :author
 
   attr_accessible :name, :comment, :document
   validates_presence_of :name

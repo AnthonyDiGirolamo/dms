@@ -77,6 +77,7 @@ class DocumentsController < ApplicationController
       flash[:notice] = 'Document was successfully updated.'
       redirect_to(@document)
     else
+      flash[:error] = 'Document update failed.'
       render :action => "edit"
     end
   end

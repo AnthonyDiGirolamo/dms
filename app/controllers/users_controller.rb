@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       request.user_id = @user.id
       request.role_id = role.id
       request.department_id = department.id unless role.name == "administrator"
-      request.save!
+      request.save
 
       redirect_back_or_default(root_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
