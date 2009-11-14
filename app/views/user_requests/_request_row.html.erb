@@ -1,7 +1,7 @@
 <tr>
   <td>
     <% if !request_row.created_at.nil? -%> 
-    <%= h request_row.created_at.strftime("%m/%d/%y %I:%M %p") %>
+    <%= h format_time(request_row.created_at) %>
     <% end -%>
   </td>
   <td>
@@ -19,7 +19,7 @@
   </td>
   <td>
     <%= h request_row.state.humanize %>
-    on <%= h request_row.updated_at.strftime("%m/%d/%y") %>
+    on <%= h format_date(request_row.updated_at) %>
   </td>
   <td>
     <% if request_row.state != "approved" -%>

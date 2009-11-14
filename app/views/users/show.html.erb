@@ -44,7 +44,7 @@
   <% for request in @requests %>
     <tr>
       <td>
-        <%= h request.created_at.strftime("%m/%d/%y %I:%M %p") %>
+        <%= h format_time(request.created_at) %>
       </td>
       <td>
         <% if not request.role_id.nil? -%>
@@ -58,11 +58,11 @@
         <% end %>
       </td>
       <%#<td>%>
-        <%# h request.updated_at.strftime("%m/%d/%y %I:%M %p") %>
+        <%# h format_time(request.updated_at %>
       <%#</td>%>
       <td>
         <%= h request.state.humanize %>
-        on <%= h request.updated_at.strftime("%m/%d/%y") %>
+        on <%= h format_date(request.updated_at) %>
       </td>
     </tr>
   <% end %>

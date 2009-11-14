@@ -16,23 +16,36 @@ of <%= h number_to_human_size(@user.quota) %>
   <tr>
     <th>Name</th>
     <th>Size</th>
-    <th>Sharing?</th>
     <th>Updated</th>
   </tr>
 
 <% @documents.each do |document| %>
+
+  <%# Color every other row %>
   <tr class="<%= cycle("even","odd") %>">
     <td>
-      <%# link_to 'Show', document, :class => 'document_show action' %> 
+      <%# link_to 'Show', document, :class => 'document_show action' %>
       <%# image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
       <a style="background-image: url(/images/icons/16x16/<%= document.mime_icon %>);" class="tr_action" href="/documents/<%= h document.id %>">
       <%= h document.name %>
       </a>
     </td>
-    <td> <%= h number_to_human_size(document.document_file_size) %> </td>
-    <td><%= document.shares.count %></td>
-    <td> <%= h document.updated_at.strftime("%m/%d/%y %I:%M %p") %> </td>
+    <td>
+      <%= h number_to_human_size(document.document_file_size) %>
+    </td>
+    <td>
+      <%= h format_time(document.updated_at) %>
+    </td>
+
+    <td> <%# Indicator Icons %>
+      <% if document.shares_count > 0 -%>
+        <%= image_tag("icons/16x16/users.png", :size => "16x16", :alt => "Document Type Icon") %>
+      <% end -%>
+    </td>
+
   </tr>
+
 <% end %>
+
 </table>
 

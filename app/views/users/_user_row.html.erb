@@ -10,17 +10,17 @@
   </td>
   <td>
     <% if !user_row.created_at.nil? -%> 
-    <%= h user_row.created_at.strftime("%m/%d/%y %I:%M %p") %>
+    <%= h format_time(user_row.created_at) %>
     <% end -%>
   </td>
   <td>
     <% if !user_row.updated_at.nil? -%> 
-    <%= h user_row.updated_at.strftime("%m/%d/%y %I:%M %p") %>
+    <%= h format_time(user_row.updated_at) %>
     <% end -%>
   </td>
   <td>
     <% if !user_row.activated_at.nil? -%> 
-    <%= h user_row.activated_at.strftime("%m/%d/%y %I:%M %p") %>
+    <%= h format_time(user_row.activated_at) %>
     <% end -%>
   </td>
   <td>
