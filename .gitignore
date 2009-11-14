@@ -2,3 +2,4 @@ assets/
 config/database.yml
 log/
 public/stylesheets
+db/schema.rb
