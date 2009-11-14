@@ -37,6 +37,8 @@
 
 .bordered { border: 1px solid black; }
 .inline { display:inline; }
+.center { text-align: center; }
+.right { text-align: right; }
 #pad_bottom { padding-bottom: 10px; }
 
 html {
@@ -217,6 +219,12 @@ a.action {
 .user_new {
   background-image: url(/images/icons/16x16/user--plus.png);
 }
+.user_edit {
+  background-image: url(/images/icons/16x16/user--pencil.png);
+}
+.user_delete {
+  background-image: url(/images/icons/16x16/user--minus.png);
+}
 
 .request_index {
   background-image: url(/images/icons/16x16/question-white.png);
@@ -226,6 +234,12 @@ a.action {
   background-image: url(/images/icons/16x16/minus-circle.png);
 }
 
+.icon_cross {
+  background-image: url(/images/icons/16x16/cross.png);
+}
+.icon_tick {
+  background-image: url(/images/icons/16x16/tick.png);
+}
 /*Table Formatting*/
 
 table {
@@ -257,10 +271,6 @@ a.tr_action {
 
 tr.odd { background-color: @Aluminium1; }
 tr.even { background-color: white; }
-
-.icon_width {
-  width: 25px;
-}
 
 /*Paging*/
 

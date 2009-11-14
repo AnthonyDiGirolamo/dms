@@ -6,8 +6,4 @@ class Share < ActiveRecord::Base
   validates_associated :owner
   validates_associated :user
   validates_associated :document
-
-  validates_presence_of :can_read
-  validates_presence_of :can_update
-  validates_presence_of :can_checkout
 end

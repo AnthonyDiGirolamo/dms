@@ -4,7 +4,6 @@ class CreateShares < ActiveRecord::Migration
       t.integer :owner_id
 	  t.integer :user_id
 	  t.integer :document_id
-	  t.boolean :can_read, :default => false
 	  t.boolean :can_update, :default => false
 	  t.boolean :can_checkout, :default => false
       t.timestamps

@@ -20,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/documents/:id/download/:style.:format', :controller => 'documents', :action => 'download', :conditions => { :method => :get }
   map.resources :documents, :member => { :checkout => :put, :checkin => :put }, :has_many => :shares
+  map.toggle_update_document_share '/documents/:document_id/shares/:id/toggle_update', :controller => 'shares', :action => 'toggle_update', :conditions => { :method => :put }
+  map.toggle_checkout_document_share '/documents/:document_id/shares/:id/toggle_checkout', :controller => 'shares', :action => 'toggle_checkout', :conditions => { :method => :put }
 
   # The priority is based upon order of creation: first created -> highest priority.
 

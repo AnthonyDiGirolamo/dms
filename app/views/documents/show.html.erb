@@ -3,13 +3,15 @@
 
 <div id="pad_bottom">
 <ul class="toolbar">
-<li class="title">Actions</li>
+<li class="title">Document</li>
     <li><%= link_to 'Edit', edit_document_path(@document), :class => 'document_edit action' %></li>
-    <li><%= link_to 'Destroy', @document, :confirm => 'Are you sure?', :method => :delete, :class => 'document_delete action'  %></li>
+    <li><%= link_to 'Delete', @document, :confirm => 'Are you sure?', :method => :delete, :class => 'document_delete action'  %></li>
     <li><%= link_to 'Download', @document.document.url, :class => 'document_download action' %></li>
-    <li><%= link_to 'Check-In', @document.document.url, :class => 'document_checkin action' %></li>
-    <li><%= link_to 'Check-Out', @document.document.url, :class => 'document_checkout action' %></li>
-    <li><%= link_to 'Sharing', @document.document.url, :class => 'document_share action' %></li>
+    <% if @document.checked_out? -%>
+      <li><%= link_to 'Check-In', @document.document.url, :class => 'document_checkin action' %></li>
+    <% else -%>
+      <li><%= link_to 'Check-Out', @document.document.url, :class => 'document_checkout action' %></li>
+    <% end -%>
 </ul>
 </div>
 
@@ -22,8 +24,6 @@
   <p><%= h @document.comment %></p>
 <% end -%>
 
-<% if !@shares.empty? -%>
-
 <div id="pad_bottom">
 <ul class="toolbar">
   <li class="title">Shares</li>
@@ -31,27 +31,26 @@
 </ul>
 </div>
 
+<% if !@shares.empty? -%>
+
   <table border="0" cellspacing="0" cellpadding="5">
     <tr>
       <th>Login</th>
       <th>Name</th>
       <th>Email</th>
-      <th class="icon_width">
-        <%= image_tag "icons/16x16/magnifier.png", :size => "16x16", :alt => "Can Read?", :title => "Can Read?" %>
+      <th class="center">
+        <%= image_tag "icons/16x16/document--pencil.png", :size => "16x16", :alt => "Can Edit?", :title => "Can Edit?" %> Update
       </th>
-      <th class="icon_width">
-        <%= image_tag "icons/16x16/document--pencil.png", :size => "16x16", :alt => "Can Edit?", :title => "Can Edit?" %>
+      <th class="center">
+        <%= image_tag "icons/16x16/document-export.png", :size => "16x16", :alt => "Can Check-Out?", :title => "Can Check-Out?" %> Check-Out
       </th>
-      <th class="icon_width">
-        <%= image_tag "icons/16x16/document-export.png", :size => "16x16", :alt => "Can Check-Out?", :title => "Can Check-Out?" %>
-      </th>
+      <th class="right"></th>
     </tr>
 
   <% @shares.each do |share| %>
     <tr class="<%= cycle("odd","even") %>">
       <td>
         <%= h share.user.login %>
-        <%= link_to 'Edit', edit_document_share_path(share) %>
       </td>
       <td>
         <%= h share.user.name %>
@@ -59,31 +58,22 @@
       <td>
         <%= h share.user.email %>
       </td>
-      <td class="icon">
-        <% if share.can_read? -%>
-          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
-        <% else -%>
-          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
-        <% end -%>
+      <td class="center">
+        <%= link_to '', toggle_update_document_share_path(@document, share), :method => :put, :class => "#{share.can_update? ? "icon_tick" : "icon_cross"} action" %>
       </td>
-      <td class="icon">
-        <% if share.can_update? -%>
-          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
-        <% else -%>
-          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
-        <% end -%>
+      <td class="center">
+        <%= link_to '', toggle_checkout_document_share_path(@document, share), :method => :put, :class => "#{share.can_checkout? ? "icon_tick" : "icon_cross"} action" %>
       </td>
-      <td class="icon">
-        <% if share.can_checkout? -%>
-          <%= image_tag "icons/16x16/tick.png", :size => "16x16", :alt => "Yes", :title => "Yes" %>
-        <% else -%>
-          <%= image_tag "icons/16x16/cross.png", :size => "16x16", :alt => "No", :title => "No" %>
-        <% end -%>
+      <td class="right">
+        <%= link_to 'Edit', edit_document_share_path(@document, share), :class => 'user_edit action' %>
+        <%= link_to 'Delete', document_share_path(@document, share), :confirm => 'Are you sure?', :method => :delete, :class => 'user_delete action' %>
       </td>
     </tr>
   <% end -%>
 
   </table>
 
+<% else -%>
+  This document is not being shared.
 <% end -%>
 

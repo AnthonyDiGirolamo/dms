@@ -3,18 +3,15 @@ class SharesController < ApplicationController
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
   before_filter :find_document_by_id
-  before_filter :find_share_by_id, :only => [ :show, :edit, :update, :destroy ]
+  before_filter :find_share_by_id, :only => [ :show, :edit, :update, :destroy, :toggle_update, :toggle_checkout ]
 
   def index
-    #if request.post?
-      redirect_to(document_path(@document))
-    #else
-      #redirect_back_or_default(document_path(@document))
-    #end
+    redirect_to(document_path(@document))
   end
 
   def new
     @share = @document.shares.new
+    @share.owner_id = current_user.id
   end
 
   def create
@@ -32,17 +29,14 @@ class SharesController < ApplicationController
   end
 
   def show
+    redirect_to(document_path(@document))
   end
 
   def edit
   end
 
   def update
-    @share.can_read = params[:share][:can_read]
-    @share.can_update = params[:share][:can_update]
-    @share.can_checkout = params[:share][:can_checkout]
-
-    if @share.save
+    if @share.update_attributes(params[:share])
       flash[:notice] = 'Share was successfully updated.'
       redirect_to(document_path(@document))
     else
@@ -55,6 +49,40 @@ class SharesController < ApplicationController
   def destroy
     @share.destroy
     redirect_to(document_path(@document))
+  end
+
+  def toggle_update
+    if @share.can_update?
+      @share.can_update = false
+      @share.can_checkout = false
+    else
+      @share.can_update = true
+    end
+
+    if @share.save
+      flash[:notice] = 'Share was successfully updated.'
+      redirect_to(document_path(@document))
+    else
+      flash[:error] = 'Share update failed.'
+      redirect_to(document_path(@document))
+    end
+  end
+
+  def toggle_checkout
+    if @share.can_checkout?
+      @share.can_checkout = false
+    else
+      @share.can_checkout = true
+      @share.can_update = true
+    end
+
+    if @share.save
+      flash[:notice] = 'Share was successfully updated.'
+      redirect_to(document_path(@document))
+    else
+      flash[:error] = 'Share update failed.'
+      redirect_to(document_path(@document))
+    end
   end
 
 private

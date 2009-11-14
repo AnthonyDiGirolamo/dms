@@ -3,7 +3,7 @@
   <td>
     <%# link_to 'Show', document, :class => 'document_show action' %>
     <%# image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
-    <a style="background-image: url(/images/icons/16x16/<%= document.mime_icon %>);" class="tr_action" href="/documents/<%= h document.id %>">
+    <a style="background-image: url(/images/icons/16x16/<%= document.mime_icon %>);" class="action" href="/documents/<%= h document.id %>">
     <%= h document.name %>
     </a>
   </td>
