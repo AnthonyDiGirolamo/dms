@@ -44,12 +44,21 @@ class SharesController < ApplicationController
   end
 
   def update
-    if @share.update_attributes(params[:share])
-      flash[:notice] = 'Share was successfully updated.'
-      redirect_to(document_path(@document))
+    user = User.find_by_login params[:share][:login] unless params[:share].nil?
+    if !user.nil?
+
+      @share.user = user
+      if @share.save
+        flash[:notice] = 'Share was successfully updated.'
+        redirect_to(document_path(@document))
+      else
+        flash[:notice] = 'Share could not be created updated.'
+        redirect_to(document_path(@document))
+      end
+
     else
-      flash[:error] = 'Share update failed.'
-      render :action => "edit"
+        flash[:error] = 'That user does not exist.'
+        render :action => "edit"
     end
   end
 

@@ -4,9 +4,8 @@ class DocumentsController < ApplicationController
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
   # For pre-loading the /document/:id parameter in a URL
-  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout, :share]
-  # For pre-loading role and department names
-  #before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
+  before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
+  before_filter :document_access, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
 
   SEND_FILE_METHOD = :default
 
@@ -39,6 +38,7 @@ class DocumentsController < ApplicationController
     @user = current_user
     @used_space = current_user.documents.sum(:document_file_size)
     @documents = current_user.documents
+    @documents_shared_with_me = current_user.shared_documents_by_others
   end
 
   def new
@@ -60,20 +60,89 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # RESTRICTED ACCESS BELOW
+
   def checkout
+    if !@checkout_access
+      flash[:error] = 'You do not have access to check-out.'
+      redirect_to(@document)
+    end
+
+    if !@document.checked_out?
+      @document.checked_out = true
+      @document.checked_out_by = current_user
+      @document.checked_out_at = Time.now
+
+      if @document.save
+        flash[:notice] = 'Document succesfully checked-out.'
+        redirect_to(@document)
+      else
+        flash[:error] = 'Document could not be checked-out.'
+        redirect_to(@document)
+      end
+
+    else
+      flash[:error] = 'This document is already checked-out.'
+      redirect_to(@document)
+    end
   end
 
   def checkin
+    if !@checkout_access
+      flash[:error] = 'You do not have access to check-in.'
+      redirect_to(@document)
+    end
+
+    if @document.checked_out?
+      @document.checked_out = false
+      @document.checked_out_by = nil
+      @document.checked_out_at = nil
+
+      if @document.save
+        flash[:notice] = 'Document succesfully checked-in.'
+        redirect_to(@document)
+      else
+        flash[:error] = 'Document could not be checked-in.'
+        redirect_to(@document)
+      end
+
+    else
+      flash[:error] = 'This document is already checked-in.'
+      redirect_to(@document)
+    end
   end
 
   def show
+    # Get shares if any
     @shares = @document.shares.find :all, :include => :user
+
+    # Checked out? - by who?
+    if @document.checked_out?
+      @checked_out_by = User.find @document.checked_out_by # Get who checked it out
+      @my_checkout = true if @checked_out_by == current_user # Is it me?
+    end
+
+    # my_doc=true  =>  @document exists
+    # shared_doc=true  =>  @share @document exists
+    @edit_access = (@my_doc or (@shared_doc and @share.can_update?)) and !@document.checked_out? or @my_checkout
+    @delete_access = @my_doc and !@document.checked_out?
+    @checkout_access = @my_doc or (@shared_doc and @share.can_checkout?)
   end
 
   def edit
+    if !@edit_access
+      flash[:error] = 'You do not have access to edit.'
+      redirect_to(@document)
+    end
+
   end
 
   def update
+    if !@edit_access
+      flash[:error] = 'You do not have access to update.'
+      redirect_to(@document)
+    end
+
     if @document.update_attributes(params[:document])
       flash[:notice] = 'Document was successfully updated.'
       redirect_to(@document)
@@ -84,6 +153,11 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
+    if !@delete_access
+      flash[:error] = 'You do not have access to delete.'
+      redirect_to(@document)
+    end
+
     begin
       @document.destroy
       flash[:notice] = 'Document was successfully destroyed.'
@@ -96,11 +170,36 @@ class DocumentsController < ApplicationController
 private
 
   def find_document_by_id
-    begin
-      @document = current_user.documents.find_by_id(params[:id])
-    rescue
-      flash[:error] = 'That document does not exist.'
-      redirect_to(documents_url)
+    @document = current_user.documents.find_by_id(params[:id])
+
+    if @document.nil? # This is not my document
+
+      @share = current_user.shares_by_others.find_by_document_id(params[:id])
+
+      if @share.nil? # I don't have access to this doc
+        flash[:error] = 'That document does not exist.'
+        redirect_to(documents_url)
+
+      else # This is a document shared with me
+        @document = @share.document
+        @shared_doc = true
+        # @share.can_update?
+        # @share.can_checkout?
+      end
+
+    else # This is my document
+      @my_doc = true
+    end
+  end
+
+  def document_access
+    # my_doc=true > @document | shared_doc=true > @share & @document 
+    if @document and @my_doc
+      @edit_access = (@my_doc or (@shared_doc and @share.can_update?)) and !@document.checked_out? or @my_checkout
+      @delete_access = @my_doc and !@document.checked_out?
+      @checkout_access = @my_doc or (@shared_doc and @share.can_checkout?)
+    else
+      @edit_access = @delete_access = @checkout_access = false
     end
   end
 

@@ -1,17 +1,38 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
-<div id="pad_bottom">
+<div class="pad_bottom">
 <ul class="toolbar">
 <li class="title">Document</li>
-    <li><%= link_to 'Edit', edit_document_path(@document), :class => 'document_edit action' %></li>
+
+  <% if @edit_access -%>
+      <li><%= link_to 'Edit', edit_document_path(@document), :class => 'document_edit action' %></li>
+  <% end -%>
+
+  <% if @delete_access -%>
     <li><%= link_to 'Delete', @document, :confirm => 'Are you sure?', :method => :delete, :class => 'document_delete action'  %></li>
-    <li><%= link_to 'Download', @document.document.url, :class => 'document_download action' %></li>
-    <% if @document.checked_out? -%>
-      <li><%= link_to 'Check-In', @document.document.url, :class => 'document_checkin action' %></li>
+  <% end -%>
+
+  <%# read access %>
+  <li><%= link_to 'Download', @document.document.url, :class => 'document_download action' %></li>
+
+  <% if @document.checked_out? -%>
+
+    <% if @my_checkout -%> 
+      <li><%= link_to 'Check-In', checkin_document_path(@document), :method => :put, :class => 'document_checkin action' %></li>
     <% else -%>
-      <li><%= link_to 'Check-Out', @document.document.url, :class => 'document_checkout action' %></li>
+      <li class="checkout_message document_checkout"> Checked-out by <%= h @checked_out_by.name %> </li>
+    <% end -%> 
+
+  <%# not checked out %>
+  <% else -%>
+
+    <% if @checkout_access -%>
+      <li><%= link_to 'Check-Out', checkout_document_path(@document), :method => :put, :class => 'document_checkout action' %></li>
     <% end -%>
+
+  <% end -%>
+
 </ul>
 </div>
 
@@ -29,7 +50,10 @@
   <p><%= h @document.comment %></p>
 <% end -%>
 
-<div id="pad_bottom">
+<%# IF MY DOC, ALLOW SHARING %>
+<% if @my_doc -%>
+
+<div class="pad_bottom">
 <ul class="toolbar">
   <li class="title">Shares</li>
   <li><%= link_to "New share", new_document_share_path(@document), :class => 'user_new action' %></li>
@@ -80,5 +104,7 @@
 
 <% else -%>
   This document is not being shared.
+<% end -%>
+
 <% end -%>
 

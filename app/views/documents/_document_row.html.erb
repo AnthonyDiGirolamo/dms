@@ -3,8 +3,7 @@
   <td>
     <%# link_to 'Show', document, :class => 'document_show action' %>
     <%# image_tag("icons/16x16/" + document.mime_icon, :size => "16x16", :alt => "Document Type Icon") %>
-    <a style="background-image: url(/images/icons/16x16/<%= document.mime_icon %>);" class="action" href="/documents/<%= h document.id %>">
-    <%= h document.name %>
+    <%= link_to document.name, document, :class => "action", :style => "background-image: url(/images/icons/16x16/#{document.mime_icon});" %>
     </a>
   </td>
   <td>
@@ -14,9 +13,13 @@
     <%= h format_time(document.updated_at) %>
   </td>
 
-  <td> <%# Indicator Icons %>
+  <%# Indicator Icons %>
+  <td class="right">
+    <% if document.checked_out? -%>
+      <%= image_tag "icons/16x16/document-export.png", :size => "16x16", :alt => "Checked-Out", :title => "Checked-Out" %>
+    <% end -%>
     <% if document.shares_count > 0 -%>
-      <%= image_tag "icons/16x16/users.png", :size => "16x16", :alt => "Document Type Icon", :title => "Currently Sharing" %>
+      <%= image_tag "icons/16x16/users.png", :size => "16x16", :alt => "Currently Sharing", :title => "Currently Sharing" %>
     <% end -%>
   </td>
 

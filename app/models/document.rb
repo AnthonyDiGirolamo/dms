@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
-  belongs_to :author, :foreign_key => "user_id"
-  belongs_to :checked_out_by, :foreign_key => "checked_out_by"
+  belongs_to :user
+  belongs_to :checked_out_by, :foreign_key => "checked_out_by", :class_name => "User"
   has_many :audits
   has_many :shares
 

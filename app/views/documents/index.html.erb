@@ -12,18 +12,30 @@ of <%= h number_to_human_size(@user.quota) %>
 <li><%= link_to "New document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
-<table border="0" cellspacing="0" cellpadding="5">
+<table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
   <tr>
     <th>Name</th>
     <th>Size</th>
     <th>Updated</th>
   </tr>
 
-<%# @documents.each do |document| %>
+<%= render :partial => 'document_row', :collection => @documents, :as => :document %>
 
-  <%= render :partial => 'document_row', :collection => @documents, :as => :document %>
+</table>
 
-<%# end %>
+
+<ul class="toolbar">
+<li class="title">Documents Shared with Me</li>
+</ul>
+
+<table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
+  <tr>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Updated</th>
+  </tr>
+
+<%= render :partial => 'document_row', :collection => @documents_shared_with_me, :as => :document %>
 
 </table>
 
