@@ -113,20 +113,12 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    # Get shares if any
-    @shares = @document.shares.find :all, :include => :user
-
-    # Checked out? - by who?
-    if @document.checked_out?
-      @checked_out_by = User.find @document.checked_out_by # Get who checked it out
-      @my_checkout = true if @checked_out_by == current_user # Is it me?
+    begin
+      @shares = @document.shares.find :all, :include => :user
+    rescue
+      flash[:notice] = "You don't have access to that document."
+      redirect_to(documents_url)
     end
-
-    # my_doc=true  =>  @document exists
-    # shared_doc=true  =>  @share @document exists
-    @edit_access = (@my_doc or (@shared_doc and @share.can_update?)) and !@document.checked_out? or @my_checkout
-    @delete_access = @my_doc and !@document.checked_out?
-    @checkout_access = @my_doc or (@shared_doc and @share.can_checkout?)
   end
 
   def edit
@@ -134,7 +126,6 @@ class DocumentsController < ApplicationController
       flash[:error] = 'You do not have access to edit.'
       redirect_to(@document)
     end
-
   end
 
   def update
@@ -161,45 +152,10 @@ class DocumentsController < ApplicationController
     begin
       @document.destroy
       flash[:notice] = 'Document was successfully destroyed.'
+      redirect_to(documents_url)
     rescue
       flash[:error] = 'Unable to destroy that document.'
-    end
-    redirect_to(documents_url)
-  end
-
-private
-
-  def find_document_by_id
-    @document = current_user.documents.find_by_id(params[:id])
-
-    if @document.nil? # This is not my document
-
-      @share = current_user.shares_by_others.find_by_document_id(params[:id])
-
-      if @share.nil? # I don't have access to this doc
-        flash[:error] = 'That document does not exist.'
-        redirect_to(documents_url)
-
-      else # This is a document shared with me
-        @document = @share.document
-        @shared_doc = true
-        # @share.can_update?
-        # @share.can_checkout?
-      end
-
-    else # This is my document
-      @my_doc = true
-    end
-  end
-
-  def document_access
-    # my_doc=true > @document | shared_doc=true > @share & @document 
-    if @document and @my_doc
-      @edit_access = (@my_doc or (@shared_doc and @share.can_update?)) and !@document.checked_out? or @my_checkout
-      @delete_access = @my_doc and !@document.checked_out?
-      @checkout_access = @my_doc or (@shared_doc and @share.can_checkout?)
-    else
-      @edit_access = @delete_access = @checkout_access = false
+      redirect_to(documents_url)
     end
   end
 

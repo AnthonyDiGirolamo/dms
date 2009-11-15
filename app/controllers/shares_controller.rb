@@ -2,7 +2,7 @@ class SharesController < ApplicationController
   prepend_before_filter :login_required, :session_expire, :update_activity_time
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
-  before_filter :find_document_by_id
+  before_filter :find_document
   before_filter :find_share_by_id, :only => [ :show, :edit, :update, :toggle_update, :toggle_checkout ]
 
   def index
@@ -109,7 +109,7 @@ class SharesController < ApplicationController
 
 private
 
-  def find_document_by_id
+  def find_document
     begin
       @document = current_user.documents.find_by_id(params[:document_id])
     rescue
