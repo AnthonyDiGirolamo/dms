@@ -1,12 +1,7 @@
 <% form_for(@share, :url => (@share.new_record? ? document_shares_path : document_share_path) ) do |form| %>
-  <% form.error_messages %>
 
-  <%= form.text_field :owner_id %>
-  <%= form.text_field :user_id %>
-  <%= form.text_field :document_id %>
-
-  <p>
-    <%= form.submit @share.new_record? ? "Create Share" : "Update Share" %>
-  </p>
+  <p class="input_title">User login</p>
+  <p> <%= text_field_tag 'share[login]', @share.new_record? ? nil : @login %> </p>
+  <p> <%= form.submit @share.new_record? ? "Create Share" : "Update Share" %> </p>
 
 <% end %>

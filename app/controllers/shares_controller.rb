@@ -3,7 +3,7 @@ class SharesController < ApplicationController
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
   before_filter :find_document_by_id
-  before_filter :find_share_by_id, :only => [ :show, :edit, :update, :destroy, :toggle_update, :toggle_checkout ]
+  before_filter :find_share_by_id, :only => [ :show, :edit, :update, :toggle_update, :toggle_checkout ]
 
   def index
     redirect_to(document_path(@document))
@@ -11,20 +11,27 @@ class SharesController < ApplicationController
 
   def new
     @share = @document.shares.new
-    @share.owner_id = current_user.id
   end
 
   def create
-    @share = @document.shares.new(params[:share]) unless params[:share].nil?
-    if @share and @share.save
-      flash[:notice] = 'Share was successfully created.'
-      redirect_to(document_path(@document))
-    else
-      if @share.nil?
-        redirect_to(new_document_share_path(@document))
+    @share = @document.shares.new
+    @share.owner = current_user
+    user = User.find_by_login params[:share][:login] unless params[:share].nil?
+
+    if !user.nil?
+
+      @share.user = user
+      if @share.save
+        flash[:notice] = 'Share was successfully created.'
+        redirect_to(document_path(@document))
       else
-        render :action => "new"
+        flash[:notice] = 'Share could not be created created.'
+        redirect_to(document_path(@document))
       end
+
+    else
+        flash[:error] = 'That user does not exist.'
+        render :action => "new"
     end
   end
 
@@ -33,6 +40,7 @@ class SharesController < ApplicationController
   end
 
   def edit
+    @login = @share.user.login
   end
 
   def update
@@ -42,13 +50,18 @@ class SharesController < ApplicationController
     else
       flash[:error] = 'Share update failed.'
       render :action => "edit"
-      #redirect_to(edit_document_share_path(@document, @share))
     end
   end
 
   def destroy
-    @share.destroy
-    redirect_to(document_path(@document))
+    begin
+      @document.shares.find(params[:id]).destroy
+      flash[:notice] = 'Share was successfully deleted.'
+      redirect_to(document_path(@document))
+    rescue
+      flash[:error] = 'Share delete failed.'
+      redirect_to(document_path(@document))
+    end
   end
 
   def toggle_update
@@ -88,14 +101,19 @@ class SharesController < ApplicationController
 private
 
   def find_document_by_id
-    @document = current_user.documents.find_by_id(params[:document_id])
+    begin
+      @document = current_user.documents.find_by_id(params[:document_id])
+    rescue
+      flash[:error] = "That document does not exist."
+      redirect_back_or_default(documents_path)
+    end
   end
 
   def find_share_by_id
     begin
       @share = @document.shares.find(params[:id])
     rescue
-      flash[:error] = "That does not exist."
+      flash[:error] = "That share does not exist."
       redirect_back_or_default(documents_path)
     end
   end

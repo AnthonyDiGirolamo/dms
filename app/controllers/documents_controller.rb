@@ -96,7 +96,12 @@ class DocumentsController < ApplicationController
 private
 
   def find_document_by_id
-    @document = current_user.documents.find_by_id(params[:id])
+    begin
+      @document = current_user.documents.find_by_id(params[:id])
+    rescue
+      flash[:error] = 'That document does not exist.'
+      redirect_to(documents_url)
+    end
   end
 
 end
