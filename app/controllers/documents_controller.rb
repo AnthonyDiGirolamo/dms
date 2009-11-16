@@ -54,6 +54,9 @@ class DocumentsController < ApplicationController
     end
   end
 
+  def corporate
+  end
+
   def new
     @document = current_user.documents.new
   end

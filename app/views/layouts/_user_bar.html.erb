@@ -11,12 +11,21 @@
     You have no Permisions!
   <% else -%>
 
-    <% if current_user.roles.first.name == "administrator" -%>
+    <% if current_user.has_role?("administrator") -%>
       <%= link_to "All Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
       <%= link_to "Pending Users", pending_users_path,  { :title => "Manage Pending Users", :class => 'action user_index' } %>
       <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
     <% else -%>
-      <%= link_to "Documents", documents_path ,  { :title => "Manage Documents", :class => 'action document_index' } %>
+
+      <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index' } %>
+
+      <% if current_user.has_role?("corporate") -%>
+        <%= link_to "All Documents", corporate_documents_path, { :title => "Manage all documents", :class => 'action document_index' } %>
+      <% elsif current_user.has_role?("manager") -%>
+        <% department = current_user.departments.first -%>
+        <%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action document_index' } %>
+      <% end -%>
+
     <% end -%>
 
   <% end -%>
