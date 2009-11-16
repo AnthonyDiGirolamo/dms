@@ -2,7 +2,7 @@ class SharesController < ApplicationController
   prepend_before_filter :login_required, :session_expire, :update_activity_time
   require_role ["employee", "manager", "corporate"] # role1 or role2 or role3
 
-  before_filter :find_document
+  before_filter :find_document_share
   before_filter :find_share_by_id, :only => [ :show, :edit, :update, :toggle_update, :toggle_checkout ]
 
   def index
@@ -104,26 +104,6 @@ class SharesController < ApplicationController
     else
       flash[:error] = 'Share update failed.'
       redirect_to(document_path(@document))
-    end
-  end
-
-private
-
-  def find_document
-    begin
-      @document = current_user.documents.find_by_id(params[:document_id])
-    rescue
-      flash[:error] = "That document does not exist."
-      redirect_back_or_default(documents_path)
-    end
-  end
-
-  def find_share_by_id
-    begin
-      @share = @document.shares.find(params[:id])
-    rescue
-      flash[:error] = "That share does not exist."
-      redirect_back_or_default(documents_path)
     end
   end
 

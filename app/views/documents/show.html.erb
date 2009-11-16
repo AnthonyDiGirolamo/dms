@@ -18,10 +18,9 @@
 
   <% if @document.checked_out? -%>
 
+    <li class="checkout_message document_checkout"> Checked-out by <%= h @checked_out_by.name %> </li>
     <% if @my_checkout -%> 
       <li><%= link_to 'Check-In', checkin_document_path(@document), :method => :put, :class => 'document_checkin action' %></li>
-    <% else -%>
-      <li class="checkout_message document_checkout"> Checked-out by <%= h @checked_out_by.name %> </li>
     <% end -%> 
 
   <%# not checked out %>
@@ -41,16 +40,17 @@
   <%= h @document.name %>
 </p>
 
-<p><b>Size:</b> <%= h number_to_human_size(@document.document_file_size) %> &nbsp;&nbsp;
-<b>Created:</b> <%= h format_time(@document.created_at) %> &nbsp;&nbsp;
-<b>Last Updated:</b> <%= h format_time(@document.updated_at) %>
-</p>
+<p><b> Owner: </b><%= h @document.user.name %></p> 
+<p><b> Size: </b><%= h number_to_human_size(@document.document_file_size) %></p> 
+<p><b> Created: </b><%= h format_time(@document.created_at) %></p> 
+<p><b> Last Updated: </b><%= h format_time(@document.updated_at) %></p> 
 
 <% if @document.comment -%>
+  <p><b>Comment:</b></p>
   <p><%= h @document.comment %></p>
 <% end -%>
 
-<%# IF MY DOC, ALLOW SHARING %>
+<%# IF MY DOC, DISPLAY SHARING %>
 <% if @my_doc -%>
 
 <div class="pad_bottom">

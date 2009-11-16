@@ -56,7 +56,7 @@ private
       # Check for an existing share
       @share = current_user.shares_by_others.find_by_document_id(params[:id])
 
-      if @share.nil? # I don't have access to this doc
+      if @share.nil? # I don't have access to this doc!
         flash[:error] = 'That document does not exist.'
         redirect_to(documents_url)
 
@@ -69,14 +69,16 @@ private
     # Checked out? - by who?
     if @document and @document.checked_out?
       @checked_out_by = User.find @document.checked_out_by # Get who checked it out
-      @my_checkout = true if @checked_out_by == current_user # Is it me?
+      if @checked_out_by == current_user # Is it me?
+        @my_checkout = true
+      end
     end
   end
 
   def document_access
     # If my document
     if @document and @my_doc
-      @edit_access = !@document.checked_out? or @my_checkout
+      @edit_access = !(@document.checked_out?) or @my_checkout
       @delete_access = !@document.checked_out?
       @share_access = @checkout_access = true
     # If document shared with me
@@ -89,6 +91,22 @@ private
       @edit_access = @delete_access = @checkout_access = @share_access = false
       flash[:error] = "You don't have access to that."
       redirect_to(documents_url)
+    end
+  end
+
+  def find_document_share
+    @document = current_user.documents.find_by_id(params[:document_id])
+
+    flash[:error] = "That document does not exist."
+    redirect_back_or_default(documents_path)
+  end
+
+  def find_share_by_id
+    begin
+      @share = @document.shares.find(params[:id])
+    rescue
+      flash[:error] = "That share does not exist."
+      redirect_back_or_default(documents_path)
     end
   end
 
