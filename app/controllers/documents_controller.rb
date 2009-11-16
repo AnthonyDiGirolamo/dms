@@ -74,7 +74,7 @@ class DocumentsController < ApplicationController
       @document.checked_out_at = Time.now
 
       if @document.save
-        flash[:notice] = 'Document succesfully checked-out.'
+        flash[:notice] = 'Succesfully checked-out and locked to changes by others.'
         redirect_to(@document)
       else
         flash[:error] = 'Document could not be checked-out.'
@@ -99,7 +99,7 @@ class DocumentsController < ApplicationController
       @document.checked_out_at = nil
 
       if @document.save
-        flash[:notice] = 'Document succesfully checked-in.'
+        flash[:notice] = 'Succesfully checked-in.'
         redirect_to(@document)
       else
         flash[:error] = 'Document could not be checked-in.'
@@ -113,12 +113,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-    begin
-      @shares = @document.shares.find :all, :include => :user
-    rescue
-      flash[:notice] = "You don't have access to that document."
-      redirect_to(documents_url)
-    end
+    @shares = @document.shares.find :all, :include => :user
   end
 
   def edit

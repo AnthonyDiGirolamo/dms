@@ -78,7 +78,11 @@ private
   def document_access
     # If my document
     if @document and @my_doc
-      @edit_access = !(@document.checked_out?) or @my_checkout
+      if @my_checkout
+        @edit_access = true 
+      else
+        @edit_access = !@document.checked_out?
+      end
       @delete_access = !@document.checked_out?
       @share_access = @checkout_access = true
     # If document shared with me
@@ -97,14 +101,20 @@ private
   def find_document_share
     @document = current_user.documents.find_by_id(params[:document_id])
 
-    flash[:error] = "That document does not exist."
-    redirect_back_or_default(documents_path)
+    if @document
+      @share_access = @my_doc = true
+    else
+      @share_access = false
+      @shared_doc = true
+      flash[:error] = "You cannot manage sharing for that document."
+      redirect_back_or_default(documents_path)
+    end
   end
 
   def find_share_by_id
-    begin
-      @share = @document.shares.find(params[:id])
-    rescue
+    @share = @document.shares.find_by_id(params[:id])
+
+    if @share.nil?
       flash[:error] = "That share does not exist."
       redirect_back_or_default(documents_path)
     end

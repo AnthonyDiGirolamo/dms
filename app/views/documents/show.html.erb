@@ -1,6 +1,8 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+<%# render :partial => 'show_document_debug' %>
+
 <div class="pad_bottom">
 <ul class="toolbar">
 <li class="title">Document</li>
@@ -19,9 +21,9 @@
   <% if @document.checked_out? -%>
 
     <li class="checkout_message document_checkout"> Checked-out by <%= h @checked_out_by.name %> </li>
-    <% if @my_checkout -%> 
+    <% if @my_checkout -%>
       <li><%= link_to 'Check-In', checkin_document_path(@document), :method => :put, :class => 'document_checkin action' %></li>
-    <% end -%> 
+    <% end -%>
 
   <%# not checked out %>
   <% else -%>
@@ -40,10 +42,10 @@
   <%= h @document.name %>
 </p>
 
-<p><b> Owner: </b><%= h @document.user.name %></p> 
-<p><b> Size: </b><%= h number_to_human_size(@document.document_file_size) %></p> 
-<p><b> Created: </b><%= h format_time(@document.created_at) %></p> 
-<p><b> Last Updated: </b><%= h format_time(@document.updated_at) %></p> 
+<p><b> Owner: </b><%= h @document.user.name %></p>
+<p><b> Size: </b><%= h number_to_human_size(@document.document_file_size) %></p>
+<p><b> Created: </b><%= h format_time(@document.created_at) %></p>
+<p><b> Last Updated: </b><%= h format_time(@document.updated_at) %></p>
 
 <% if @document.comment -%>
   <p><b>Comment:</b></p>
