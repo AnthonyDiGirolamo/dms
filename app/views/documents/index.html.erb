@@ -17,12 +17,14 @@ of <%= h number_to_human_size(@user.quota) %>
     <th>Name</th>
     <th>Size</th>
     <th>Updated</th>
+    <th></th>
   </tr>
 
 <%= render :partial => 'document_row', :collection => @documents, :as => :document %>
 
 </table>
 
+<% reset_cycle -%>
 
 <ul class="toolbar">
 <li class="title">Documents Shared with Me</li>
@@ -33,6 +35,7 @@ of <%= h number_to_human_size(@user.quota) %>
     <th>Name</th>
     <th>Size</th>
     <th>Updated</th>
+    <th></th>
   </tr>
 
 <%= render :partial => 'document_row', :collection => @documents_shared_with_me, :as => :document %>

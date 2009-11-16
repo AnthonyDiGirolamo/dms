@@ -81,8 +81,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @time = session[:expires_at]
-    @requests = UserRequest.find_all_by_user_id current_user.id, :include => [ :role, :department ], :order => 'created_at ASC'
+    @requests = UserRequest.find_all_by_user_id current_user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end
 
   def edit

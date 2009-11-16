@@ -6,7 +6,7 @@ class UserRequestsController < ApplicationController
   require_role "administrator"
 
   def index
-    @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => 'created_at ASC', :per_page => 25
+    @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => 'created_at DESC', :per_page => 25
   end
 
   # Add try/catch blocks
@@ -44,6 +44,14 @@ class UserRequestsController < ApplicationController
     @user_request.state = "revoked"
     @user_request.save!
     redirect_to user_requests_path
+  end
+
+  def new
+      
+  end
+
+  def create
+      
   end
 
 private

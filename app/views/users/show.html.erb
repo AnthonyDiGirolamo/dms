@@ -2,69 +2,95 @@
 <%= render :partial => 'layouts/flash_messages' %>
 
 <h2><%= h @user.name %></h2>
-<ul>
-  <li><b>User Name:</b>
-  <%= h @user.login %></li>
 
-  <li><b>Status:</b>
-  <%= h @user.state %></li>
+<table class="info pad_bottom" border="0" cellspacing="0" cellpadding="0">
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> Login </td>
+    <td> <%= h @user.login %> </td>
+  </tr>
 
-  <li><b>Email:</b>
-  <%= h @user.email %></li>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> Status </td>
+    <td> <%= h @user.state %> </td>
+  </tr>
 
-  <li><b>Quota:</b>
-  <%= h number_to_human_size(@user.quota) %></li>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> Email </td>
+    <td> <%= h @user.email %> </td>
+  </tr>
 
-<% if not @user.roles.empty? -%>
-  <li><b>Role:</b>
-  <% for role in @user.roles %>
-    <%= h role.name.humanize %>
-  <% end %>
-  </li>
-<% end -%>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> Quota </td>
+    <td> <%= h number_to_human_size(@user.quota) %> </td>
+  </tr>
 
-<% if not @user.departments.empty? -%>
-  <li><b>Department:</b>
-  <% for department in @user.departments %>
-    <%= h department.name %>
-  <% end %>
-  </li>
-<% end -%>
-</ul>
+  <tr class="<%= cycle("odd","even") %>">
+    <% if not @user.roles.empty? -%>
+      <td class="info_title"> Role </td>
+      <td>
+        <% for role in @user.roles %>
+          <%= h role.name.humanize %>
+        <% end %>
+      </td>
+    <% end -%>
+  </tr>
+
+  <tr class="<%= cycle("odd","even") %>">
+    <% if not @user.departments.empty? -%>
+      <td class="info_title"> Dept. </td>
+      <td>
+        <% for department in @user.departments %>
+          <%= h department.name %>
+        <% end %>
+      </td>
+    <% end -%>
+  </tr>
+</table>
+
+<% reset_cycle -%>
 
 <% if not @requests.nil? -%> 
-<p><h3>Requests:</h3></p>
+
+  <ul class="toolbar">
+  <li class="title">Request History</li>
+  <li>New Request</li>
+  </ul>
+
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <th>Request Date</th>
-    <th>Requested Permissions</th>
-    <%#<th>Updated</th>%>
+    <th>Date</th>
+    <th>Role</th>
+    <th>Dept.</th>
     <th>Status</th>
   </tr>
+
   <% for request in @requests %>
-    <tr>
+
+    <tr class="<%= cycle("odd","even") %>">
+
       <td>
         <%= h format_time(request.created_at) %>
       </td>
+
       <td>
-        <% if not request.role_id.nil? -%>
-          Role: <%= h request.role.name.humanize %>
-        <% end %>
-        <% if not request.role_id.nil? and not request.department_id.nil? %>
-          <br/>
-        <% end %>
-        <% if not request.department_id.nil? -%>
-          Department: <%= h request.department.name %>
-        <% end %>
+        <%# if not request.role_id.nil? -%>
+          <%= h(request.role.name.humanize) unless request.role_id.nil? %>
+        <%# end %>
       </td>
-      <%#<td>%>
-        <%# h format_time(request.updated_at %>
-      <%#</td>%>
       <td>
-        <%= h request.state.humanize %>
+        <%# if not request.department_id.nil? -%>
+          <%= h(request.department.name) unless request.department_id.nil? %>
+        <%# end %>
+      </td>
+
+      <td>
+        <b><%= h request.state.humanize %></b>
         on <%= h format_date(request.updated_at) %>
       </td>
+
     </tr>
+
   <% end %>
+
 </table>
 <% end %>

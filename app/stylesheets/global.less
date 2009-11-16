@@ -65,7 +65,12 @@ h1 {
 
 h2 {
   font-size: 1.4em;
-  margin: 0 0 1em 0;
+  margin: 0 0 0.5em 0;
+}
+
+h3 {
+  font-size: 1.2em;
+  margin: 0 0 0.25em 0;
 }
 
 a {
@@ -174,7 +179,6 @@ li.checkout_message {
   background-position: center left;
 }
 
-
 /*Action buttons w/ icons*/
 
 a.action {
@@ -259,15 +263,27 @@ table {
   width: 100%;
 }
 
+table.info {
+  width: 20em;
+}
+
 th {
   text-align: left;
   font-size: 1.2em;
   font-weight: bold;
+  border-bottom: 1px solid @Aluminium4;
 }
 
 tr {
   height: 2em;
   line-height: 2em;
+}
+
+td.info_title {
+  width: 4em;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 10px;
 }
 
 a.tr_action {
@@ -282,8 +298,8 @@ a.tr_action {
   }
 }
 
-tr.odd { background-color: @Aluminium1; }
-tr.even { background-color: white; }
+tr.even { background-color: @Aluminium1; }
+tr.odd { background-color: #FCFCFC; }
 
 /*Paging*/
 
