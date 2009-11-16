@@ -53,8 +53,7 @@ private
     end
   end
 
-  # Find document via a users documents or shares
-  # TODO: add manager/corporate override
+  # Find document via a users documents or shares or manager/corporate
   def find_document_by_id
     @document = current_user.documents.find_by_id(params[:id])
 

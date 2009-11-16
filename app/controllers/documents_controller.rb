@@ -114,6 +114,10 @@ class DocumentsController < ApplicationController
 
   def show
     @shares = @document.shares.find :all, :include => :user
+
+    if !@document.user.departments.empty?
+      @department_name = @document.user.departments.first.name
+    end
   end
 
   def edit

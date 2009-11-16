@@ -42,10 +42,48 @@
   <%= h @document.name %>
 </p>
 
-<p><b> Owner: </b><%= h @document.user.name %></p>
-<p><b> Size: </b><%= h number_to_human_size(@document.document_file_size) %></p>
-<p><b> Created: </b><%= h format_time(@document.created_at) %></p>
-<p><b> Last Updated: </b><%= h format_time(@document.updated_at) %></p>
+<table class="info" border="0" cellspacing="0" cellpadding="0">
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> 
+      Owner
+    </td>
+    <td> 
+      <%= h @document.user.name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title">
+      Department
+    </td>
+    <td> 
+      <%= h @department_name %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> 
+      Created
+    </td>
+    <td> 
+      <%= h format_time(@document.created_at) %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> 
+      Updated
+    </td>
+    <td> 
+      <%= h format_time(@document.updated_at) %>
+    </td>
+  </tr>
+  <tr class="<%= cycle("odd","even") %>">
+    <td class="info_title"> 
+      Size
+    </td>
+    <td> 
+      <%= h number_to_human_size(@document.document_file_size) %>
+    </td>
+  </tr>
+</table>
 
 <% if @document.comment -%>
   <p><b>Comment:</b></p>
@@ -63,6 +101,7 @@
 </div>
 
 <% if !@shares.empty? -%>
+<% reset_cycle -%>
 
   <table border="0" cellspacing="0" cellpadding="5">
     <tr>

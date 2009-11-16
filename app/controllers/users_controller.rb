@@ -109,25 +109,19 @@ class UsersController < ApplicationController
 private
 
   def find_user
-    if user_admin?
+    if current_user.has_role?("administrator")
       @user = User.find_by_id(params[:id])
+
+      if @user.nil?
+        flash[:error] = 'That user does not exist.'
+        redirect_back_or_default(root_path)
+      end
     else
       @user = current_user
     end
 
     if @user == current_user
       @request_access = true
-    end
-
-    #flash[:error] = 'That user does not exist.'
-    #redirect_back_or_default(users_path)
-  end
-
-  def user_admin?
-    if !current_user.roles.empty?
-      current_user.roles.first.name == "administrator"
-    else
-      false
     end
   end
 

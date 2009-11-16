@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # It may be a good idea to have "admin" roles return true always
   def has_role?(role_in_question)
     @_list ||= self.roles.collect(&:name)
-    return true if @_list.include?("admin")
+    return true if @_list.include?("administrator")
     (@_list.include?(role_in_question.to_s) )
   end
 
