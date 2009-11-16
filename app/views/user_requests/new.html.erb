@@ -1,0 +1,30 @@
+<h1>New Request</h1>
+
+<% form_for :user_request, :url => user_requests_path do |f| -%>
+
+<p>
+  <p class="input_title">Role</p>
+  <% for role in @roles %>
+    <% if role.name == "employee" %>
+      <%= radio_button "role", "name", role.name, :checked => true %>
+    <% else %>
+      <%= radio_button "role", "name", role.name %>
+    <% end %>
+    <%= h role.name.humanize %><br/>
+  <% end %>
+</p>
+
+<p>
+  <p class="input_title">Department</p>
+  <% for department in @departments %>
+    <% if department == @departments.first %>
+      <%= radio_button "department", "name", department.name, :checked => true %>
+    <% else %>
+      <%= radio_button "department", "name", department.name %>
+    <% end %>
+    <%= h department.name %><br/>
+  <% end %>
+</p>
+
+<p><%= submit_tag 'Submit' %></p>
+<% end -%>

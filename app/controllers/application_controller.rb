@@ -17,6 +17,14 @@ class ApplicationController < ActionController::Base
 
 private
 
+  def all_roles
+    @roles = Role.find :all, :order => 'name ASC'
+  end
+
+  def all_departments
+    @departments = Department.find :all, :order => 'name ASC'
+  end
+
 #  def handle_remember_cookie
 #    if logged_in? and valid_remember_cookie?
 #      unless current_user.remember_token_expires_at > Time.now

@@ -24,38 +24,39 @@
     <td> <%= h number_to_human_size(@user.quota) %> </td>
   </tr>
 
+  <% if not @user.roles.empty? -%>
   <tr class="<%= cycle("odd","even") %>">
-    <% if not @user.roles.empty? -%>
       <td class="info_title"> Role </td>
       <td>
         <% for role in @user.roles %>
           <%= h role.name.humanize %>
         <% end %>
       </td>
-    <% end -%>
   </tr>
+  <% end -%>
 
+  <% if not @user.departments.empty? -%>
   <tr class="<%= cycle("odd","even") %>">
-    <% if not @user.departments.empty? -%>
       <td class="info_title"> Dept. </td>
       <td>
         <% for department in @user.departments %>
           <%= h department.name %>
         <% end %>
       </td>
-    <% end -%>
   </tr>
+  <% end -%>
 </table>
 
 <% reset_cycle -%>
 
-<% if not @requests.nil? -%> 
+<ul class="toolbar">
+<li class="title">Request History</li>
+<% if @request_access -%>
+  <li><%= link_to "New Request", new_user_request_path, :class => 'request_index action' %></li>
+<% end -%>
+</ul>
 
-  <ul class="toolbar">
-  <li class="title">Request History</li>
-  <li>New Request</li>
-  </ul>
-
+<% if !@requests.empty? -%>
 <table border="0" cellspacing="0" cellpadding="0">
   <tr>
     <th>Date</th>
@@ -93,4 +94,10 @@
   <% end %>
 
 </table>
-<% end %>
+
+<% else %>
+
+  <%# There should be SOMETHING here. %>
+  <p>No past requests found.</p>
+
+<% end -%>

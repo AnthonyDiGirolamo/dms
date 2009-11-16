@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   prepend_before_filter :login_required, :session_expire, :update_activity_time, :except => [:new, :create, :activate]
-  require_role "administrator", :for_all_except => [:new, :create, :activate, :show, :edit ]
+  require_role "administrator", :for_all_except => [:new, :create, :activate, :show]
 
   # For pre-loading the /users/:id parameter in a URL
   before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
@@ -16,8 +16,8 @@ class UsersController < ApplicationController
     logout_keeping_session!
 
     # check for valid role/department names
-    role = get_role_by_name(params[:role][:name])
-    department = get_department_by_name(params[:department][:name])
+    role = Role.find_by_name(params[:role][:name])
+    department = Department.find_by_name(params[:department][:name])
     if role.nil? or department.nil?
       flash[:error]  = "There was an error setting up that account.  Please try again."
       render :action => 'new'
@@ -81,13 +81,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @requests = UserRequest.find_all_by_user_id current_user.id, :include => [ :role, :department ], :order => 'created_at DESC'
+    @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end
 
   def edit
-    # allow changing name
-    # what else?
-    #   submit new requests
+    # TODO allow changing name, quota. what else?
   end
 
   def index
@@ -109,37 +107,27 @@ class UsersController < ApplicationController
 
 private
 
-  def all_roles
-    @roles = Role.find :all, :order => 'name ASC'
-  end
-
-  def all_departments
-    @departments = Department.find :all, :order => 'name ASC'
-  end
-
-  def get_role_by_name(name)
-    Role.find_by_name name
-  end
-
-  def get_department_by_name(name)
-    Department.find_by_name name
-  end
-
   def find_user
-    begin
-      if user_admin?
-        @user = User.find(params[:id])
-      else
-        @user = current_user
-      end
-    rescue
-      flash[:error] = 'That user does not exist.'
-      redirect_back_or_default(users_path)
+    if user_admin?
+      @user = User.find_by_id(params[:id])
+    else
+      @user = current_user
     end
+
+    if @user == current_user
+      @request_access = true
+    end
+
+    #flash[:error] = 'That user does not exist.'
+    #redirect_back_or_default(users_path)
   end
 
   def user_admin?
-    current_user.roles.first.name == "administrator"
+    if !current_user.roles.empty?
+      current_user.roles.first.name == "administrator"
+    else
+      false
+    end
   end
 
   def all_users

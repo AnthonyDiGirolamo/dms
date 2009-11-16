@@ -27,7 +27,7 @@
     <% else -%>
       approve
     <% end -%>
-    <% if request_row.state != "rejected" -%>
+    <% if request_row.state != "rejected" and request_row.state != "approved" -%>
     <%= link_to "reject", reject_user_request_path(:id => request_row.id), :method => :put %>
     <% else -%>
       reject
