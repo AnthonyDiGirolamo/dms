@@ -21,7 +21,11 @@
 
   <tr class="<%= cycle("odd","even") %>">
     <td class="info_title"> Quota </td>
-    <td> <%= h number_to_human_size(@user.quota) %> </td>
+    <td>
+      <%= h number_to_human_size(@user.quota) %>,
+      (Using <%= h number_to_human_size(@used_space) %>
+      or <%= h number_to_percentage(@used_space.to_f / @user.quota.to_f, :precision => 2) %>)
+    </td>
   </tr>
 
   <% if not @user.roles.empty? -%>

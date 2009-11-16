@@ -81,6 +81,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end
 
