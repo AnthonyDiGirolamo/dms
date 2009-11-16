@@ -41,6 +41,19 @@ class DocumentsController < ApplicationController
     @documents_shared_with_me = current_user.shared_documents_by_others
   end
 
+  def department
+    if @department = Department.find_by_id(params[:id])
+      @user = current_user
+      @used_space = current_user.documents.sum(:document_file_size)
+      @documents = @department.documents
+      @department_list = true
+      render :action => "index"
+    else
+      flash[:error] = "That department does not exist."
+      redirect_to documents_path
+    end
+  end
+
   def new
     @document = current_user.documents.new
   end

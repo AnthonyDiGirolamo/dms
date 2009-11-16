@@ -8,11 +8,15 @@ of <%= h number_to_human_size(@user.quota) %>
 </div>
 
 <ul class="toolbar">
-<li class="title">My Documents</li>
-<li><%= link_to "New Document", new_document_path, :class => 'document_new action' %></li>
+  <% if @department_list -%>
+    <li class="title"> <%= h @department.name %> </li>
+  <% else -%>
+    <li class="title">My Documents</li>
+  <% end -%>
+  <li><%= link_to "New Document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
-<% if !@documents.empty? -%>
+<% if @documents and !@documents.empty? -%>
 
   <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
     <tr>
@@ -32,7 +36,7 @@ of <%= h number_to_human_size(@user.quota) %>
 
 <% reset_cycle -%>
 
-<% if !@documents_shared_with_me.empty? -%>
+<% if @documents_shared_with_me and !@documents_shared_with_me.empty? -%>
 
   <ul class="toolbar">
   <li class="title">Documents Shared with Me</li>

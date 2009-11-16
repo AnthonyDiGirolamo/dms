@@ -37,10 +37,12 @@
 </ul>
 </div>
 
+<div class="pad_bottom">
 <p class="document_title">
   <%= image_tag("icons/16x16/" + @document.mime_icon, :size => "16x16", :alt => h(@document.document_content_type) ) %>
   <%= h @document.name %>
 </p>
+</div>
 
 <table class="info" border="0" cellspacing="0" cellpadding="0">
   <tr class="<%= cycle("odd","even") %>">
