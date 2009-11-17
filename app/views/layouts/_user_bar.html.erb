@@ -20,10 +20,10 @@
       <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index' } %>
 
       <% if current_user.has_role?("corporate") -%>
-        <%= link_to "All Documents", corporate_documents_path, { :title => "Manage all documents", :class => 'action document_index' } %>
+        <%= link_to "Departments", corporate_documents_path, { :title => "Manage all documents", :class => 'action icon_folder_document' } %>
       <% elsif current_user.has_role?("manager") -%>
         <% department = current_user.departments.first -%>
-        <%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action document_index' } %>
+        <%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action icon_folder_document' } %>
       <% end -%>
 
     <% end -%>

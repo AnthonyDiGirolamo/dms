@@ -81,6 +81,7 @@ class UsersController < ApplicationController
   end
 
   def show
+
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end
@@ -122,6 +123,12 @@ private
 
     if @user == current_user
       @request_access = true
+    end
+
+    if @user.has_role?("corporate")
+      @corporate_access = true
+    elsif @user.has_role?("manager")
+      @manager_access = true
     end
   end
 

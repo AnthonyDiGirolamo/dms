@@ -20,7 +20,7 @@
 
   <% if @document.checked_out? -%>
 
-    <li class="checkout_message document_checkout"> Checked-out by <%= h @checked_out_by.name %> </li>
+    <li class="checkout_message icon_lock"> Checked-out by <%= h @checked_out_by.name %> </li>
     <% if @my_checkout -%>
       <li><%= link_to 'Check-In', checkin_document_path(@document), :method => :put, :class => 'document_checkin action' %></li>
     <% end -%>

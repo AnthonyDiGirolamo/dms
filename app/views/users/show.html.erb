@@ -44,7 +44,7 @@
       <td class="info_title"> Dept. </td>
       <td>
         <% for department in @user.departments %>
-          <%= h department.name %>
+          <p class="item"><%= h department.name %></p>
         <% end %>
       </td>
   </tr>
@@ -52,6 +52,10 @@
 </table>
 
 <% reset_cycle -%>
+
+<% if @corporate_access -%>
+<p>To add departments, create a new request and select "corporate" as your role. Then select the new department you wish to add, it will be added to the list of departments you oversee.</p>
+<% end -%>
 
 <ul class="toolbar">
 <li class="title">Request History</li>

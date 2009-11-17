@@ -53,24 +53,65 @@ private
     end
   end
 
-  # Find document via a users documents or shares or manager/corporate
+  # Find document via a users documents, 
+  # shares, or manager/corporate access
   def find_document_by_id
+    @employee_access = true
+
     @document = current_user.documents.find_by_id(params[:id])
 
     if !@document.nil? # This is my document
       @my_doc = true
+
     else # This is not my document
+
       # Check for an existing share
       @share = current_user.shares_by_others.find_by_document_id(params[:id])
 
-      if @share.nil? # I don't have access to this doc!
-        flash[:error] = 'That document does not exist.'
-        redirect_to(documents_url)
-
-      else # This is a document shared with me
+      if !@share.nil? # This is a document shared with me
         @document = @share.document
         @shared_doc = true
+
+      else # This isn't a doc I have access to via shares
+
+        # check for department access
+
+        if current_user.has_role?("manager")
+          @document = Document.find_by_id(params[:id])
+          if @document
+            @department = @document.user.departments.first
+            if current_user.has_department?(@department.name)
+              @my_doc = true # treat manager access as if you own it
+              @manager_access = true
+            end
+          end
+          if @document.nil? or @my_doc.nil?
+            flash[:error] = 'That document does not exist.'
+            redirect_to(documents_url)
+          end
+        end
+
+        if current_user.has_role?("corporate")
+          @document = Document.find_by_id(params[:id])
+          if @document
+            @department = @document.user.departments.first
+            if current_user.has_department?(@department.name)
+              @my_doc = true # treat corporate access as if you own it
+              @corporate_access = true
+            end
+          end
+          if @document.nil? or @my_doc.nil?
+            flash[:error] = 'That document does not exist.'
+            redirect_to(documents_url)
+          end
+        end
+
+        if @document.nil?
+          flash[:error] = 'That document does not exist.'
+          redirect_to(documents_url)
+        end
       end
+
     end
 
     # Checked out? - by who?
@@ -82,6 +123,7 @@ private
     end
   end
 
+  # Apply permissions
   def document_access
     # If my document
     if @document and @my_doc
@@ -111,10 +153,44 @@ private
     if @document
       @share_access = @my_doc = true
     else
-      @share_access = false
-      @shared_doc = true
-      flash[:error] = "You cannot manage sharing for that document."
-      redirect_back_or_default(documents_path)
+
+      if current_user.has_role?("manager")
+        @document = Document.find_by_id(params[:document_id])
+        if @document
+          @department = @document.user.departments.first
+          if current_user.has_department?(@department.name)
+            # treat manager access as if you own it
+            @share_access = @my_doc = true
+            @manager_access = true
+          end
+        end
+        if @document.nil? or @my_doc.nil?
+          flash[:error] = "You cannot manage sharing for that document."
+          redirect_to(documents_url)
+        end
+
+      elsif current_user.has_role?("corporate")
+        @document = Document.find_by_id(params[:document_id])
+        if @document
+          @department = @document.user.departments.first
+          if current_user.has_department?(@department.name)
+            # treat corporate access as if you own it
+            @share_access = @my_doc = true
+            @corporate_access = true
+          end
+        end
+        if @document.nil? or @my_doc.nil?
+          flash[:error] = "You cannot manage sharing for that document."
+          redirect_to(documents_url)
+        end
+
+      else
+        @share_access = false
+        @shared_doc = true
+        flash[:error] = "You cannot manage sharing for that document."
+        redirect_back_or_default(documents_path)
+      end
+
     end
   end
 

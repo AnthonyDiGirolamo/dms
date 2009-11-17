@@ -15,13 +15,19 @@ class UserRequestsController < ApplicationController
     user = @user_request.user
     role = @user_request.role
     department = @user_request.department
+
     if not role.nil?
       user.roles.delete_all
       user.roles << role
     end
     if not department.nil?
-      user.departments.delete_all
-      user.departments << department
+      if role.name == "corporate" and current_user.has_role?("corporate")
+        # Append to current departments
+        user.departments << department
+      else
+        user.departments.delete_all
+        user.departments << department
+      end
     end
 
     @user_request.state = "approved"

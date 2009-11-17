@@ -6,9 +6,14 @@ class User < ActiveRecord::Base
   # has_role? simply needs to return true or false whether a user has a role or not.
   # It may be a good idea to have "admin" roles return true always
   def has_role?(role_in_question)
-    @_list ||= self.roles.collect(&:name)
-    return true if @_list.include?("administrator")
-    (@_list.include?(role_in_question.to_s) )
+    @role_list ||= self.roles.collect(&:name)
+    return true if @role_list.include?("administrator")
+    (@role_list.include?(role_in_question.to_s) )
+  end
+
+  def has_department?(dept)
+    @dept_list ||= self.departments.collect(&:name)
+    (@dept_list.include?(dept.to_s) )
   end
 
   has_many :user_requests

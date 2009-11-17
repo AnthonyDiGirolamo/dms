@@ -79,6 +79,22 @@ class Document < ActiveRecord::Base
 #    mime = File.mime_type?(self.document.path)
 #  end
 
+  #def depts_doc(depts, doc_id)
+  #  where = " WHERE "
+  #  id = ""
+  #  id = doc_id
+  #  print id.class
+  #  print id
+  #  i = 0
+  #  for dept in depts
+  #    i++
+  #    where += '"departments".id = ' + id
+  #    where += " OR " unless i == depts.size
+  #  end
+  #  where += ' AND "documents".id = ' + id
+  #  return %{SELECT "documents".* FROM "users" INNER JOIN "departments_users" ON "departments_users".user_id = "users".id INNER JOIN "departments" on "departments_users".department_id = "departments".id INNER JOIN "documents" ON "users".id = "documents".user_id } + where + " LIMIT 1 "
+  #end
+
 private
 
   def dont_process

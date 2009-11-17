@@ -42,19 +42,36 @@ class DocumentsController < ApplicationController
   end
 
   def department
-    if @department = Department.find_by_id(params[:id])
-      @user = current_user
-      @used_space = current_user.documents.sum(:document_file_size)
-      @documents = @department.documents
-      @department_list = true
-      render :action => "index"
+    @user = current_user
+    if current_user.has_role?("manager") or current_user.has_role?("corporate")
+      if @department = Department.find_by_id(params[:id])
+        if @user.has_department?(@department.name)
+          @used_space = current_user.documents.sum(:document_file_size)
+          @documents = @department.documents
+          @department_list = true
+          render :action => "index"
+        else
+          flash[:error] = "You don't have access to that department."
+          redirect_to documents_path
+        end
+      else
+        flash[:error] = "That department does not exist."
+        redirect_to documents_path
+      end
     else
-      flash[:error] = "That department does not exist."
+      flash[:error] = "You don't have access to that."
       redirect_to documents_path
     end
   end
 
   def corporate
+    @user = current_user
+    if current_user.has_role?("corporate")
+      @departments = current_user.departments
+    else
+      flash[:error] = "You don't have access to that."
+      redirect_to documents_path
+    end
   end
 
   def new
