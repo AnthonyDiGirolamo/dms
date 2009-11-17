@@ -22,6 +22,7 @@ class SharesController < ApplicationController
 
       @share.user = user
       if @share.save
+        make_audit(@document, @share, current_user, "create share")
         flash[:notice] = 'Share was successfully created.'
         redirect_to(document_path(@document))
       else
@@ -49,6 +50,7 @@ class SharesController < ApplicationController
 
       @share.user = user
       if @share.save
+        make_audit(@document, @share, current_user, "update share")
         flash[:notice] = 'Share was successfully updated.'
         redirect_to(document_path(@document))
       else
@@ -64,6 +66,9 @@ class SharesController < ApplicationController
 
   def destroy
     begin
+      @share = @document.shares.find(params[:id])
+      make_audit(@document, nil, current_user, "delete share, ID:'#{@share.id}', Owner:'#{@share.owner_id}', User:'#{@share.user_id}', Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'" )
+
       @document.shares.find(params[:id]).destroy
       flash[:notice] = 'Share was successfully deleted.'
       redirect_to(document_path(@document))
@@ -82,6 +87,7 @@ class SharesController < ApplicationController
     end
 
     if @share.save
+      make_audit(@document, @share, current_user, "share permission change, Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'")
       flash[:notice] = 'Share was successfully updated.'
       redirect_to(document_path(@document))
     else
@@ -99,6 +105,7 @@ class SharesController < ApplicationController
     end
 
     if @share.save
+      make_audit(@document, @share, current_user, "share permission change, Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'")
       flash[:notice] = 'Share was successfully updated.'
       redirect_to(document_path(@document))
     else

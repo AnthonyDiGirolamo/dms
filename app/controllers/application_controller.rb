@@ -53,7 +53,7 @@ private
     end
   end
 
-  # Find document via a users documents, 
+  # Find document via a users documents,
   # shares, or manager/corporate access
   def find_document_by_id
     @employee_access = true
@@ -128,7 +128,7 @@ private
     # If my document
     if @document and @my_doc
       if @my_checkout
-        @edit_access = true 
+        @edit_access = true
       else
         @edit_access = !@document.checked_out?
       end
@@ -154,6 +154,7 @@ private
       @share_access = @my_doc = true
     else
 
+      # MANAGER
       if current_user.has_role?("manager")
         @document = Document.find_by_id(params[:document_id])
         if @document
@@ -169,6 +170,7 @@ private
           redirect_to(documents_url)
         end
 
+      # CORPORATE
       elsif current_user.has_role?("corporate")
         @document = Document.find_by_id(params[:document_id])
         if @document
@@ -184,6 +186,7 @@ private
           redirect_to(documents_url)
         end
 
+      # NO ACCESS
       else
         @share_access = false
         @shared_doc = true
@@ -200,6 +203,17 @@ private
     if @share.nil?
       flash[:error] = "That share does not exist."
       redirect_back_or_default(documents_path)
+    end
+  end
+
+  def make_audit(doc, share, user, action)
+    audit = Audit.new
+    audit.document = doc unless doc.nil?
+    audit.share = share unless doc.nil?
+    audit.user = user unless user.nil?
+    audit.action = action
+    if not audit.save
+      logger.warn "Failed Audit for Doc:#{doc} Share:#{share} User:#{user} Action:'#{action}'"
     end
   end
 

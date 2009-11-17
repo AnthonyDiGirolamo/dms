@@ -1,9 +1,7 @@
 class Audit < ActiveRecord::Base
   belongs_to :document
   belongs_to :user
-
-  validates_associated :document
-  validates_associated :user
+  belongs_to :share
 
   validates_presence_of :action
 end
