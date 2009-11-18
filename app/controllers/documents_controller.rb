@@ -7,7 +7,12 @@ class DocumentsController < ApplicationController
   before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
   before_filter :document_access, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
 
-  SEND_FILE_METHOD = :default
+  if RAILS_ENV == 'production'
+    SEND_FILE_METHOD = :nginx
+  else
+    SEND_FILE_METHOD = :default
+  end
+
 
   def download
     head(:not_found) and return if (document = Document.find(params[:id])).nil?
