@@ -94,7 +94,7 @@ class UsersController < ApplicationController
           when "created_at_desc" then "created_at DESC" 
         end
       end
-      @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 4
+      @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 25
     end
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
       end 
     end
 
-    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 4
+    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 25
 
     if request.xml_http_request? 
       render :partial => "user_table", :layout => false 

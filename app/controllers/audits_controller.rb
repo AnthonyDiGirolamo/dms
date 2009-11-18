@@ -14,7 +14,7 @@ class AuditsController < ApplicationController
         when "created_at_desc" then "created_at DESC" 
       end
     end
-    @audits = Audit.paginate :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 4
+    @audits = Audit.paginate :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 25
   end
 
 end

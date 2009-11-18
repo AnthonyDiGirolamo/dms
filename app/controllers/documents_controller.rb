@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
       when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type]) and return
     end
 
-    make_audit(document, nil, current_user, "download document")
+    make_audit(document, nil, current_user, "download document, ID:'#{document.id}', Name:'#{document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
     send_file(path, send_file_options)
   end
 
@@ -83,7 +83,7 @@ class DocumentsController < ApplicationController
     @document = current_user.documents.new(params[:document])
     if current_user.documents.sum(:document_file_size) < current_user.quota
       if @document.save
-        make_audit(@document, nil, current_user, "create document")
+        make_audit(@document, nil, current_user, "create document, ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
         flash[:notice] = 'Document was successfully created.'
         redirect_to(@document)
       else
@@ -109,7 +109,7 @@ class DocumentsController < ApplicationController
       @document.checked_out_at = Time.now
 
       if @document.save
-        make_audit(@document, nil, current_user, "checkout document")
+        make_audit(@document, nil, current_user, "checkout document, ID:'#{@document.id}', Name:'#{@document.name}'")
         flash[:notice] = 'Succesfully checked-out and locked to changes by others.'
         redirect_to(@document)
       else
@@ -135,7 +135,7 @@ class DocumentsController < ApplicationController
       @document.checked_out_at = nil
 
       if @document.save
-        make_audit(@document, nil, current_user, "checkin document")
+        make_audit(@document, nil, current_user, "checkin document, ID:'#{@document.id}', Name:'#{@document.name}'")
         flash[:notice] = 'Succesfully checked-in.'
         redirect_to(@document)
       else
@@ -176,7 +176,7 @@ class DocumentsController < ApplicationController
       else
         action = "update document metadata"
       end
-      make_audit(@document, nil, current_user, action)
+      make_audit(@document, nil, current_user, action+", ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
       flash[:notice] = 'Document was successfully updated.'
       redirect_to(@document)
     else
@@ -195,7 +195,7 @@ class DocumentsController < ApplicationController
       make_audit(nil, nil, current_user, "delete document, ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}', Created:'#{@document.created_at}', Updated:#{@document.updated_at}'")
 
       for share in @document.shares
-        make_audit(nil, nil, current_user, "delete share cascade, ID:'#{share.id}', Owner:'#{share.owner_id}', User:'#{share.user_id}', Update?:'#{share.can_update}', Checkout?:'#{share.can_checkout}'" )
+        make_audit(nil, nil, current_user, "delete document share delete cascade, ID:'#{share.id}', Owner:'#{share.owner_id}', User:'#{share.user_id}', Update?:'#{share.can_update}', Checkout?:'#{share.can_checkout}'" )
       end
 
       @document.shares.destroy_all
