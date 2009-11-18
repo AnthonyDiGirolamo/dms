@@ -38,7 +38,10 @@
   <%= link_to "Log in",  login_path,  { :title => "Log in", :class => 'action user_login' } %>
   <%= link_to "Register", register_path, { :title => "Create an account", :class => 'action user_new' } %>
   </div>
-  Not logged in! Register or login to the right.
+  You are not logged in. Please
+  <%= link_to "Log in",  login_path,  { :title => "Log in", :class => 'action user_login' } %>
+  or
+  <%= link_to "Register", register_path, { :title => "Create an account", :class => 'action user_new' } %>.
 
 <% end -%>
 

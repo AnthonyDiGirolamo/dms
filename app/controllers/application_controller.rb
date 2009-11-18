@@ -159,7 +159,9 @@ private
       @share_access = @checkout_access = true
     # If document shared with me
     elsif @document and @share and @shared_doc
-      @edit_access = @share.can_update? and (!@document.checked_out? or @my_checkout)
+      if @share.can_update? and (!@document.checked_out? or @my_checkout)
+        @edit_access = true
+      end
       @checkout_access = @share.can_checkout?
       @delete_access = @share_access = false
     else

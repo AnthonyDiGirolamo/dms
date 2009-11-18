@@ -1,13 +1,13 @@
 <%= render :partial => 'layouts/flash_messages' %>
 
-<h1>Log In</h1>
+<%#<h1>Log In</h1>%>
 
 <% form_tag session_path do -%>
-<p><%= label_tag 'login' %><br />
-<%= text_field_tag 'login', @login %></p>
+<p class="input_title"> <%= label_tag 'login' %></p>
+<p><%= text_field_tag 'login', @login, :class => 'input_field' %></p>
 
-<p><%= label_tag 'password' %><br/>
-<%= password_field_tag 'password', nil %></p>
+<p class="input_title"> <%= label_tag 'password' %></p>
+<p><%= password_field_tag 'password', nil, :class => 'input_field' %></p>
 
 <%# <p> %>
 <%# label_tag 'remember_me', 'Remember me' %>

@@ -31,7 +31,7 @@ class DocumentsController < ApplicationController
       when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type]) and return
     end
 
-    make_audit(document, nil, current_user, "download document, ID:'#{document.id}', Name:'#{document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
+    make_audit(document, nil, current_user, "download document, ID:'#{document.id}', Name:'#{document.name}', Size:'#{document.document_file_size}', Type:'#{document.document_content_type}', OriginalFileName:'#{document.document_file_name}'")
     send_file(path, send_file_options)
   end
 
@@ -44,6 +44,8 @@ class DocumentsController < ApplicationController
       sort = case params[:sort]
         when "name" then "name ASC" 
         when "name_desc" then "name DESC" 
+        #when "document_content_type" then "document_content_type ASC" 
+        #when "document_content_type_desc" then "document_content_type DESC" 
         when "document_file_size" then "document_file_size ASC" 
         when "document_file_size_desc" then "document_file_size DESC" 
         when "updated_at" then "updated_at ASC" 
@@ -53,7 +55,7 @@ class DocumentsController < ApplicationController
       params[:sort] = "updated_at_desc"
       sort = 'updated_at DESC'  
     end
-    @documents = Document.paginate_by_user_id @user.id, :page => params[:page], :order => sort, :per_page => 25
+    @documents = Document.paginate_by_user_id @user.id, :page => params[:page], :order => sort, :per_page => 10
   end
 
   def shared
@@ -64,6 +66,8 @@ class DocumentsController < ApplicationController
       sort = case params[:sort]
         when "name" then "name ASC" 
         when "name_desc" then "name DESC" 
+        #when "document_content_type" then "document_content_type ASC" 
+        #when "document_content_type_desc" then "document_content_type DESC" 
         when "document_file_size" then "document_file_size ASC" 
         when "document_file_size_desc" then "document_file_size DESC" 
         when "updated_at" then "updated_at ASC" 
@@ -73,7 +77,7 @@ class DocumentsController < ApplicationController
       params[:sort] = "updated_at_desc"
       sort = 'updated_at DESC'  
     end
-    @documents = Document.paginate_by_sql ['SELECT "documents".*, "shares".document_id AS id FROM "documents" INNER JOIN "shares" ON "documents".id = "shares".document_id WHERE ("shares".user_id = ? ) ORDER BY '+sort, @user.id ], :page => params[:page], :per_page => 25
+    @documents = Document.paginate_by_sql ['SELECT "documents".*, "shares".document_id AS id FROM "documents" INNER JOIN "shares" ON "documents".id = "shares".document_id WHERE ("shares".user_id = ? ) ORDER BY '+sort, @user.id ], :page => params[:page], :per_page => 10
     render :action => "index"
     @shared_list = true
   end
@@ -99,6 +103,8 @@ class DocumentsController < ApplicationController
             sort = case params[:sort]
               when "name" then "name ASC" 
               when "name_desc" then "name DESC" 
+              #when "document_content_type" then "document_content_type ASC" 
+              #when "document_content_type_desc" then "document_content_type DESC" 
               when "document_file_size" then "document_file_size ASC" 
               when "document_file_size_desc" then "document_file_size DESC" 
               when "updated_at" then "updated_at ASC" 
@@ -108,7 +114,7 @@ class DocumentsController < ApplicationController
             params[:sort] = "updated_at_desc"
             sort = 'updated_at DESC'  
           end
-          @documents = Document.paginate_by_sql ['SELECT "documents".*, "departments".id AS department_id, "departments".name AS department_name FROM "users" INNER JOIN "departments_users" ON "departments_users".user_id = "users".id INNER JOIN "departments" on "departments_users".department_id = "departments".id INNER JOIN "documents" ON "users".id = "documents".user_id WHERE "departments".id = ? ORDER BY '+sort, params[:id] ], :page => params[:page], :per_page => 25
+          @documents = Document.paginate_by_sql ['SELECT "documents".*, "departments".id AS department_id, "departments".name AS department_name FROM "users" INNER JOIN "departments_users" ON "departments_users".user_id = "users".id INNER JOIN "departments" on "departments_users".department_id = "departments".id INNER JOIN "documents" ON "users".id = "documents".user_id WHERE "departments".id = ? ORDER BY '+sort, params[:id] ], :page => params[:page], :per_page => 10
           @department_list = true
           render :action => "index"
         else

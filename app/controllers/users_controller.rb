@@ -35,8 +35,8 @@ class UsersController < ApplicationController
       request.department_id = department.id unless role.name == "administrator"
       request.save
 
-      redirect_back_or_default(root_path) ; return
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      redirect_back_or_default(root_path) ; return
     else
       flash[:error]  = "There was an error setting up that account.  Please try again."
       render :action => 'new'
@@ -94,7 +94,7 @@ class UsersController < ApplicationController
         params[:sort] = "created_at_desc"
         sort = 'created_at DESC'  
       end
-      @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 25
+      @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 10
     end
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
@@ -123,7 +123,7 @@ class UsersController < ApplicationController
       sort = 'created_at DESC'  
     end
 
-    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 25
+    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 10
 
     if request.xml_http_request? 
       render :partial => "user_table", :layout => false 
@@ -166,7 +166,7 @@ private
   end
 
   def users_by_state(state)
-    @users = User.paginate_by_state state, :page => params[:page], :include => [:roles, :departments], :order => 'login ASC', :per_page => 25
+    @users = User.paginate_by_state state, :page => params[:page], :include => [:roles, :departments], :order => 'login ASC', :per_page => 10
   end
 
 end
