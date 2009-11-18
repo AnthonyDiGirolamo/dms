@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about', :controller => 'home', :action => 'about', :conditions => { :method => :get }
 
   map.resources :users,
-    :member => { :suspend => :put, :unsuspend => :put, :purge => :delete},
+    :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :destroy => :delete },
     :collection => { :pending => :get }
   map.resource :session
 

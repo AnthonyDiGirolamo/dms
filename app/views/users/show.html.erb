@@ -91,12 +91,12 @@
 
       <td>
         <%# if not request.role_id.nil? -%>
-          <%= h(request.role.name.humanize) unless request.role_id.nil? %>
+          <%= h(request.role.name.humanize) unless request.role.nil? %>
         <%# end %>
       </td>
       <td>
         <%# if not request.department_id.nil? -%>
-          <%= h(request.department.name) unless request.department_id.nil? %>
+          <%= h(request.department.name) unless request.department.nil? %>
         <%# end %>
       </td>
 

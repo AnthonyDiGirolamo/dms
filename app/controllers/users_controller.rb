@@ -61,23 +61,72 @@ class UsersController < ApplicationController
   end
 
   def suspend
-    @user.suspend!
-    redirect_to users_path ; return
+    if @user.state != "suspended" and @user.state != "deleted"
+      @user.suspend!
+      make_audit(nil, nil, @user, "user suspend, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      redirect_to users_path ; return
+    else
+      flash[:error] = 'That user cannot be suspended.'
+      redirect_to users_path ; return
+    end
   end
 
   def unsuspend
-    @user.unsuspend!
-    redirect_to users_path ; return
+    if @user.state == "suspended" and @user.state != "deleted"
+      @user.unsuspend!
+      make_audit(nil, nil, @user, "user unsuspend, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      redirect_to users_path ; return
+    else
+      flash[:error] = 'That user cannot be unsuspended.'
+      redirect_to users_path ; return
+    end
   end
 
   def destroy
-    @user.delete!
-    redirect_to users_path ; return
+    if @user.state != "deleted"
+      @user.delete!
+      make_audit(nil, nil, @user, "user delete, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      redirect_to users_path ; return
+    else
+      flash[:error] = 'That user cannot be deleted.'
+      redirect_to users_path ; return
+    end
   end
 
   def purge
-    @user.destroy
-    redirect_to users_path ; return
+    if @user.state == "deleted"
+      for share in @user.shares_by_me
+        make_audit(nil, nil, nil, "user purge share delete cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Share ID:'#{share.id}', Owner:'#{share.owner_id}, #{share.owner.login}', User:'#{share.user_id}, #{share.user.login}', Update?:'#{share.can_update}', Checkout?:'#{share.can_checkout}'" )
+        share.destroy
+      end
+
+      for share in @user.shares_by_others
+        make_audit(nil, nil, nil, "user purge share delete cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Share ID:'#{share.id}', Owner:'#{share.owner_id}, #{share.owner.login}', User:'#{share.user_id}, #{share.user.login}', Update?:'#{share.can_update}', Checkout?:'#{share.can_checkout}'" )
+        share.destroy
+      end
+
+      for dept in @user.departments
+        make_audit(nil, nil, nil, "user purge department remove cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Department ID:'#{dept.id}', Department Name:'#{dept.name}'" )
+        @user.departments.delete(dept)
+      end
+
+      for role in @user.roles
+        make_audit(nil, nil, nil, "user purge role remove cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Role ID:'#{role.id}', Role Name:'#{role.name}'" )
+        @user.roles.delete(role)
+      end
+
+      for doc in @user.documents
+        make_audit(nil, nil, nil, "user purge document delete cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', DocumentID:'#{doc.id}', Name:'#{doc.name}', Size:'#{doc.document_file_size}', Type:'#{doc.document_content_type}', OriginalFileName:'#{doc.document_file_name}', Created:'#{doc.created_at}', Updated:#{doc.updated_at}'")
+        doc.destroy
+      end
+
+      make_audit(nil, nil, nil, "user purge, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      @user.destroy
+      redirect_to users_path ; return
+    else
+      flash[:error] = 'That user cannot be purged, delete it first.'
+      redirect_to users_path ; return
+    end
   end
 
   def show

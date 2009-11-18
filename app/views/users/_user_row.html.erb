@@ -33,10 +33,27 @@
     <%# for role in user.roles %>
       <%#= h role.name.humanize %>
     <%# end %>
-  </td>
-  <td>
+  <%#</td>%>
+  <%#<td>%>
     <%# for department in user.departments %>
       <%#= h department.name %>
     <%# end %>
+  <%#</td>%>
+  <td>
+    <% if user.state != "suspended" and user.state != "deleted" -%> 
+      <%= link_to 'Suspend', suspend_user_path(user), :method => :put, :class => "action icon_bang_yellow" %>
+    <% end -%>
+
+    <% if user.state == "suspended" and user.state != "deleted" -%> 
+      <%= link_to 'Reactivate', unsuspend_user_path(user), :method => :put, :class => "action icon_tick_circle" %>
+    <% end -%>
+
+    <% if user.state != "deleted" -%> 
+    <%= link_to 'Delete', destroy_user_path(user), :confirm => 'This will mark the user \'deleted\' but keep their data. This cannot be undone. Are you sure?', :method => :delete, :class => 'user_delete action' %>
+    <% end -%>
+
+    <% if user.state == "deleted" -%> 
+    <%= link_to 'Purge', purge_user_path(user), :confirm => 'This will permanently delete the user and all all associatiated data. This cannot be undone. Are you sure?', :method => :delete, :class => 'user_delete action' %>
+    <% end -%>
   </td>
 </tr>
