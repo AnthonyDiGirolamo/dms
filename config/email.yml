@@ -1,0 +1,15 @@
+development:
+  :address: smtp.asu.edu
+  :port: 25
+  :authentication: plain
+  :domain: xerxes2.asu.edu
+  #:user_name: user
+  #:password: pass
+production:
+  :address: smtp.asu.edu
+  :port: 25
+  :authentication: plain
+  :domain: xerxes2.asu.edu
+  #:user_name: user
+  #:password: pass
+

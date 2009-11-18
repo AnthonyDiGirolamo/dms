@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
     setup_email(user)
     @subject    += 'Please activate your new account'
   
-    @body[:url]  = "http://YOURSITE/activate/#{user.activation_code}"
+    @body[:url]  = "https://129.219.33.6/activate/#{user.activation_code}"
   
   end
   
@@ -16,8 +16,8 @@ class UserMailer < ActionMailer::Base
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"
-      @from        = "ADMINEMAIL"
-      @subject     = "[YOURSITE] "
+      @from        = "adigiro@asu.edu"
+      @subject     = "Document Management System - "
       @sent_on     = Time.now
       @body[:user] = user
     end

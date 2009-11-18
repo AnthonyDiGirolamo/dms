@@ -23,6 +23,12 @@ config.action_view.cache_template_loading            = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+#
+# Load mail configuration if not in test environment
+if RAILS_ENV != 'test'
+  email_settings = YAML::load(File.open("#{RAILS_ROOT}/config/email.yml"))
+  ActionMailer::Base.smtp_settings = email_settings[RAILS_ENV] unless email_settings[RAILS_ENV].nil?
+end
 
 # Enable threaded mode
 # config.threadsafe!
