@@ -1,24 +1,25 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+<div class="page_info">
+  <%= page_entries_info @user_requests %>
+</div>
+
 <div class="pad_bottom">
   <p class="document_title">Requests</p>
 </div>
 
 <div class="pagination">
   <%= will_paginate @user_requests, :container => false %>
-  <div clas="page_info">
-    <p><%= page_entries_info @user_requests %></p>
-  </div>
 </div>
 
-<table border="0" cellspacing="0" cellpadding="0">
+<table border="0" cellspacing="0" cellpadding="2">
   <tr>
-    <th>Created</th>
+    <th> <%= sort_link_helper "Created", "created_at", "index" %> </th>
     <th>User</th>
     <th>Role</th>
     <th>Department</th>
-    <th>Status</th>
+    <th> <%= sort_link_helper "Status", "state", "index" %> </th>
     <th></th>
   </tr>
   <%= render :partial => 'request_row', :collection => @user_requests %>

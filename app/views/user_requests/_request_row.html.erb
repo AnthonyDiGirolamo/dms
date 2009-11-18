@@ -1,11 +1,11 @@
-<tr>
+<tr class="<%= cycle("odd","even") %>">
   <td>
     <% if !request_row.created_at.nil? -%> 
-    <%= h format_time(request_row.created_at) %>
+    <%= h format_short_time(request_row.created_at) %>
     <% end -%>
   </td>
   <td>
-    <%= h request_row.user.login %>
+    <%= link_to request_row.user.login, request_row.user, :class => "action icon_user_card" %>
   </td>
   <td>
     <% if !request_row.role.nil? -%> 
@@ -19,23 +19,18 @@
   </td>
   <td>
     <%= h request_row.state.humanize %>
-    on <%= h format_date(request_row.updated_at) %>
+    <%#on %>
+    <%#= h format_short_time(request_row.updated_at) %>
   </td>
   <td>
     <% if request_row.state != "approved" -%>
-    <%= link_to "approve", approve_user_request_path(:id => request_row.id), :method => :put %>
-    <% else -%>
-      approve
+    <%= link_to "approve", approve_user_request_path(:id => request_row.id), :method => :put, :class => 'action icon_tick' %>
     <% end -%>
     <% if request_row.state != "rejected" and request_row.state != "approved" -%>
-    <%= link_to "reject", reject_user_request_path(:id => request_row.id), :method => :put %>
-    <% else -%>
-      reject
+    <%= link_to "reject", reject_user_request_path(:id => request_row.id), :method => :put, :class => 'action icon_cross' %>
     <% end -%>
-    <% if request_row.state != "revoked" -%>
-    <%= link_to "revoke", revoke_user_request_path(:id => request_row.id), :method => :put %>
-    <% else -%>
-      revoke
+    <% if request_row.state != "pending" and request_row.state != "revoked" -%>
+      <%= link_to "revoke", revoke_user_request_path(:id => request_row.id), :method => :put, :class => 'action icon_cancel' %>
     <% end -%>
   </td>
 </tr>

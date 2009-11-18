@@ -46,8 +46,8 @@ class DocumentsController < ApplicationController
         when "name_desc" then "name DESC" 
         when "document_file_size" then "document_file_size ASC" 
         when "document_file_size_desc" then "document_file_size DESC" 
-        when "updated_at" then "created_at ASC" 
-        when "updated_at_desc" then "created_at DESC" 
+        when "updated_at" then "updated_at ASC" 
+        when "updated_at_desc" then "updated_at DESC" 
       end
     else
       params[:sort] = "updated_at_desc"
@@ -66,8 +66,8 @@ class DocumentsController < ApplicationController
         when "name_desc" then "name DESC" 
         when "document_file_size" then "document_file_size ASC" 
         when "document_file_size_desc" then "document_file_size DESC" 
-        when "updated_at" then "created_at ASC" 
-        when "updated_at_desc" then "created_at DESC" 
+        when "updated_at" then "updated_at ASC" 
+        when "updated_at_desc" then "updated_at DESC" 
       end
     else
       params[:sort] = "updated_at_desc"
@@ -75,6 +75,7 @@ class DocumentsController < ApplicationController
     end
     @documents = Document.paginate_by_sql ['SELECT "documents".*, "shares".document_id AS id FROM "documents" INNER JOIN "shares" ON "documents".id = "shares".document_id WHERE ("shares".user_id = ? ) ORDER BY '+sort, @user.id ], :page => params[:page], :per_page => 25
     render :action => "index"
+    @shared_list = true
   end
 
   def department
@@ -84,7 +85,13 @@ class DocumentsController < ApplicationController
 
       return if validate_sql_integer(params[:id], 'That department does not exist.', documents_path)
 
-      if @department = Department.find(params[:id])
+      begin
+        @department = Department.find(params[:id])
+      rescue
+        @department = nil
+      end
+
+      if @department
         if @user.has_department?(@department.name)
           @used_space = current_user.documents.sum(:document_file_size)
           #@documents = @department.documents
@@ -94,8 +101,8 @@ class DocumentsController < ApplicationController
               when "name_desc" then "name DESC" 
               when "document_file_size" then "document_file_size ASC" 
               when "document_file_size_desc" then "document_file_size DESC" 
-              when "updated_at" then "created_at ASC" 
-              when "updated_at_desc" then "created_at DESC" 
+              when "updated_at" then "updated_at ASC" 
+              when "updated_at_desc" then "updated_at DESC" 
             end
           else
             params[:sort] = "updated_at_desc"

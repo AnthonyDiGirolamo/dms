@@ -8,7 +8,18 @@ class UserRequestsController < ApplicationController
   before_filter :all_roles, :all_departments, :only => [:new, :create]
 
   def index
-    @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => 'created_at DESC', :per_page => 25
+    if !params[:sort].nil?
+      sort = case params[:sort]
+        when "state" then "state ASC" 
+        when "state_desc" then "state DESC" 
+        when "created_at" then "created_at ASC" 
+        when "created_at_desc" then "created_at DESC" 
+      end
+    else
+      params[:sort] = "created_at_desc"
+      sort = 'created_at DESC'  
+    end
+    @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => sort, :per_page => 25
   end
 
   def approve

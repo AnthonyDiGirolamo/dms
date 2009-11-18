@@ -12,9 +12,12 @@ of <%= h number_to_human_size(@user.quota) %>
 <ul class="toolbar">
   <% if @department_list -%>
     <li class="title"> <%= h @department.name %> </li>
+  <% elsif @shared_list -%>
+    <li class="title">Documents Shared with Me</li>
   <% else -%>
     <li class="title">My Documents</li>
   <% end -%>
+
   <li><%= link_to "New Document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
@@ -32,21 +35,6 @@ of <%= h number_to_human_size(@user.quota) %>
 <% else -%>
   <p>No documents here! Create some by clicking New Document above.</p>
 <% end -%>
+
 <% end -%>
 
-<% reset_cycle -%>
-
-<% if @documents_shared_with_me -%>
-
-  <ul class="toolbar">
-  <li class="title">Documents Shared with Me</li>
-  </ul>
-
-<% if !@documents_shared_with_me.empty? -%>
-
-  <%= render :partial => 'documents_table', :object => @documents_shared_with_me, :as => :documents %>
-
-<% else -%>
-  <p>No documents are being shared with you.</p>
-<% end -%>
-<% end -%>
