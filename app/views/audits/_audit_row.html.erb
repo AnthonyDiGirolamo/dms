@@ -1,0 +1,18 @@
+<tr class="<%= cycle("odd","even") %>">
+  <td>
+    <%= link_to audit.user.login, audit.user, :class => "action icon_user_card" %>
+    <%#= h audit.user.login unless audit.user.nil? %>
+  </td>
+  <%#<td>%>
+    <%#= h audit.document.name unless audit.document.nil? %>
+  <%#</td>%>
+  <%#<td>%>
+    <%#= h audit.share.user.login unless audit.share.nil? %>
+  <%#</td>%>
+  <td>
+    <%= h format_short_time(audit.created_at) %>
+  </td>
+  <td>
+    <%= h audit.action unless audit.action.nil? %>
+  </td>
+</tr>

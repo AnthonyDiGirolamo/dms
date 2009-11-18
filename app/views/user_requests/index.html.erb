@@ -1,6 +1,10 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+<div class="pad_bottom">
+  <p class="document_title">Requests</p>
+</div>
+
 <div class="pagination">
   <%= will_paginate @user_requests, :container => false %>
   <div clas="page_info">

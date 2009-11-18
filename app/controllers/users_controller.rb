@@ -81,6 +81,21 @@ class UsersController < ApplicationController
   end
 
   def show
+    @admin_access = current_user.has_role?("administrator")
+    if @admin_access
+      if params[:sort].nil?
+        params[:sort] = "created_at_desc"
+        sort = 'created_at DESC'  
+      else
+        sort = case params[:sort]
+          when "action" then "action ASC" 
+          when "action_desc" then "action DESC" 
+          when "created_at" then "created_at ASC" 
+          when "created_at_desc" then "created_at DESC" 
+        end
+      end
+      @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 4
+    end
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end

@@ -1,21 +1,20 @@
 class AuditsController < ApplicationController
+  prepend_before_filter :login_required, :session_expire, :update_activity_time
+  require_role "administrator"
+
   def index
-
-    sort = case params['sort']
-      when "username" then "username" 
-      when "username_reverse" then "username DESC" 
-      when "last_name" then "last_name" 
-      when "last_name_reverse" then "last_name DESC" 
-      when "updated_at" then "updated_at" 
-      when "updated_at_reverse" then "updated_at DESC" 
-      when "last_login" then "last_login" 
-      when "last_login_reverse" then "last_login DESC" 
-      when "super_user" then "super_user" 
-      when "super_user_reverse" then "super_user DESC" 
-    end 
-
-    @audits = Audit.all
-    @audits = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 25
+    if params[:sort].nil?
+      params[:sort] = "created_at_desc"
+      sort = 'created_at DESC'  
+    else
+      sort = case params[:sort]
+        when "action" then "action ASC" 
+        when "action_desc" then "action DESC" 
+        when "created_at" then "created_at ASC" 
+        when "created_at_desc" then "created_at DESC" 
+      end
+    end
+    @audits = Audit.paginate :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 4
   end
 
 end

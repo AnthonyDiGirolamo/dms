@@ -40,6 +40,7 @@
 .center { text-align: center; }
 .right { text-align: right; }
 .pad_bottom { padding-bottom: 1em; }
+.pad_top { padding-top: 1em; }
 
 html {
   margin: 0;
@@ -95,11 +96,13 @@ p.document_title {
 }
 
 p.item {
+  color: black;
   padding: 2px;
   display: inline;
   background-color: @Aluminium3;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+  text-shadow: @Aluminium1 1px 1px 0px;
 }
 
 /*Flash notice/errors*/
@@ -314,6 +317,10 @@ a.action {
   background-image: url(/images/icons/16x16/sort-quantity-descending.png);
 }
 
+.system_log {
+  background-image: url(/images/icons/16x16/application-monitor.png);
+}
+
 .login { .icon_sortaz; }
 .login_desc { .icon_sortaz_desc; }
 .state { .icon_sortaz; }
@@ -324,6 +331,8 @@ a.action {
 .created_at_desc { .icon_sortdate_desc; }
 .updated_at { .icon_sortdate; }
 .updated_at_desc { .icon_sortdate_desc; }
+/*.action { .icon_sortaz; }*/
+/*.action_desc { .icon_sortaz_desc; }*/
 
 /*Table Formatting*/
 

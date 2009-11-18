@@ -14,6 +14,7 @@
     <% if current_user.has_role?("administrator") -%>
       <%= link_to "Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
       <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
+      <%= link_to "Log", audits_path,  { :title => "System Auditing", :class => 'action system_log' } %>
     <% else -%>
 
       <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index' } %>

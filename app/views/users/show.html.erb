@@ -1,10 +1,13 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+
+<div class="pad_bottom">
 <p class="document_title">
   <%= image_tag("icons/16x16/card-address.png", :size => "16x16", :alt => "User:" ) %>
   <%= h @user.name %>
 </p>
+</div>
 
 <table class="info pad_bottom" border="0" cellspacing="0" cellpadding="0">
   <tr class="<%= cycle("odd","even") %>">
@@ -60,15 +63,17 @@
 <p>To add departments, create a new request and select "corporate" as your role. Then select the new department you wish to add, it will be added to the list of departments you oversee.</p>
 <% end -%>
 
+<div class="pad_bottom">
 <ul class="toolbar">
 <li class="title">Request History</li>
 <% if @request_access -%>
   <li><%= link_to "New Request", new_user_request_path, :class => 'request_index action' %></li>
 <% end -%>
 </ul>
+</div>
 
 <% if !@requests.empty? -%>
-<table border="0" cellspacing="0" cellpadding="0">
+<table border="0" cellspacing="0" cellpadding="0" class="pad_bottom">
   <tr>
     <th>Date</th>
     <th>Role</th>
@@ -110,5 +115,30 @@
 
   <%# There should be SOMETHING here. %>
   <p>No past requests found.</p>
+
+<% end -%>
+
+<% if @admin_access -%>
+
+<% if !@audits.empty? -%>
+  <div class="page_info">
+    <%= page_entries_info @audits %>
+  </div>
+<% end -%>
+
+<div class="pad_bottom">
+<ul class="toolbar">
+  <li class="title">Activity Log for <%= h @user.name %> </li>
+</ul>
+</div>
+
+  <% if @audits.empty? -%>
+    <p>No activity found.</p>
+  <% else -%>
+    <div class="pagination">
+      <%= will_paginate @audits, :container => false %>
+    </div>
+  <%= render :partial => 'audits/audit_table', :object => @audits, :as => :audits %>
+  <% end -%>
 
 <% end -%>

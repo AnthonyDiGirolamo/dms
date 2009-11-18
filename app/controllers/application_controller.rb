@@ -80,7 +80,8 @@ private
           @document = Document.find_by_id(params[:id])
           if @document
             @department = @document.user.departments.first
-            if current_user.has_department?(@department.name)
+            #@role = @document.user.roles.first
+            if current_user.has_department?(@department.name) #and @role.name != "manager" and @role.name != "corporate"
               @my_doc = true # treat manager access as if you own it
               @manager_access = true
             end
@@ -95,7 +96,8 @@ private
           @document = Document.find_by_id(params[:id])
           if @document
             @department = @document.user.departments.first
-            if current_user.has_department?(@department.name)
+            #@role = @document.user.roles.first
+            if current_user.has_department?(@department.name) #and @role.name != "manager" and @role.name != "corporate"
               @my_doc = true # treat corporate access as if you own it
               @corporate_access = true
             end

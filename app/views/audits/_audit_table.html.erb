@@ -1,0 +1,10 @@
+<table border="0" cellspacing="0" cellpadding="5">
+  <tr>
+    <th> User </th>
+    <%#<th> Document </th>%>
+    <%#<th> Share </th>%>
+    <th> <%= sort_link_helper "Time", "created_at", "show" %> </th>
+    <th> Action <%#= sort_link_helper "Action", "action", "show" %> </th>
+  </tr>
+<%= render :partial => 'audits/audit_row', :collection => @audits, :as => :audit %>
+</table>

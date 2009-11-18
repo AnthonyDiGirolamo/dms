@@ -20,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   map.new_user_request '/user_requests/new', :controller => 'user_requests', :action => 'new', :conditions => { :method => :get }
   map.connect '/user_requests', :controller => 'user_requests', :action => 'create', :conditions => { :method => :post }
 
+  map.audits '/audits', :controller => 'audits', :action => 'index', :conditions => { :method => :get }
+
   map.connect '/documents/:id/download/:style.:format', :controller => 'documents', :action => 'download', :conditions => { :method => :get }
   map.department_documents '/documents/department/:id', :controller => 'documents', :action => 'department', :conditions => { :method => :get }
   map.corporate_documents '/documents/corporate', :controller => 'documents', :action => 'corporate', :conditions => { :method => :get }

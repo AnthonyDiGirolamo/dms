@@ -137,7 +137,7 @@
         <%= link_to '', toggle_checkout_document_share_path(@document, share), :method => :put, :class => "#{share.can_checkout? ? "icon_tick" : "icon_cross"} action" %>
       </td>
       <td class="right">
-        <%= link_to 'Edit', edit_document_share_path(@document, share), :class => 'user_edit action' %>
+        <%= link_to 'Change User', edit_document_share_path(@document, share), :class => 'user_edit action' %>
         <%= link_to 'Delete', document_share_path(@document, share), :confirm => 'Are you sure?', :method => :delete, :class => 'user_delete action' %>
       </td>
     </tr>

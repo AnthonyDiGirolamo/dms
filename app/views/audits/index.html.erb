@@ -1,36 +1,24 @@
-<h1>Listing audits</h1>
+<%= render :partial => 'layouts/user_bar' %>
+<%= render :partial => 'layouts/flash_messages' %>
 
-<% if @documents and !@documents.empty? -%>
-
-  <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
-    <tr>
-      <th>Name</th>
-      <th>Size</th>
-      <th>Updated</th>
-      <th></th>
-    </tr>
-
-  <%= render :partial => 'document_row', :collection => @documents, :as => :document %>
-
-  </table>
-
-<% else -%>
-  <p>No documents here! Create some by clicking New Document above.</p>
+<% if !@audits.empty? -%>
+  <div class="page_info">
+    <%= page_entries_info @audits %>
+  </div>
 <% end -%>
 
-<table>
-  <tr>
-  </tr>
+<div class="pad_bottom">
+  <p class="document_title">Activity Log</p>
+</div>
 
-<% @audits.each do |audit| %>
-  <tr>
-    <td><%= link_to 'Show', audit %></td>
-    <td><%= link_to 'Edit', edit_audit_path(audit) %></td>
-    <td><%= link_to 'Destroy', audit, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% if @audits.empty? -%>
+    <p>No activity found.</p>
+  <% else -%>
 
-<br />
+    <div class="pagination">
+      <%= will_paginate @audits, :container => false %>
+    </div>
 
-<%= link_to 'New audit', new_audit_path %>
+  <%= render :partial => 'audits/audit_table', :object => @audits, :as => :audits %>
+
+  <% end -%>
