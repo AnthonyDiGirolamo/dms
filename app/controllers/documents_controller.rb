@@ -154,7 +154,7 @@ class DocumentsController < ApplicationController
     if current_user.documents.sum(:document_file_size) < current_user.quota
       if @document.save
         make_audit(@document, nil, current_user, "create document, ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
-        flash[:notice] = 'Document was successfully created.'
+        flash[:notice] = 'Document successfully created.'
         redirect_to(@document) ; return
       else
         render :action => "new"
@@ -180,7 +180,7 @@ class DocumentsController < ApplicationController
 
       if @document.save
         make_audit(@document, nil, current_user, "checkout document, ID:'#{@document.id}', Name:'#{@document.name}'")
-        flash[:notice] = 'Succesfully checked-out and locked to changes by others.'
+        flash[:notice] = 'Successfully checked-out and locked to changes by others.'
         redirect_to(@document) ; return
       else
         flash[:error] = 'Document could not be checked-out.'
@@ -206,7 +206,7 @@ class DocumentsController < ApplicationController
 
       if @document.save
         make_audit(@document, nil, current_user, "checkin document, ID:'#{@document.id}', Name:'#{@document.name}'")
-        flash[:notice] = 'Succesfully checked-in.'
+        flash[:notice] = 'Successfully checked-in.'
         redirect_to(@document) ; return
       else
         flash[:error] = 'Document could not be checked-in.'
@@ -247,7 +247,7 @@ class DocumentsController < ApplicationController
         action = "update document metadata"
       end
       make_audit(@document, nil, current_user, action+", ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
-      flash[:notice] = 'Document was successfully updated.'
+      flash[:notice] = 'Document successfully updated.'
       redirect_to(@document) ; return
     else
       flash[:error] = 'Document update failed.'
@@ -270,7 +270,7 @@ class DocumentsController < ApplicationController
 
       @document.shares.destroy_all
       @document.destroy
-      flash[:notice] = 'Document was successfully destroyed.'
+      flash[:notice] = 'Document successfully destroyed.'
       redirect_to(documents_url) ; return
     rescue
       flash[:error] = 'Unable to destroy that document.'

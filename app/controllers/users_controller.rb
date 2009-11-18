@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     if @user.state != "suspended" and @user.state != "deleted"
       @user.suspend!
       make_audit(nil, nil, @user, "user suspend, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      flash[:notice] = 'User suspend successfully completed.'
       redirect_to users_path ; return
     else
       flash[:error] = 'That user cannot be suspended.'
@@ -75,6 +76,7 @@ class UsersController < ApplicationController
     if @user.state == "suspended" and @user.state != "deleted"
       @user.unsuspend!
       make_audit(nil, nil, @user, "user unsuspend, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      flash[:notice] = 'User unsuspend successfully completed.'
       redirect_to users_path ; return
     else
       flash[:error] = 'That user cannot be unsuspended.'
@@ -86,6 +88,7 @@ class UsersController < ApplicationController
     if @user.state != "deleted"
       @user.delete!
       make_audit(nil, nil, @user, "user delete, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
+      flash[:notice] = 'User delete successfully completed.'
       redirect_to users_path ; return
     else
       flash[:error] = 'That user cannot be deleted.'
@@ -120,8 +123,14 @@ class UsersController < ApplicationController
         doc.destroy
       end
 
+      for user_request in @user.user_requests
+        make_audit(nil, nil, nil, "user purge user_request delete cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Requested Department ID:'#{user_request.department_id}', Requested Role ID:'#{user_request.role_id}', Request State:'#{user_request.state}'" )
+        user_request.destroy
+      end
+
       make_audit(nil, nil, nil, "user purge, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
       @user.destroy
+      flash[:notice] = 'User purge successfully completed.'
       redirect_to users_path ; return
     else
       flash[:error] = 'That user cannot be purged, delete it first.'
@@ -170,8 +179,8 @@ class UsersController < ApplicationController
         when "quota_desc" then "quota DESC" 
       end 
     else
-      params[:sort] = "created_at_desc"
-      sort = 'created_at DESC'  
+      params[:sort] = "updated_at_desc"
+      sort = 'updated_at DESC'  
     end
 
     @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 10
