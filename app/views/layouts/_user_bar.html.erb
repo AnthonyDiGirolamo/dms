@@ -12,8 +12,7 @@
   <% else -%>
 
     <% if current_user.has_role?("administrator") -%>
-      <%= link_to "All Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
-      <%= link_to "Pending Users", pending_users_path,  { :title => "Manage Pending Users", :class => 'action user_index' } %>
+      <%= link_to "Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
       <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
     <% else -%>
 

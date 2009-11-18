@@ -1,0 +1,21 @@
+<%= render :partial => 'layouts/user_bar' %>
+<%= render :partial => 'layouts/flash_messages' %>
+
+<div id="float_right">
+<%= image_tag("spinner.gif", 
+    :align => 'absmiddle', 
+    :border=> 0, 
+    :id => 'spinner', 
+    :style=>"display: none;" ) %>
+</div>
+
+<div class="page_info">
+  <%= page_entries_info @users %>
+</div>
+<div class="pagination">
+  <%= will_paginate @users, :container => false %>
+</div>
+
+<div id="table">
+  <%= render :partial => 'user_table', :object => @users, :as => :users %>
+</div>

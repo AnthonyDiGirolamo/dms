@@ -1,5 +1,23 @@
 <h1>Listing audits</h1>
 
+<% if @documents and !@documents.empty? -%>
+
+  <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
+    <tr>
+      <th>Name</th>
+      <th>Size</th>
+      <th>Updated</th>
+      <th></th>
+    </tr>
+
+  <%= render :partial => 'document_row', :collection => @documents, :as => :document %>
+
+  </table>
+
+<% else -%>
+  <p>No documents here! Create some by clicking New Document above.</p>
+<% end -%>
+
 <table>
   <tr>
   </tr>

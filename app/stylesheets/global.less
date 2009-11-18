@@ -298,13 +298,13 @@ a.action {
 .icon_sortdate {
   background-image: url(/images/icons/16x16/sort-date.png);
 }
-.icon_sortdat_desc {
+.icon_sortdate_desc {
   background-image: url(/images/icons/16x16/sort-date-descending.png);
 }
 .icon_sortnum {
   background-image: url(/images/icons/16x16/sort-number.png);
 }
-.icon_sortnum-desc {
+.icon_sortnum_desc {
   background-image: url(/images/icons/16x16/sort-number-descending.png);
 }
 .icon_sortq {
@@ -313,6 +313,17 @@ a.action {
 .icon_sortq_desc {
   background-image: url(/images/icons/16x16/sort-quantity-descending.png);
 }
+
+.login { .icon_sortaz; }
+.login_desc { .icon_sortaz_desc; }
+.state { .icon_sortaz; }
+.state_desc { .icon_sortaz_desc; }
+.quota { .icon_sortnum; }
+.quota_desc { .icon_sortnum_desc; }
+.created_at { .icon_sortdate; }
+.created_at_desc { .icon_sortdate_desc; }
+.updated_at { .icon_sortdate; }
+.updated_at_desc { .icon_sortdate_desc; }
 
 /*Table Formatting*/
 
@@ -336,7 +347,7 @@ tr {
   line-height: 2em;
 }
 
-td.info_title {
+.info_title {
   width: 4em;
   font-weight: bold;
   text-align: right;
@@ -361,32 +372,41 @@ tr.odd { background-color: #FCFCFC; }
 /*Paging*/
 
 .pagination {
-  text-align: center;
+  text-align: left;
   padding: .3em;
 
 	a, span {
 	  padding: .2em .5em;
 	}
 	span.disabled {
-	  color: @Aluminium4;
+	  color: @Aluminium5;
+	  background: @Aluminium1;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      text-shadow: white 1px 1px 0px;
 	}
 	span.current {
 	  font-weight: bold;
-	  color: @ScarletRed1;
+	  color: white;
+	  background: @ScarletRed1;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      text-shadow: @Aluminium6 1px 1px 0px;
 	}
 	a {
-	  border: 1px solid @Aluminium3;
-	  color: @SkyBlue1;
+	  background: @Aluminium2;
+	  color: @Aluminium6;
 	  text-decoration: none;
+      font-weight: bold;
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      text-shadow: @Aluminium1 1px 1px 0px;
 	}
 	a:hover, a:focus {
-	  border-color: @Aluminium6;
-	  background: @SkyBlue1;
+	  background: @SkyBlue2;
 	  color: white;
-	}
-	.page_info {
-	  color: @Aluminium4;
-	  padding-top: .8em;
+      font-weight: bold;
+      text-shadow: @Aluminium6 1px 1px 0px;
 	}
 	.prev_page, .next_page {
 	  border-width: 2px;
@@ -397,6 +417,16 @@ tr.odd { background-color: #FCFCFC; }
 	.next_page {
 	  margin-left: 1em;
 	}
+}
+
+.page_info {
+  padding: 5px;
+  color: black;
+  float: right;
+  background-color: @Aluminium2;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  color:black;
 }
 
 /*Error display*/

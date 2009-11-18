@@ -81,7 +81,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
   end
@@ -91,12 +90,29 @@ class UsersController < ApplicationController
   end
 
   def index
-    all_users
-    render :action => 'all'
-  end
+    if params[:sort].nil?
+      params[:sort] = "created_at_desc"
+      sort = 'created_at DESC'  
+    else
+      sort = case params[:sort]
+        when "login" then "login ASC" 
+        when "login_desc" then "login DESC" 
+        when "created_at" then "created_at ASC" 
+        when "created_at_desc" then "created_at DESC" 
+        when "updated_at" then "updated_at ASC" 
+        when "updated_at_desc" then "updated_at DESC" 
+        when "state" then "state ASC" 
+        when "state_desc" then "state DESC" 
+        when "quota" then "quota ASC" 
+        when "quota_desc" then "quota DESC" 
+      end 
+    end
 
-  def all
-    all_users
+    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 4
+
+    if request.xml_http_request? 
+      render :partial => "user_table", :layout => false 
+    end 
   end
 
   def pending
@@ -130,10 +146,6 @@ private
     elsif @user.has_role?("manager")
       @manager_access = true
     end
-  end
-
-  def all_users
-    @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => 'login ASC', :per_page => 25
   end
 
   def users_by_state(state)

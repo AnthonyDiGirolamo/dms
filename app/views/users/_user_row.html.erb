@@ -1,42 +1,42 @@
 <tr class="<%= cycle("odd","even") %>">
   <td>
-    <%= h user_row.login %>
+    <%= link_to user.login, user, :class => "action icon_user_card" %>
   </td>
+  <%#<td>%>
+    <%#= h user.email %>
+  <%#</td>%>
+  <%#<td>%>
+    <%#= h user.name %>
+  <%#</td>%>
   <td>
-    <%= h user_row.email %>
-  </td>
-  <td>
-    <%= h user_row.name %>
-  </td>
-  <td>
-    <% if !user_row.created_at.nil? -%> 
-    <%= h format_time(user_row.created_at) %>
+    <% if !user.created_at.nil? -%> 
+    <%= h format_short_time(user.created_at) %>
     <% end -%>
   </td>
   <td>
-    <% if !user_row.updated_at.nil? -%> 
-    <%= h format_time(user_row.updated_at) %>
+    <% if !user.updated_at.nil? -%> 
+    <%= h format_short_time(user.updated_at) %>
     <% end -%>
   </td>
+  <%#<td>%>
+    <%# if !user.activated_at.nil? -%> 
+    <%#= h format_short_time(user.activated_at) %>
+    <%# end -%>
+  <%#</td>%>
   <td>
-    <% if !user_row.activated_at.nil? -%> 
-    <%= h format_time(user_row.activated_at) %>
-    <% end -%>
+    <%= h user.state %>
+  </td>
+  <%#<td>%>
+    <%#= h number_to_human_size(user.quota) %>
+  <%#</td>%>
+  <%#<td>%>
+    <%# for role in user.roles %>
+      <%#= h role.name.humanize %>
+    <%# end %>
   </td>
   <td>
-    <%= h user_row.state %>
-  </td>
-  <td>
-    <%= h number_to_human_size(user_row.quota) %>
-  </td>
-  <td>
-    <% for role in user_row.roles %>
-      <%= h role.name.humanize %>
-    <% end %>
-  </td>
-  <td>
-    <% for department in user_row.departments %>
-      <%= h department.name %>
-    <% end %>
+    <%# for department in user.departments %>
+      <%#= h department.name %>
+    <%# end %>
   </td>
 </tr>

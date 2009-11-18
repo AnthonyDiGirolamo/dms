@@ -1,13 +1,25 @@
 <table border="0" cellspacing="0" cellpadding="5">
   <tr>
-    <th>Login</th>
-    <th>Email</th>
-    <th>Name</th>
-    <th>Created</th>
-    <th>Updated</th>
-    <th>Activated</th>
-    <th>State</th>
-    <th>Quota</th>
-    <th>Role</th>
-    <th>Department</th>
+    <th> 
+      <%= sort_link_helper "Login", "login", "index" %>
+    </th>
+    <%#<th>Email</th>%>
+    <%#<th>Name</th>%>
+    <th>
+      <%= sort_link_helper "Created", "created_at", "index" %>
+    </th>
+    <th>
+      <%= sort_link_helper "Updated", "updated_at", "index" %>
+    </th>
+    <%#<th>Activated</th>%>
+    <th>
+      <%= sort_link_helper "State", "state", "index" %>
+    </th>
+    <%#<th>%>
+      <%#= sort_link_helper "Quota", "quota", "index" %>
+    <%#</th>%>
+    <%#<th>Role</th>%>
+    <%#<th>Department</th>%>
   </tr>
+<%= render :partial => 'user_row', :collection => @users, :as => :user %>
+</table>
