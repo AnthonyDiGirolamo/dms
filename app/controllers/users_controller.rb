@@ -98,6 +98,8 @@ class UsersController < ApplicationController
     end
     @used_space = current_user.documents.sum(:document_file_size)
     @requests = UserRequest.find_all_by_user_id @user.id, :include => [ :role, :department ], :order => 'created_at DESC'
+
+    @user_page = true if @user == current_user
   end
 
   def edit
@@ -124,10 +126,7 @@ class UsersController < ApplicationController
     end
 
     @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 10
-
-    if request.xml_http_request? 
-      render :partial => "user_table", :layout => false 
-    end 
+    @users_page = true
   end
 
   def pending

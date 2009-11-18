@@ -56,6 +56,7 @@ class DocumentsController < ApplicationController
       sort = 'updated_at DESC'  
     end
     @documents = Document.paginate_by_user_id @user.id, :page => params[:page], :order => sort, :per_page => 10
+    @documents_page = true
   end
 
   def shared
@@ -78,8 +79,9 @@ class DocumentsController < ApplicationController
       sort = 'updated_at DESC'  
     end
     @documents = Document.paginate_by_sql ['SELECT "documents".*, "shares".document_id AS id FROM "documents" INNER JOIN "shares" ON "documents".id = "shares".document_id WHERE ("shares".user_id = ? ) ORDER BY '+sort, @user.id ], :page => params[:page], :per_page => 10
-    render :action => "index"
     @shared_list = true
+    @shared_page = true
+    render :action => "index"
   end
 
   def department
@@ -116,6 +118,7 @@ class DocumentsController < ApplicationController
           end
           @documents = Document.paginate_by_sql ['SELECT "documents".*, "departments".id AS department_id, "departments".name AS department_name FROM "users" INNER JOIN "departments_users" ON "departments_users".user_id = "users".id INNER JOIN "departments" on "departments_users".department_id = "departments".id INNER JOIN "documents" ON "users".id = "documents".user_id WHERE "departments".id = ? ORDER BY '+sort, params[:id] ], :page => params[:page], :per_page => 10
           @department_list = true
+          @department_page = true
           render :action => "index"
         else
           flash[:error] = "You don't have access to that department."
@@ -135,6 +138,7 @@ class DocumentsController < ApplicationController
     @user = current_user
     if current_user.has_role?("corporate")
       @departments = current_user.departments
+      @corporate_page = true
     else
       flash[:error] = "You don't have access to that."
       redirect_to documents_path ; return

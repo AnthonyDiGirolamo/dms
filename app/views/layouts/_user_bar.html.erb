@@ -1,9 +1,26 @@
 <div id="user_bar">
 
+<% mydoc_selected="" -%>
+<% shared_selected="" -%>
+<% corp_selected="" -%>
+<% dept_selected="" -%>
+<% user_selected="" -%>
+<% users_selected="" -%>
+<% requests_selected="" -%>
+<% audits_selected="" -%>
+<% user_selected = " selected" if @user_page -%>
+<% users_selected = " selected" if @users_page -%>
+<% requests_selected = " selected" if @requests_page -%>
+<% audits_selected = " selected" if @audits_page -%>
+<% mydoc_selected = " selected" if @documents_page -%>
+<% shared_selected = " selected" if @shared_page -%>
+<% corp_selected = " selected" if @corporate_page -%>
+<% dept_selected = " selected" if @department_page -%>
+
 <% if logged_in? -%>
 
   <div id="float_right">
-    Logged in as <%= link_to_current_user :content_method => :name, :class => 'action user_show', :title => 'View my account information.' %>
+    Logged in as <%= link_to_current_user :content_method => :name, :class => 'action user_show'+user_selected, :title => 'View my account information.' %>
   <%= link_to "Log out", logout_path, { :title => "Log out", :class => 'action user_logout' } %>
   </div>
 
@@ -12,19 +29,24 @@
   <% else -%>
 
     <% if current_user.has_role?("administrator") -%>
-      <%= link_to "Users", users_path,  { :title => "Manage Users", :class => 'action user_index' } %>
-      <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index' } %>
-      <%= link_to "Log", audits_path,  { :title => "System Auditing", :class => 'action system_log' } %>
+      <%= link_to "Users", users_path,  { :title => "Manage Users", :class => 'action user_index'+users_selected } %>
+      <%= link_to "Requests", user_requests_path,  { :title => "Manage Requests", :class => 'action request_index'+requests_selected } %>
+      <%= link_to "Log", audits_path,  { :title => "System Auditing", :class => 'action system_log'+audits_selected } %>
     <% else -%>
 
-      <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index' } %>
-      <%= link_to "Shared", shared_documents_path ,  { :title => "View Documents Shared With Me", :class => 'action user_index' } %>
+      <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index'+mydoc_selected } %>
+
+      <%= link_to "Shared", shared_documents_path ,  { :title => "View Documents Shared With Me", :class => 'action user_index'+shared_selected } %>
 
       <% if current_user.has_role?("corporate") -%>
-        <%= link_to "Departments", corporate_documents_path, { :title => "Manage all documents", :class => 'action icon_folder_document' } %>
+
+        <%= link_to "Departments", corporate_documents_path, { :title => "Manage all documents", :class => 'action icon_building'+corp_selected } %>
+
       <% elsif current_user.has_role?("manager") -%>
         <% department = current_user.departments.first -%>
-        <%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action icon_folder_document' } %>
+
+        <%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action icon_building'+dept_selected } %>
+
       <% end -%>
 
     <% end -%>

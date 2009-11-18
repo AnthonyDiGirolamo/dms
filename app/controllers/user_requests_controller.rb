@@ -20,6 +20,7 @@ class UserRequestsController < ApplicationController
       sort = 'created_at DESC'  
     end
     @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => sort, :per_page => 10
+    @requests_page = true
   end
 
   def approve

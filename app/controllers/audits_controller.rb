@@ -15,6 +15,7 @@ class AuditsController < ApplicationController
       end
     end
     @audits = Audit.paginate :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 10
+    @audits_page = true
   end
 
 end
