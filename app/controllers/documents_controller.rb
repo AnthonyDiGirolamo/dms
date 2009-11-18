@@ -39,22 +39,69 @@ class DocumentsController < ApplicationController
     @user = current_user
     @used_space = current_user.documents.sum(:document_file_size)
     @documents = current_user.documents
+
+    if !params[:sort].nil?
+      sort = case params[:sort]
+        when "name" then "name ASC" 
+        when "name_desc" then "name DESC" 
+        when "document_file_size" then "document_file_size ASC" 
+        when "document_file_size_desc" then "document_file_size DESC" 
+        when "updated_at" then "created_at ASC" 
+        when "updated_at_desc" then "created_at DESC" 
+      end
+    else
+      params[:sort] = "updated_at_desc"
+      sort = 'updated_at DESC'  
+    end
+    @documents = Document.paginate_by_user_id @user.id, :page => params[:page], :order => sort, :per_page => 25
   end
 
   def shared
     @user = current_user
     @used_space = current_user.documents.sum(:document_file_size)
-    @documents_shared_with_me = current_user.shared_documents_by_others
+    #@documents_shared_with_me = current_user.shared_documents_by_others
+    if !params[:sort].nil?
+      sort = case params[:sort]
+        when "name" then "name ASC" 
+        when "name_desc" then "name DESC" 
+        when "document_file_size" then "document_file_size ASC" 
+        when "document_file_size_desc" then "document_file_size DESC" 
+        when "updated_at" then "created_at ASC" 
+        when "updated_at_desc" then "created_at DESC" 
+      end
+    else
+      params[:sort] = "updated_at_desc"
+      sort = 'updated_at DESC'  
+    end
+    @documents = Document.paginate_by_sql ['SELECT "documents".*, "shares".document_id AS id FROM "documents" INNER JOIN "shares" ON "documents".id = "shares".document_id WHERE ("shares".user_id = ? ) ORDER BY '+sort, @user.id ], :page => params[:page], :per_page => 25
     render :action => "index"
   end
 
   def department
     @user = current_user
+
     if current_user.has_role?("manager") or current_user.has_role?("corporate")
+
+      return if validate_sql_integer(params[:id], 'That department does not exist.', documents_path)
+
       if @department = Department.find(params[:id])
         if @user.has_department?(@department.name)
           @used_space = current_user.documents.sum(:document_file_size)
-          @documents = @department.documents
+          #@documents = @department.documents
+          if !params[:sort].nil?
+            sort = case params[:sort]
+              when "name" then "name ASC" 
+              when "name_desc" then "name DESC" 
+              when "document_file_size" then "document_file_size ASC" 
+              when "document_file_size_desc" then "document_file_size DESC" 
+              when "updated_at" then "created_at ASC" 
+              when "updated_at_desc" then "created_at DESC" 
+            end
+          else
+            params[:sort] = "updated_at_desc"
+            sort = 'updated_at DESC'  
+          end
+          @documents = Document.paginate_by_sql ['SELECT "documents".*, "departments".id AS department_id, "departments".name AS department_name FROM "users" INNER JOIN "departments_users" ON "departments_users".user_id = "users".id INNER JOIN "departments" on "departments_users".department_id = "departments".id INNER JOIN "documents" ON "users".id = "documents".user_id WHERE "departments".id = ? ORDER BY '+sort, params[:id] ], :page => params[:page], :per_page => 25
           @department_list = true
           render :action => "index"
         else

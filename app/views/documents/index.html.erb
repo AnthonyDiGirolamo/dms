@@ -20,17 +20,14 @@ of <%= h number_to_human_size(@user.quota) %>
 
 <% if !@documents.empty? -%>
 
-  <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
-    <tr>
-      <th>Name</th>
-      <th>Size</th>
-      <th>Updated</th>
-      <th></th>
-    </tr>
+  <div class="page_info">
+    <%= page_entries_info @documents %>
+  </div>
+  <div class="pagination">
+    <%= will_paginate @documents, :container => false %>
+  </div>
 
-  <%= render :partial => 'document_row', :collection => @documents, :as => :document %>
-
-  </table>
+  <%= render :partial => 'documents_table', :object => @documents, :as => :documents %>
 
 <% else -%>
   <p>No documents here! Create some by clicking New Document above.</p>
@@ -47,18 +44,7 @@ of <%= h number_to_human_size(@user.quota) %>
 
 <% if !@documents_shared_with_me.empty? -%>
 
-
-  <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
-    <tr>
-      <th>Name</th>
-      <th>Size</th>
-      <th>Updated</th>
-      <th></th>
-    </tr>
-
-  <%= render :partial => 'document_row', :collection => @documents_shared_with_me, :as => :document %>
-
-  </table>
+  <%= render :partial => 'documents_table', :object => @documents_shared_with_me, :as => :documents %>
 
 <% else -%>
   <p>No documents are being shared with you.</p>

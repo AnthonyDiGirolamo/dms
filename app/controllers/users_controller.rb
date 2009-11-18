@@ -105,10 +105,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:sort].nil?
-      params[:sort] = "created_at_desc"
-      sort = 'created_at DESC'  
-    else
+    if !params[:sort].nil?
       sort = case params[:sort]
         when "login" then "login ASC" 
         when "login_desc" then "login DESC" 
@@ -121,6 +118,9 @@ class UsersController < ApplicationController
         when "quota" then "quota ASC" 
         when "quota_desc" then "quota DESC" 
       end 
+    else
+      params[:sort] = "created_at_desc"
+      sort = 'created_at DESC'  
     end
 
     @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 25
