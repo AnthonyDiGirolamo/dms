@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
   map.department_documents '/documents/department/:id', :controller => 'documents', :action => 'department', :conditions => { :method => :get }
   map.corporate_documents '/documents/corporate', :controller => 'documents', :action => 'corporate', :conditions => { :method => :get }
   map.resources :documents, :member => { :checkout => :put, :checkin => :put }, :has_many => :shares
+  map.shared_documents '/documents/shared', :controller => 'documents', :action => 'shared', :conditions => { :method => :get }
   map.toggle_update_document_share '/documents/:document_id/shares/:id/toggle_update', :controller => 'shares', :action => 'toggle_update', :conditions => { :method => :put }
   map.toggle_checkout_document_share '/documents/:document_id/shares/:id/toggle_checkout', :controller => 'shares', :action => 'toggle_checkout', :conditions => { :method => :put }
 

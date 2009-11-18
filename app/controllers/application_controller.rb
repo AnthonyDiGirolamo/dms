@@ -42,7 +42,7 @@ private
       if session[:expires_at].nil? or session[:expires_at] < Time.now.to_i
         logout_keeping_session!
         flash[:error] = 'Your session expired. Please, login again.'
-        redirect_to login_path
+        redirect_to login_path ; return
       end
     end
   end
@@ -56,9 +56,20 @@ private
   # Find document via a users documents,
   # shares, or manager/corporate access
   def find_document_by_id
+    if current_user.has_role?("administrator")
+      flash[:error] = "You don't have acces to that."
+      redirect_to root_path ; return
+    end
+
     @employee_access = true
 
-    @document = current_user.documents.find_by_id(params[:id])
+    return if validate_sql_integer(params[:id], 'That document does not exist.', documents_url)
+
+    begin
+      @document = current_user.documents.find(params[:id])
+    rescue
+      @document = nil
+    end
 
     if !@document.nil? # This is my document
       @my_doc = true
@@ -77,7 +88,12 @@ private
         # check for department access
 
         if current_user.has_role?("manager")
-          @document = Document.find_by_id(params[:id])
+          begin
+            @document = Document.find(params[:id])
+          rescue
+            @document = nil
+          end
+
           if @document
             @department = @document.user.departments.first
             #@role = @document.user.roles.first
@@ -88,12 +104,17 @@ private
           end
           if @document.nil? or @my_doc.nil?
             flash[:error] = 'That document does not exist.'
-            redirect_to(documents_url)
+            redirect_to(documents_url) ; return
           end
         end
 
         if current_user.has_role?("corporate")
-          @document = Document.find_by_id(params[:id])
+          begin
+            @document = Document.find(params[:id])
+          rescue
+            @document = nil
+          end
+
           if @document
             @department = @document.user.departments.first
             #@role = @document.user.roles.first
@@ -104,13 +125,13 @@ private
           end
           if @document.nil? or @my_doc.nil?
             flash[:error] = 'That document does not exist.'
-            redirect_to(documents_url)
+            redirect_to(documents_url) ; return
           end
         end
 
         if @document.nil?
           flash[:error] = 'That document does not exist.'
-          redirect_to(documents_url)
+          redirect_to(documents_url) ; return
         end
       end
 
@@ -145,12 +166,18 @@ private
       # Should never get here
       @edit_access = @delete_access = @checkout_access = @share_access = false
       flash[:error] = "You don't have access to that."
-      redirect_to(documents_url)
+      redirect_to(documents_url) ; return
     end
   end
 
   def find_document_share
-    @document = current_user.documents.find_by_id(params[:document_id])
+    return if validate_sql_integer(params[:documents_id], 'That document does not exist.', documents_url)
+
+    begin
+      @document = current_user.documents.find(params[:document_id])
+    rescue
+      @document = nil
+    end
 
     if @document
       @share_access = @my_doc = true
@@ -158,7 +185,12 @@ private
 
       # MANAGER
       if current_user.has_role?("manager")
-        @document = Document.find_by_id(params[:document_id])
+        begin
+          @document = Document.find(params[:document_id])
+        rescue
+          @document = nil
+        end
+
         if @document
           @department = @document.user.departments.first
           if current_user.has_department?(@department.name)
@@ -169,12 +201,17 @@ private
         end
         if @document.nil? or @my_doc.nil?
           flash[:error] = "You cannot manage sharing for that document."
-          redirect_to(documents_url)
+          redirect_to(documents_url) ; return
         end
 
       # CORPORATE
       elsif current_user.has_role?("corporate")
-        @document = Document.find_by_id(params[:document_id])
+        begin
+          @document = Document.find(params[:document_id])
+        rescue
+          @document = nil
+        end
+
         if @document
           @department = @document.user.departments.first
           if current_user.has_department?(@department.name)
@@ -185,7 +222,7 @@ private
         end
         if @document.nil? or @my_doc.nil?
           flash[:error] = "You cannot manage sharing for that document."
-          redirect_to(documents_url)
+          redirect_to(documents_url) ; return
         end
 
       # NO ACCESS
@@ -193,18 +230,25 @@ private
         @share_access = false
         @shared_doc = true
         flash[:error] = "You cannot manage sharing for that document."
-        redirect_back_or_default(documents_path)
+        redirect_back_or_default(documents_path) ; return
       end
 
     end
   end
 
   def find_share_by_id
-    @share = @document.shares.find_by_id(params[:id])
+    return if validate_sql_integer(params[:id], 'That share does not exist.', documents_url)
+
+    begin
+      @share = @document.shares.find(params[:id])
+    rescue
+      flash[:error] = "That share does not exist."
+      redirect_back_or_default(documents_path) ; return
+    end
 
     if @share.nil?
       flash[:error] = "That share does not exist."
-      redirect_back_or_default(documents_path)
+      redirect_back_or_default(documents_path) ; return
     end
   end
 
@@ -217,6 +261,20 @@ private
     if not audit.save
       logger.warn "Failed Audit for Doc:#{doc} Share:#{share} User:#{user} Action:'#{action}'"
     end
+  end
+
+  def validate_sql_integer(id, error, path)
+    match_data = id.match("[0-9]*")
+    if match_data.size != 1 or match_data.to_s != id
+      flash[:error] = error
+      redirect_to(path)
+      return true
+    elsif id.to_i > 2147483647 or id.to_i < 0
+      flash[:error] = error
+      redirect_to(path)
+      return true
+    end
+    return false
   end
 
 end

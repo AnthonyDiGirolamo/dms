@@ -16,7 +16,8 @@ of <%= h number_to_human_size(@user.quota) %>
   <li><%= link_to "New Document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
-<% if @documents and !@documents.empty? -%>
+<% if @documents -%>
+<% if !@documents.empty? -%>
 
   <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
     <tr>
@@ -33,10 +34,12 @@ of <%= h number_to_human_size(@user.quota) %>
 <% else -%>
   <p>No documents here! Create some by clicking New Document above.</p>
 <% end -%>
+<% end -%>
 
 <% reset_cycle -%>
 
-<% if @documents_shared_with_me and !@documents_shared_with_me.empty? -%>
+<% if @documents_shared_with_me -%>
+<% if !@documents_shared_with_me.empty? -%>
 
   <ul class="toolbar">
   <li class="title">Documents Shared with Me</li>
@@ -54,4 +57,7 @@ of <%= h number_to_human_size(@user.quota) %>
 
   </table>
 
+<% else -%>
+  <p>No documents are being shared with you.</p>
+<% end -%>
 <% end -%>

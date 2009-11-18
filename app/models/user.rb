@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   # It may be a good idea to have "admin" roles return true always
   def has_role?(role_in_question)
     @role_list ||= self.roles.collect(&:name)
-    return true if @role_list.include?("administrator")
     (@role_list.include?(role_in_question.to_s) )
   end
 
@@ -32,16 +31,16 @@ class User < ActiveRecord::Base
   include Authentication::ByCookieToken
   include Authorization::StatefulRoles
   validates_presence_of     :login
-  validates_length_of       :login,    :within => 3..255
+  validates_length_of       :login,    :within => 3..40
   validates_uniqueness_of   :login
   validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
   validates_presence_of     :name
   validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => false
-  validates_length_of       :name,     :maximum => 255
+  validates_length_of       :name,     :maximum => 100
 
   validates_presence_of     :email
-  validates_length_of       :email,    :within => 6..255 #r@a.wk
+  validates_length_of       :email,    :within => 6..40 #r@a.wk
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 

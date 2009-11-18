@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
   SEND_FILE_METHOD = :default
 
   def download
-    head(:not_found) and return if (document = Document.find_by_id(params[:id])).nil?
+    head(:not_found) and return if (document = Document.find(params[:id])).nil?
     head(:forbidden) and return unless document.downloadable?(current_user)
 
     path = document.document.path(params[:style])
@@ -39,13 +39,19 @@ class DocumentsController < ApplicationController
     @user = current_user
     @used_space = current_user.documents.sum(:document_file_size)
     @documents = current_user.documents
-    @documents_shared_with_me = current_user.shared_documents_by_others
+  end
+
+  def shared
+    @user = current_user
+    @used_space = current_user.documents.sum(:document_file_size)
+    @documents_shared_by_others = current_user.shared_documents_by_others
+    render :action => "index"
   end
 
   def department
     @user = current_user
     if current_user.has_role?("manager") or current_user.has_role?("corporate")
-      if @department = Department.find_by_id(params[:id])
+      if @department = Department.find(params[:id])
         if @user.has_department?(@department.name)
           @used_space = current_user.documents.sum(:document_file_size)
           @documents = @department.documents
@@ -53,15 +59,15 @@ class DocumentsController < ApplicationController
           render :action => "index"
         else
           flash[:error] = "You don't have access to that department."
-          redirect_to documents_path
+          redirect_to documents_path ; return
         end
       else
         flash[:error] = "That department does not exist."
-        redirect_to documents_path
+        redirect_to documents_path ; return
       end
     else
       flash[:error] = "You don't have access to that."
-      redirect_to documents_path
+      redirect_to documents_path ; return
     end
   end
 
@@ -71,7 +77,7 @@ class DocumentsController < ApplicationController
       @departments = current_user.departments
     else
       flash[:error] = "You don't have access to that."
-      redirect_to documents_path
+      redirect_to documents_path ; return
     end
   end
 
@@ -85,7 +91,7 @@ class DocumentsController < ApplicationController
       if @document.save
         make_audit(@document, nil, current_user, "create document, ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
         flash[:notice] = 'Document was successfully created.'
-        redirect_to(@document)
+        redirect_to(@document) ; return
       else
         render :action => "new"
       end
@@ -100,7 +106,7 @@ class DocumentsController < ApplicationController
   def checkout
     if !@checkout_access
       flash[:error] = 'You do not have access to check-out.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
 
     if !@document.checked_out?
@@ -111,22 +117,22 @@ class DocumentsController < ApplicationController
       if @document.save
         make_audit(@document, nil, current_user, "checkout document, ID:'#{@document.id}', Name:'#{@document.name}'")
         flash[:notice] = 'Succesfully checked-out and locked to changes by others.'
-        redirect_to(@document)
+        redirect_to(@document) ; return
       else
         flash[:error] = 'Document could not be checked-out.'
-        redirect_to(@document)
+        redirect_to(@document) ; return
       end
 
     else
       flash[:error] = 'This document is already checked-out.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
   end
 
   def checkin
     if !@checkout_access
       flash[:error] = 'You do not have access to check-in.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
 
     if @document.checked_out?
@@ -137,15 +143,15 @@ class DocumentsController < ApplicationController
       if @document.save
         make_audit(@document, nil, current_user, "checkin document, ID:'#{@document.id}', Name:'#{@document.name}'")
         flash[:notice] = 'Succesfully checked-in.'
-        redirect_to(@document)
+        redirect_to(@document) ; return
       else
         flash[:error] = 'Document could not be checked-in.'
-        redirect_to(@document)
+        redirect_to(@document) ; return
       end
 
     else
       flash[:error] = 'This document is already checked-in.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
   end
 
@@ -160,14 +166,14 @@ class DocumentsController < ApplicationController
   def edit
     if !@edit_access
       flash[:error] = 'You do not have access to edit.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
   end
 
   def update
     if !@edit_access
       flash[:error] = 'You do not have access to update.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
 
     if @document.update_attributes(params[:document])
@@ -178,7 +184,7 @@ class DocumentsController < ApplicationController
       end
       make_audit(@document, nil, current_user, action+", ID:'#{@document.id}', Name:'#{@document.name}', Size:'#{@document.document_file_size}', Type:'#{@document.document_content_type}', OriginalFileName:'#{@document.document_file_name}'")
       flash[:notice] = 'Document was successfully updated.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     else
       flash[:error] = 'Document update failed.'
       render :action => "edit"
@@ -188,7 +194,7 @@ class DocumentsController < ApplicationController
   def destroy
     if !@delete_access
       flash[:error] = 'You do not have access to delete.'
-      redirect_to(@document)
+      redirect_to(@document) ; return
     end
 
     begin
@@ -201,10 +207,10 @@ class DocumentsController < ApplicationController
       @document.shares.destroy_all
       @document.destroy
       flash[:notice] = 'Document was successfully destroyed.'
-      redirect_to(documents_url)
+      redirect_to(documents_url) ; return
     rescue
       flash[:error] = 'Unable to destroy that document.'
-      redirect_to(documents_url)
+      redirect_to(documents_url) ; return
     end
   end
 

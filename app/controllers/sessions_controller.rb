@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       update_activity_time
-      redirect_back_or_default(root_path)
+      redirect_back_or_default(root_path) ; return
       flash[:notice] = "Logged in successfully"
     else
       note_failed_signin
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
   def destroy
     logout_killing_session!
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(root_path)
+    redirect_back_or_default(root_path) ; return
   end
 
 protected

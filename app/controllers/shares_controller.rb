@@ -6,7 +6,7 @@ class SharesController < ApplicationController
   before_filter :find_share_by_id, :only => [ :show, :edit, :update, :toggle_update, :toggle_checkout ]
 
   def index
-    redirect_to(document_path(@document))
+    redirect_to(document_path(@document)) ; return
   end
 
   def new
@@ -24,10 +24,10 @@ class SharesController < ApplicationController
       if @share.save
         make_audit(@document, @share, current_user, "create share, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}'")
         flash[:notice] = 'Share was successfully created.'
-        redirect_to(document_path(@document))
+        redirect_to(document_path(@document)) ; return
       else
         flash[:notice] = 'Share could not be created created.'
-        redirect_to(document_path(@document))
+        redirect_to(document_path(@document)) ; return
       end
 
     else
@@ -37,7 +37,7 @@ class SharesController < ApplicationController
   end
 
   def show
-    redirect_to(document_path(@document))
+    redirect_to(document_path(@document)) ; return
   end
 
   def edit
@@ -52,10 +52,10 @@ class SharesController < ApplicationController
       if @share.save
         make_audit(@document, @share, current_user, "update share, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}'")
         flash[:notice] = 'Share was successfully updated.'
-        redirect_to(document_path(@document))
+        redirect_to(document_path(@document)) ; return
       else
         flash[:notice] = 'Share could not be created updated.'
-        redirect_to(document_path(@document))
+        redirect_to(document_path(@document)) ; return
       end
 
     else
@@ -71,10 +71,10 @@ class SharesController < ApplicationController
 
       @document.shares.find(params[:id]).destroy
       flash[:notice] = 'Share was successfully deleted.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     rescue
       flash[:error] = 'Share delete failed.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     end
   end
 
@@ -89,10 +89,10 @@ class SharesController < ApplicationController
     if @share.save
       make_audit(@document, @share, current_user, "share permission change, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}', Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'")
       flash[:notice] = 'Share was successfully updated.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     else
       flash[:error] = 'Share update failed.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     end
   end
 
@@ -107,10 +107,10 @@ class SharesController < ApplicationController
     if @share.save
       make_audit(@document, @share, current_user, "share permission change, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}', Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'")
       flash[:notice] = 'Share was successfully updated.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     else
       flash[:error] = 'Share update failed.'
-      redirect_to(document_path(@document))
+      redirect_to(document_path(@document)) ; return
     end
   end
 

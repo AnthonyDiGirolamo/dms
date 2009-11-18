@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       request.department_id = department.id unless role.name == "administrator"
       request.save
 
-      redirect_back_or_default(root_path)
+      redirect_back_or_default(root_path) ; return
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
       flash[:error]  = "There was an error setting up that account.  Please try again."
@@ -50,49 +50,49 @@ class UsersController < ApplicationController
     when (!params[:activation_code].blank?) && user && !user.active?
       user.activate!
       flash[:notice] = "Signup complete! Please sign in to continue."
-      redirect_to '/login'
+      redirect_to '/login' ; return
     when params[:activation_code].blank?
       flash[:error] = "The activation code was missing.  Please follow the URL from your email."
-      redirect_back_or_default(root_path)
+      redirect_back_or_default(root_path) ; return
     else
       flash[:error]  = "We couldn't find a user with that activation code -- check your email? Or maybe you've already activated -- try signing in."
-      redirect_back_or_default(root_path)
+      redirect_back_or_default(root_path) ; return
     end
   end
 
   def suspend
     @user.suspend!
-    redirect_to users_path
+    redirect_to users_path ; return
   end
 
   def unsuspend
     @user.unsuspend!
-    redirect_to users_path
+    redirect_to users_path ; return
   end
 
   def destroy
     @user.delete!
-    redirect_to users_path
+    redirect_to users_path ; return
   end
 
   def purge
     @user.destroy
-    redirect_to users_path
+    redirect_to users_path ; return
   end
 
   def show
-    @admin_access = current_user.has_role?("administrator")
-    if @admin_access
-      if params[:sort].nil?
-        params[:sort] = "created_at_desc"
-        sort = 'created_at DESC'  
-      else
+    if current_user.has_role?("administrator")
+      @admin_access = true
+      if !params[:sort].nil?
         sort = case params[:sort]
           when "action" then "action ASC" 
           when "action_desc" then "action DESC" 
           when "created_at" then "created_at ASC" 
           when "created_at_desc" then "created_at DESC" 
         end
+      else
+        params[:sort] = "created_at_desc"
+        sort = 'created_at DESC'  
       end
       @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 25
     end
@@ -142,11 +142,13 @@ private
 
   def find_user
     if current_user.has_role?("administrator")
-      @user = User.find_by_id(params[:id])
+      return if validate_sql_integer(params[:id], 'That user does not exist.', documents_url)
 
-      if @user.nil?
+      begin
+        @user = User.find(params[:id])
+      rescue
         flash[:error] = 'That user does not exist.'
-        redirect_back_or_default(root_path)
+        redirect_back_or_default(root_path) ; return
       end
     else
       @user = current_user

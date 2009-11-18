@@ -33,10 +33,10 @@ class UserRequestsController < ApplicationController
     @user_request.state = "approved"
     if @user_request.save and user.save
       flash[:notice] = "Request approved successfully."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     else
       flash[:error] = "Request approve failed."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     end
   end
 
@@ -44,10 +44,10 @@ class UserRequestsController < ApplicationController
     @user_request.state = "rejected"
     if @user_request.save
       flash[:notice] = "Request rejected successfully."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     else
       flash[:error] = "Request reject failed."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     end
   end
 
@@ -60,10 +60,10 @@ class UserRequestsController < ApplicationController
     @user_request.state = "revoked"
     if @user_request.save and user.save
       flash[:notice] = "Request revoked successfully."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     else
       flash[:error] = "Request revoke failed."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     end
   end
 
@@ -90,7 +90,7 @@ class UserRequestsController < ApplicationController
 
     if @user_request.save
       flash[:notice] = "Request submitted successfully."
-      redirect_to root_path
+      redirect_to root_path ; return
     else
       flash[:error]  = "There was an error processing that request. Please try again."
       render :action => 'new'
@@ -104,7 +104,7 @@ private
       @user_request = UserRequest.find(params[:id])
     rescue
       flash[:error] = "That request does not exist."
-      redirect_to user_requests_path
+      redirect_to user_requests_path ; return
     end
   end
 
