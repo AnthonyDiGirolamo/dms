@@ -1,6 +1,9 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+<div class="page_info">
+  <%= page_entries_info @users %>
+</div>
 <div class="pad_bottom">
   <p class="document_title">Users</p>
 </div>
@@ -13,9 +16,6 @@
     :style=>"display: none;" ) %>
 </div>
 
-<div class="page_info">
-  <%= page_entries_info @users %>
-</div>
 <div class="pagination">
   <%= will_paginate @users, :container => false %>
 </div>

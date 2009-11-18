@@ -1,6 +1,8 @@
 <%= render :partial => 'layouts/user_bar' %>
 <%= render :partial => 'layouts/flash_messages' %>
 
+<% if @documents -%>
+
 <div id="float_right">
 Using <%= h number_to_human_size(@used_space) %>
 of <%= h number_to_human_size(@user.quota) %>
@@ -16,7 +18,6 @@ of <%= h number_to_human_size(@user.quota) %>
   <li><%= link_to "New Document", new_document_path, :class => 'document_new action' %></li>
 </ul>
 
-<% if @documents -%>
 <% if !@documents.empty? -%>
 
   <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
@@ -39,11 +40,13 @@ of <%= h number_to_human_size(@user.quota) %>
 <% reset_cycle -%>
 
 <% if @documents_shared_with_me -%>
-<% if !@documents_shared_with_me.empty? -%>
 
   <ul class="toolbar">
   <li class="title">Documents Shared with Me</li>
   </ul>
+
+<% if !@documents_shared_with_me.empty? -%>
+
 
   <table border="0" cellspacing="0" cellpadding="5" class="pad_bottom">
     <tr>

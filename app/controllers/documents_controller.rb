@@ -44,7 +44,7 @@ class DocumentsController < ApplicationController
   def shared
     @user = current_user
     @used_space = current_user.documents.sum(:document_file_size)
-    @documents_shared_by_others = current_user.shared_documents_by_others
+    @documents_shared_with_me = current_user.shared_documents_by_others
     render :action => "index"
   end
 

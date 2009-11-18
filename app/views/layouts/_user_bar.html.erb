@@ -3,7 +3,7 @@
 <% if logged_in? -%>
 
   <div id="float_right">
-  Logged in as <%= link_to_current_user :content_method => :name, :class => 'action user_show' %>
+    Logged in as <%= link_to_current_user :content_method => :name, :class => 'action user_show', :title => 'View my account information.' %>
   <%= link_to "Log out", logout_path, { :title => "Log out", :class => 'action user_logout' } %>
   </div>
 
@@ -18,6 +18,7 @@
     <% else -%>
 
       <%= link_to "Documents", documents_path ,  { :title => "Manage my documents", :class => 'action document_index' } %>
+      <%= link_to "Shared", shared_documents_path ,  { :title => "View Documents Shared With Me", :class => 'action user_index' } %>
 
       <% if current_user.has_role?("corporate") -%>
         <%= link_to "Departments", corporate_documents_path, { :title => "Manage all documents", :class => 'action icon_folder_document' } %>

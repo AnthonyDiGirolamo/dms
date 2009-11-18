@@ -171,7 +171,7 @@ private
   end
 
   def find_document_share
-    return if validate_sql_integer(params[:documents_id], 'That document does not exist.', documents_url)
+    return if validate_sql_integer(params[:document_id], 'That document does not exist.', documents_url)
 
     begin
       @document = current_user.documents.find(params[:document_id])
