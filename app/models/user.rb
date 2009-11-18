@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
+  validates_numericality_of :quota,    :greater_than_or_equal_to => 52428800, :less_than_or_equal_to => 1048576000
+
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

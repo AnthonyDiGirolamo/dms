@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   require_role "administrator", :for_all_except => [:new, :create, :activate, :show]
 
   # For pre-loading the /users/:id parameter in a URL
-  before_filter :find_user, :only => [:edit, :show, :suspend, :unsuspend, :destroy, :purge]
+  before_filter :find_user, :only => [:edit, :update, :show, :suspend, :unsuspend, :destroy, :purge]
   # For pre-loading role and department names
-  before_filter :all_roles, :all_departments, :only => [:new, :create, :edit ]
+  before_filter :all_roles, :all_departments, :only => [:new, :create, :edit, :update ]
 
   def new
     @user = User.new
@@ -143,14 +143,14 @@ class UsersController < ApplicationController
       @admin_access = true
       if !params[:sort].nil?
         sort = case params[:sort]
-          when "action" then "action ASC" 
-          when "action_desc" then "action DESC" 
-          when "created_at" then "created_at ASC" 
-          when "created_at_desc" then "created_at DESC" 
+          when "action" then "action ASC"
+          when "action_desc" then "action DESC"
+          when "created_at" then "created_at ASC"
+          when "created_at_desc" then "created_at DESC"
         end
       else
         params[:sort] = "created_at_desc"
-        sort = 'created_at DESC'  
+        sort = 'created_at DESC'
       end
       @audits = Audit.paginate_by_user_id @user.id, :page => params[:page], :include => [:user, :share, :document], :order => sort, :per_page => 10
     end
@@ -161,26 +161,88 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # TODO allow changing name, quota. what else?
+    @current_quota = case @user.quota
+      when 50.megabyte   then "50 MB"  
+      when 100.megabyte  then "100 MB" 
+      when 250.megabyte  then "250 MB" 
+      when 500.megabyte  then "500 MB" 
+      when 750.megabyte  then "750 MB" 
+      when 1000.megabyte then "1 GB"   
+    end
+
+    if @user.departments.empty?
+      @current_department = @departments.first.name
+    else
+      @current_department = @user.departments.first.name 
+    end
+    if @user.roles.empty?
+      @current_role = @roles.first.name
+    else
+      @current_role = @user.roles.first.name
+    end
   end
+
+  def update
+    debugger
+    if !params[:quota].nil?
+      quota = 50.megabyte
+      quota = case params[:quota]
+        when "50 MB" then 50.megabyte
+        when "100 MB" then 100.megabyte
+        when "250 MB" then 250.megabyte
+        when "500 MB" then 500.megabyte
+        when "750 MB" then 750.megabyte
+        when "1 GB" then 1000.megabyte
+      end
+      @user.quota = quota
+      @user.save
+    end
+
+    # check for valid role/department names
+    role = Role.find_by_name(params[:role][:name])
+    department = Department.find_by_name(params[:department][:name])
+    if role.nil? or department.nil?
+      flash[:error]  = "There was an error editing that user.  Please try again."
+      render :action => 'edit'
+    else
+      @user.roles.delete_all
+      @user.roles << role
+      if role.name == "corporate" and @user.has_role?("corporate")
+        # Append to current departments
+        @user.departments << department
+      else
+        @user.departments.delete_all
+        @user.departments << department
+      end
+    end
+
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "User updated."
+      redirect_to(users_path) ; return
+    else
+      flash[:error]  = "There was an error editing that user.  Please try again."
+      render :action => 'edit'
+    end
+  end
+
 
   def index
     if !params[:sort].nil?
       sort = case params[:sort]
-        when "login" then "login ASC" 
-        when "login_desc" then "login DESC" 
-        when "created_at" then "created_at ASC" 
-        when "created_at_desc" then "created_at DESC" 
-        when "updated_at" then "updated_at ASC" 
-        when "updated_at_desc" then "updated_at DESC" 
-        when "state" then "state ASC" 
-        when "state_desc" then "state DESC" 
-        when "quota" then "quota ASC" 
-        when "quota_desc" then "quota DESC" 
-      end 
+        when "login" then "login ASC"
+        when "login_desc" then "login DESC"
+        when "created_at" then "created_at ASC"
+        when "created_at_desc" then "created_at DESC"
+        when "updated_at" then "updated_at ASC"
+        when "updated_at_desc" then "updated_at DESC"
+        when "state" then "state ASC"
+        when "state_desc" then "state DESC"
+        when "quota" then "quota ASC"
+        when "quota_desc" then "quota DESC"
+      end
     else
       params[:sort] = "updated_at_desc"
-      sort = 'updated_at DESC'  
+      sort = 'updated_at DESC'
     end
 
     @users = User.paginate :page => params[:page], :include => [:roles, :departments], :order => sort, :per_page => 10

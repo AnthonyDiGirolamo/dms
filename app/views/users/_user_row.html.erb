@@ -40,6 +40,8 @@
     <%# end %>
   <%#</td>%>
   <td>
+    <%= link_to 'Edit', edit_user_path(user), :method => :get, :class => "action user_edit" %>
+
     <% if user.state != "suspended" and user.state != "deleted" -%> 
       <%= link_to 'Suspend', suspend_user_path(user), :method => :put, :class => "action icon_bang_yellow" %>
     <% end -%>

@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'home'
-  map.connect 'about', :controller => 'home', :action => 'about', :conditions => { :method => :get }
+  map.about 'about', :controller => 'home', :action => 'about', :conditions => { :method => :get }
 
   map.resources :users,
     :member => { :suspend => :put, :unsuspend => :put, :purge => :delete, :destroy => :delete },
