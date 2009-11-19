@@ -7,11 +7,11 @@ class DocumentsController < ApplicationController
   before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
   before_filter :document_access, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
 
-  if RAILS_ENV == 'production'
-    SEND_FILE_METHOD = :nginx
-  else
+  #if RAILS_ENV == 'production'
+    #SEND_FILE_METHOD = :nginx
+  #else
     SEND_FILE_METHOD = :default
-  end
+  #end
 
 
   def download
