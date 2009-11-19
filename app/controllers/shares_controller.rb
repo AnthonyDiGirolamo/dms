@@ -14,25 +14,45 @@ class SharesController < ApplicationController
   end
 
   def create
-    @share = @document.shares.new
-    @share.owner = current_user
-    user = User.find_by_login params[:share][:login] unless params[:share].nil?
-
-    if !user.nil?
-
-      @share.user = user
-      if @share.save
-        make_audit(@document, @share, current_user, "create share, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}'")
-        flash[:notice] = 'Share successfully created.'
-        redirect_to(document_path(@document)) ; return
+    begin
+      if params[:share].nil?
+        user = nil
       else
-        flash[:notice] = 'Share could not be created.'
-        redirect_to(document_path(@document)) ; return
+        user = User.find_by_login params[:share][:login]
+      end
+    rescue
+      user = nil
+    end
+
+    if user.nil?
+      flash[:error] = 'That user does not exist.'
+      redirect_to(document_path(@document)) ; return
+    else
+
+      begin
+        already_shared = current_user.shares_by_me.find_by_user_id(user.id)
+      rescue
+        already_shared = nil
       end
 
-    else
-        flash[:error] = 'That user does not exist.'
-        render :action => "new"
+      if already_shared
+        flash[:error] = 'You are already sharing this document with that user.'
+        redirect_to(document_path(@document)) ; return
+      else
+        @share = @document.shares.new
+        @share.owner = current_user
+
+        @share.user = user
+        if @share.save
+          make_audit(@document, @share, current_user, "create share, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}'")
+          flash[:notice] = 'Share successfully created.'
+          redirect_to(document_path(@document)) ; return
+        else
+          flash[:notice] = 'Share could not be created.'
+          redirect_to(document_path(@document)) ; return
+        end
+      end
+
     end
   end
 

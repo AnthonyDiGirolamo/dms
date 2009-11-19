@@ -161,67 +161,78 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @current_quota = case @user.quota
-      when 50.megabyte   then "50 MB"  
-      when 100.megabyte  then "100 MB" 
-      when 250.megabyte  then "250 MB" 
-      when 500.megabyte  then "500 MB" 
-      when 750.megabyte  then "750 MB" 
-      when 1000.megabyte then "1 GB"   
-    end
+    if @user.state == "deleted"
+      flash[:error] = 'That user cannot be edited.'
+      redirect_to users_path ; return
+    else
+      @current_quota = case @user.quota
+        when 50.megabyte   then "50 MB"  
+        when 100.megabyte  then "100 MB" 
+        when 250.megabyte  then "250 MB" 
+        when 500.megabyte  then "500 MB" 
+        when 750.megabyte  then "750 MB" 
+        when 1000.megabyte then "1 GB"   
+      end
 
-    if @user.departments.empty?
-      @current_department = @departments.first.name
-    else
-      @current_department = @user.departments.first.name 
-    end
-    if @user.roles.empty?
-      @current_role = @roles.first.name
-    else
-      @current_role = @user.roles.first.name
+      if @user.departments.empty?
+        @current_department = @departments.first.name
+      else
+        @current_department = @user.departments.first.name 
+      end
+      if @user.roles.empty?
+        @current_role = @roles.first.name
+      else
+        @current_role = @user.roles.first.name
+      end
     end
   end
 
   def update
-    debugger
-    if !params[:quota].nil?
-      quota = 50.megabyte
-      quota = case params[:quota]
-        when "50 MB" then 50.megabyte
-        when "100 MB" then 100.megabyte
-        when "250 MB" then 250.megabyte
-        when "500 MB" then 500.megabyte
-        when "750 MB" then 750.megabyte
-        when "1 GB" then 1000.megabyte
-      end
-      @user.quota = quota
-      @user.save
-    end
-
-    # check for valid role/department names
-    role = Role.find_by_name(params[:role][:name])
-    department = Department.find_by_name(params[:department][:name])
-    if role.nil? or department.nil?
-      flash[:error]  = "There was an error editing that user.  Please try again."
-      render :action => 'edit'
+    if @user.state == "deleted"
+      flash[:error] = 'That user cannot be edited.'
+      redirect_to users_path ; return
     else
-      @user.roles.delete_all
-      @user.roles << role
-      if role.name == "corporate" and @user.has_role?("corporate")
-        # Append to current departments
-        @user.departments << department
+
+      if !params[:quota].nil?
+        quota = 50.megabyte
+        quota = case params[:quota]
+          when "50 MB" then 50.megabyte
+          when "100 MB" then 100.megabyte
+          when "250 MB" then 250.megabyte
+          when "500 MB" then 500.megabyte
+          when "750 MB" then 750.megabyte
+          when "1 GB" then 1000.megabyte
+        end
+        @user.quota = quota
+        @user.save
+      end
+
+      # check for valid role/department names
+      role = Role.find_by_name(params[:role][:name])
+      department = Department.find_by_name(params[:department][:name])
+      if role.nil? or department.nil?
+        flash[:error]  = "There was an error editing that user.  Please try again."
+        render :action => 'edit'
       else
-        @user.departments.delete_all
-        @user.departments << department
+        @user.roles.delete_all
+        @user.roles << role
+        if role.name == "corporate" and @user.has_role?("corporate")
+          # Append to current departments
+          @user.departments << department
+        else
+          @user.departments.delete_all
+          @user.departments << department
+        end
       end
-    end
 
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "User updated."
-      redirect_to(users_path) ; return
-    else
-      flash[:error]  = "There was an error editing that user.  Please try again."
-      render :action => 'edit'
+      if @user.update_attributes(params[:user])
+        flash[:notice] = "User updated."
+        redirect_to(users_path) ; return
+      else
+        flash[:error]  = "There was an error editing that user.  Please try again."
+        render :action => 'edit'
+      end
+
     end
   end
 
