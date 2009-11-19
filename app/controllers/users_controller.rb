@@ -175,14 +175,20 @@ class UsersController < ApplicationController
       end
 
       if @user.departments.empty?
-        @current_department = @departments.first.name
+        @current_departments = [ @departments.first.name ]
       else
-        @current_department = @user.departments.first.name 
+        @current_departments = []
+        for dept in @user.departments
+          @current_departments << dept.name
+        end
       end
       if @user.roles.empty?
         @current_role = @roles.first.name
       else
         @current_role = @user.roles.first.name
+      end
+      if @user.has_role?("corporate")
+        @corporate_access = true
       end
     end
   end
@@ -209,19 +215,37 @@ class UsersController < ApplicationController
 
       # check for valid role/department names
       role = Role.find_by_name(params[:role][:name])
-      department = Department.find_by_name(params[:department][:name])
-      if role.nil? or department.nil?
+      departments = []
+      for dept in params[:department][:name]
+        begin
+          this_dept = Department.find_by_name(dept)
+        rescue
+          this_dept = nil
+        end
+
+        if this_dept.nil?
+          departments = nil
+        else
+          departments << this_dept 
+        end
+      end
+
+      if role.nil? or departments.nil?
         flash[:error]  = "There was an error editing that user.  Please try again."
         render :action => 'edit'
       else
         @user.roles.delete_all
         @user.roles << role
-        if role.name == "corporate" and @user.has_role?("corporate")
-          # Append to current departments
-          @user.departments << department
+        make_audit(nil, nil, @user, "user role change, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Role ID:'#{role.id}', Role Name:'#{role.name}'" )
+        if role.name == "corporate"
+          @user.departments.delete_all
+          for department in departments
+            @user.departments << department
+            make_audit(nil, nil, @user, "user department change, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Department ID:'#{department.id}', Department Name:'#{department.name}'" )
+          end
         else
           @user.departments.delete_all
-          @user.departments << department
+          @user.departments << departments[0]
         end
       end
 

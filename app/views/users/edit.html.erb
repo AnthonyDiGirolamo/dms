@@ -91,13 +91,16 @@
   <% end %>
 </p>
 
+<p>For corporate users, more than one department may be selected. 
+For all other roles, only one department will be added.</p>
+
 <p>
   <p class="input_title">Department</p>
   <% for department in @departments %>
-    <% if department.name == @current_department %>
-      <%= radio_button "department", "name", department.name, :checked => true %>
+    <% if @current_departments.include?(department.name) %>
+      <%= check_box_tag "department[name][]", department.name, true %>
     <% else %>
-      <%= radio_button "department", "name", department.name %>
+      <%= check_box_tag "department[name][]", department.name, false %>
     <% end %>
     <%= h department.name %><br/>
   <% end %>

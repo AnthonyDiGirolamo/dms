@@ -5,7 +5,7 @@
 <p>
   <p class="input_title">Role</p>
   <% for role in @roles %>
-    <% if role.name == "employee" %>
+    <% if role.name == @current_role %>
       <%= radio_button "role", "name", role.name, :checked => true %>
     <% else %>
       <%= radio_button "role", "name", role.name %>
@@ -17,7 +17,7 @@
 <p>
   <p class="input_title">Department</p>
   <% for department in @departments %>
-    <% if department == @departments.first %>
+    <% if department.name == @current_department %>
       <%= radio_button "department", "name", department.name, :checked => true %>
     <% else %>
       <%= radio_button "department", "name", department.name %>

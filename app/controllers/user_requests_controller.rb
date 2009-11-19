@@ -24,7 +24,6 @@ class UserRequestsController < ApplicationController
   end
 
   def approve
-    debugger
     user = @user_request.user
     role = @user_request.role
     department = @user_request.department
@@ -81,6 +80,16 @@ class UserRequestsController < ApplicationController
   end
 
   def new
+    if current_user.departments.empty?
+      @current_department = @departments.first.name
+    else
+      @current_department = current_user.departments.first.name 
+    end
+    if current_user.roles.empty?
+      @current_role = @roles.first.name
+    else
+      @current_role = current_user.roles.first.name
+    end
   end
 
   def create
