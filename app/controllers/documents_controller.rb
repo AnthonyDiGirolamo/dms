@@ -7,11 +7,11 @@ class DocumentsController < ApplicationController
   before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
   before_filter :document_access, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
 
-  #if RAILS_ENV == 'production'
-    #SEND_FILE_METHOD = :nginx
-  #else
+  if RAILS_ENV == 'production'
+    SEND_FILE_METHOD = :nginx
+  else
     SEND_FILE_METHOD = :default
-  #end
+  end
 
 
   def download
@@ -31,12 +31,13 @@ class DocumentsController < ApplicationController
     # Use the original extension
     #send_file_options[:filename] = file_name + File.extname(document.document.path).to_s
 
+    make_audit(document, nil, current_user, "download document, ID:'#{document.id}', Name:'#{document.name}', Size:'#{document.document_file_size}', Type:'#{document.document_content_type}', OriginalFileName:'#{document.document_file_name}'")
+
     case SEND_FILE_METHOD
       when :apache then send_file_options[:x_sendfile] = true
-      when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type]) and return
+      when :nginx then head(:x_accel_redirect => path.gsub(Rails.root, ''), :content_type => send_file_options[:type], :content_disposition => "attachment; filename=#{send_file_options[:filename]}" ) and return
     end
 
-    make_audit(document, nil, current_user, "download document, ID:'#{document.id}', Name:'#{document.name}', Size:'#{document.document_file_size}', Type:'#{document.document_content_type}', OriginalFileName:'#{document.document_file_name}'")
     send_file(path, send_file_options)
   end
 
