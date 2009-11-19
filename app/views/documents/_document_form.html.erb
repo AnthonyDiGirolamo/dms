@@ -24,6 +24,21 @@
 <% end -%>
 <%= label_tag 'document', 'Select a file (20 MB max)' %> </p>
 <%= error_message_on 'document', 'document', :css_class => "input_error_message" %>
+
+<p>Allowed File Types: 
+<span class="action icon_text">Plain Text</span>
+, 
+<span class="action icon_pdf">PDF</span>
+, 
+<span class="action icon_word">Word</span>
+, 
+<span class="action icon_excel">Excel</span>
+, 
+<span class="action icon_powerpoint">PowerPoint</span>
+, and 
+<span class="action icon_image">Images</span>
+</p>
+
 <p>
   <%= form.file_field :document %>
 </p>
