@@ -9,13 +9,16 @@ end
 
 task :make_admin => :environment do
   admin = User.find_by_login "admin"
-  admin.destroy
+  admin.destroy if admin
+
+  Rails::Initializer.run do |config|
+    config.action_mailer.raise_delivery_errors = false
+  end
 
   puts "Creating admin..."
   admin = User.new
   admin.update_attribute :login, "admin"
   admin.update_attribute :name, "CSE545 Administrator"
-  admin.update_attribute :email, "anthony.d@asu.edu"
   admin.update_attribute :crypted_password, "d53ee6e0fa9f651806112db7c4265408e586211e"
   admin.update_attribute :salt, "490c61b297b5d10c42030c51af08ad149c71b1be"
   admin.update_attribute :created_at, Time.now
@@ -28,9 +31,7 @@ task :make_admin => :environment do
   admin.update_attribute :deleted_at, nil
   admin.update_attribute :quota, 52428800
   admin.update_attribute :time_zone, "Arizona"
-
-  admin = User.find_by_login "admin"
-  puts admin.inspect
+  admin.update_attribute :email, "anthony.d@asu.edu"
 
   role = Role.find_by_name "administrator"
 
@@ -38,4 +39,15 @@ task :make_admin => :environment do
   admin.departments.delete_all
   admin.roles << role
   admin.save
+
+  admin = User.find_by_login "admin"
+  puts admin.inspect
+  puts admin.roles.inspect
+  puts admin.departments.inspect
+
+
+  Rails::Initializer.run do |config|
+    config.action_mailer.raise_delivery_errors = true
+  end
+
 end
