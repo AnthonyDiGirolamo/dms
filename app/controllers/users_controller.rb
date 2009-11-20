@@ -156,6 +156,7 @@ class UsersController < ApplicationController
   def show
     if current_user.has_role?("administrator")
       @admin_access = true
+
       if !params[:sort].nil?
         sort = case params[:sort]
           when "action" then "action ASC"
@@ -186,12 +187,12 @@ class UsersController < ApplicationController
       redirect_to users_path ; return
     else
       @current_quota = case @user.quota
-        when 50.megabyte   then "50 MB"  
-        when 100.megabyte  then "100 MB" 
-        when 250.megabyte  then "250 MB" 
-        when 500.megabyte  then "500 MB" 
-        when 750.megabyte  then "750 MB" 
-        when 1000.megabyte then "1 GB"   
+        when 50.megabyte   then "50 MB"
+        when 100.megabyte  then "100 MB"
+        when 250.megabyte  then "250 MB"
+        when 500.megabyte  then "500 MB"
+        when 750.megabyte  then "750 MB"
+        when 1000.megabyte then "1 GB"
       end
 
       if @user.departments.empty?
@@ -251,7 +252,7 @@ class UsersController < ApplicationController
         if this_dept.nil?
           departments = nil
         else
-          departments << this_dept 
+          departments << this_dept
         end
       end
 
@@ -334,7 +335,7 @@ private
     end
 
     if @user == current_user
-      @request_access = true
+      @request_access = true unless current_user.has_role?("administrator")
     end
 
     if @user.has_role?("corporate")

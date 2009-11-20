@@ -10,14 +10,14 @@ class UserRequestsController < ApplicationController
   def index
     if !params[:sort].nil?
       sort = case params[:sort]
-        when "state" then "state ASC" 
-        when "state_desc" then "state DESC" 
-        when "created_at" then "created_at ASC" 
-        when "created_at_desc" then "created_at DESC" 
+        when "state" then "state ASC"
+        when "state_desc" then "state DESC"
+        when "created_at" then "created_at ASC"
+        when "created_at_desc" then "created_at DESC"
       end
     else
       params[:sort] = "created_at_desc"
-      sort = 'created_at DESC'  
+      sort = 'created_at DESC'
     end
     @user_requests = UserRequest.paginate :page => params[:page], :include => [:role, :department, :user], :order => sort, :per_page => 10
     @requests_page = true
@@ -80,10 +80,15 @@ class UserRequestsController < ApplicationController
   end
 
   def new
+    if current_user.has_role?("administrator")
+      flash[:error] = 'As and admininistrator, you cannot request new permisions.'
+      redirect_to users_path ; return
+    end
+
     if current_user.departments.empty?
       @current_department = @departments.first.name
     else
-      @current_department = current_user.departments.first.name 
+      @current_department = current_user.departments.first.name
     end
     if current_user.roles.empty?
       @current_role = @roles.first.name
@@ -93,6 +98,11 @@ class UserRequestsController < ApplicationController
   end
 
   def create
+    if current_user.has_role?("administrator")
+      flash[:error] = 'As and admininistrator, you cannot request new permisions.'
+      redirect_to users_path ; return
+    end
+
     # check for valid role/department names
     role = Role.find_by_name(params[:role][:name])
     department = Department.find_by_name(params[:department][:name])
@@ -106,7 +116,7 @@ class UserRequestsController < ApplicationController
     end
 
     @user_request = UserRequest.new
-    @user_request.user_id = current_user.id      
+    @user_request.user_id = current_user.id
     @user_request.role_id = role.id
     @user_request.department_id = department.id unless role.name == "administrator"
 
