@@ -1,3 +1,12 @@
+task :admin => :environment do
+  admin = User.find_by_login "admin"
+  puts admin.inspect
+  if admin
+    puts admin.roles.inspect
+    puts admin.departments.inspect
+  end
+end
+
 task :make_admin => :environment do
   admin = User.find_by_login "admin"
   admin.destroy
@@ -29,5 +38,4 @@ task :make_admin => :environment do
   admin.departments.delete_all
   admin.roles << role
   admin.save
-
 end
