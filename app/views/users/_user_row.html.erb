@@ -1,6 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
   <td>
-    <%= link_to user.login, user, :class => "action icon_user_card" %>
+    <%= link_to h(user.login), user, :class => "action icon_user_card" %>
   </td>
   <%#<td>%>
     <%#= h user.email %>

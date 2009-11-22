@@ -5,7 +5,7 @@
     <% end -%>
   </td>
   <td>
-    <%= link_to request_row.user.login, request_row.user, :class => "action icon_user_card" unless request_row.user.nil? %>
+    <%= link_to h(request_row.user.login), request_row.user, :class => "action icon_user_card" unless request_row.user.nil? %>
   </td>
   <td>
     <% if !request_row.role.nil? -%> 

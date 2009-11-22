@@ -1,6 +1,6 @@
 <tr class="<%= cycle("odd","even") %>">
   <td>
-    <%= link_to audit.user.login, audit.user, :class => "action icon_user_card" unless audit.user.nil? %>
+    <%= link_to h(audit.user.login), audit.user, :class => "action icon_user_card" unless audit.user.nil? %>
     <%#= h audit.user.login unless audit.user.nil? %>
   </td>
   <%#<td>%>

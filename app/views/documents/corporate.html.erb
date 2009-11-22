@@ -4,6 +4,6 @@
 <h2>My Departments</h2>
 <% for department in @departments -%>
 <p>
-<%= link_to department.name, department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action icon_folder_document' } %>
+<%= link_to h(department.name), department_documents_path(department.id), { :title => "Manage documents for the "+department.name+" department.", :class => 'action icon_folder_document' } %>
 </p>
 <% end -%>
