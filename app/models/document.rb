@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
 
   attr_accessible :name, :comment, :document
   validates_presence_of :name
+  validates_length_of   :name, :within => 1..254
+  validates_format_of   :name, :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => false
 
   has_attached_file :document,
                     :url => '/:class/:id/download/:style.:extension',
