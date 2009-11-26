@@ -95,6 +95,15 @@ class SharesController < ApplicationController
       @share = @document.shares.find(params[:id])
       make_audit(@document, nil, current_user, "delete share, ID:'#{@share.id}', Owner:'#{@share.owner_id}, #{@share.owner.login}', User:'#{@share.user_id}, #{@share.user.login}', Update?:'#{@share.can_update}', Checkout?:'#{@share.can_checkout}'" )
 
+      if @share.document.checked_out?
+        if @share.document.checked_out_by == @share.user
+          doc = @share.document
+          doc.checked_out = false
+          doc.checked_out_by = nil
+          doc.checked_out_at = nil
+          doc.save
+        end
+      end
       @document.shares.find(params[:id]).destroy
       flash[:notice] = 'Share successfully deleted.'
       redirect_to(document_path(@document)) ; return
