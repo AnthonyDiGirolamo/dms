@@ -82,16 +82,19 @@ private
       if !@share.nil? # This is a document shared with me
         @document = @share.document
         @shared_doc = true
+      end
 
-      else # This isn't a doc I have access to via shares
+      #else # This isn't a doc I have access to via shares
 
         # check for department access
 
         if current_user.has_role?("manager")
-          begin
-            @document = Document.find(params[:id])
-          rescue
-            @document = nil
+          if @document.nil?
+            begin
+              @document = Document.find(params[:id])
+            rescue
+              @document = nil
+            end
           end
 
           if @document
@@ -100,6 +103,7 @@ private
             if current_user.has_department?(@department.name) #and @role.name != "manager" and @role.name != "corporate"
               @my_doc = true # treat manager access as if you own it
               @manager_access = true
+              @shared_doc = false
             end
           end
           if @document.nil? or @my_doc.nil?
@@ -109,10 +113,12 @@ private
         end
 
         if current_user.has_role?("corporate")
-          begin
-            @document = Document.find(params[:id])
-          rescue
-            @document = nil
+          if @document.nil?
+            begin
+              @document = Document.find(params[:id])
+            rescue
+              @document = nil
+            end
           end
 
           if @document
@@ -121,6 +127,7 @@ private
             if current_user.has_department?(@department.name) #and @role.name != "manager" and @role.name != "corporate"
               @my_doc = true # treat corporate access as if you own it
               @corporate_access = true
+              @shared_doc = false
             end
           end
           if @document.nil? or @my_doc.nil?
@@ -129,11 +136,12 @@ private
           end
         end
 
+        # Final Check
         if @document.nil?
           flash[:error] = 'That document does not exist.'
           redirect_to(documents_url) ; return
         end
-      end
+      #end
 
     end
 

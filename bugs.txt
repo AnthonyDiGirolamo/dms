@@ -21,8 +21,9 @@ SHARING:
 
   * [FIXED] Can share with yourself
 
-  * NEW (Found by me) If an employee shares a doc with a manager/corp in their
-    department the share privileges overwrite the manager ones.
+  * [FIXED] NEW (Found by me) If an employee shares a doc with a
+	manager/corp in their department the share privileges overwrite the
+	manager ones.
 
   * [FIXED] Someone checkouts a shared document, the author removes the
 	share but the document remains checked out.
