@@ -1,0 +1,159 @@
+Verified Bugs
+=============
+
+DOCUMENTS:
+----------
+
+  * [FIXED] Uploading a file with no extension works, downloading it doesn't
+
+  * Document downloads are not checked for ownership 
+	(the full path is NOT shown)
+
+  * Only authors should be able to delete their own documents
+
+SHARING:
+--------
+
+  * Document Sharing You can share a document with an admin, which then
+    shows you the admin’s email address.
+
+  * can share with pending/suspended/deleted users
+
+  * Can share with yourself
+
+  * NEW (Found by me) If an employee shares a doc with a manager/corp in their
+    department the share privileges overwrite the manager ones.
+
+  * Someone checkouts a shared document, the author removes the share but
+    the document remains checked out.
+
+SESSIONS:
+---------
+
+  * Failed login attempts are not logged (neither are regular login
+    attempts), and don't lock the account.
+
+  * User is logged in, Admin deletes the user,User can still use the site
+    until logged out
+
+  * Deleting a user should "Un-checkout" their documents?
+
+  * Username is not case sensitive
+
+Could not be reproduced
+=======================
+
+  * hitting the back button allows you to continue to use a logged out
+    session
+
+  * creating 2 documents with the same name, deleting one deletes both
+
+  * Sorting causes errors in IE (screenshots looked like IE6)
+    (works in IE 7 and 8)
+
+  * Cannot share checkout or modify privileges to an employee.
+    Steps to re-create: 1. Create a Manager and an Employee.  2. Have the
+    Manager upload documents.  3. Have the Manger share the document with
+    an Employee or another user.  Failure: The manager should be able to
+    give edit and checkout privileges to the other users.  Notes: I was
+    able to share privileges previously. So this failure may take multiple
+    iterations. I am not exactly sure of a root cause.
+
+  * Bug 9.3 – Sharing document fails after sharing with two other users.
+    Steps to re-create 1. Share a document with two users.  2. Share the
+    same document with a third user.  Failure: The system refuses to share
+    the document indicating the third user is already in the share list.
+    Notes: All three users are from different departments. I checked the
+    document out after the second sharing, but I don't know if that had an
+    effect.
+
+	TONY: Something is wrong, I sometimes get the "You are already sharing
+	this document with that user." message. But there is no extra entry in
+	the database. Now, I can't reproduce the error.
+
+  * The share listing is not showing the shared files. When user1 shares a
+    document with user2, the system does not show the shares file under
+    user2’s shared file list. -  No sharing access privilege: when user1
+    wants to share a document with other users, there is any access
+    privilege such as read, update, and check in/out for user1 to give
+    access to other user.
+
+	TONY: Not sure I understand what's wrong here.
+
+  * Inconsistent file uploading Sometimes text files are uploaded without
+    any error. Sometimes uploading gives an error
+
+  * When uploading a document, if a file of size more than 100 MB is used,
+    than it uploads the file on the server, and then shows an error. This
+    can harmful as the server space might get used up easily, if the
+    attacker keeps on uploading large files.
+
+	TONY: This is true, but the nginx server upload limit was set to stop
+	cliend uploads over 50mb. The DMS app rejects anything larger than 20.
+
+Needs to be verified
+====================
+
+  * Cross-Site Request Forgery (automated logout) – Visiting a webpage with
+    a malicious img while logged in will automatically log you out from
+    your authenticated session. Example HTML code:
+
+    <img src=" https://129.219.33.6/logout"/>
+
+    Reproduction Steps: Log in to the site, Open a page in another tab with
+    the malicious HTML above, You are logged out from the site
+
+More Comments
+=============
+
+  * Uploading files: you can change the filetype/filename if you wish on
+    updates
+
+	TONY: It's likely that documents may undergo format changes. For
+	example, one office program format to another. This was done on
+	purpose.
+
+  * Even though the admin approves user1, I was not able to sign in because
+    the state was still showing “pending” in the users list. I tried giving
+    a fake email id and I didn’t get anything as expected. I also tried a
+    valid email add and I still didn’t get the activation code for a long
+    time. 
+
+  * After a denied access, user is not logged out.
+
+  * No strong password rules
+
+  * Database ID's are shown all over the site
+
+  * Admin has to choose a department?
+
+    TONY: No, this was a confusing part of the UI, requests as
+	administrators ignore the department, it doesn't get added.
+
+  * Accessibility was poor.  Had to wait several hours to get approved to
+    login to the site; even though I had access to the administrator page.
+    (DoS attacks?)
+
+	TONY: This the ASU SMTP server's fault. Over the testing period 173
+	emails were sent. It's likely there was a backlog. As far as the app
+	goes the emails were sent immediately after a new user request was
+	made.
+
+  * Action: Create non unique username Result: Information leakage, able to
+    see which usernames are currently taken
+
+  * There is no password recovery used in this website. It is not a
+    vulnerability but is a design flaw by which a user cannot recover the
+    password and will create another account and this results in
+    unnecessary flooding the database. This will result in multiple
+    accounts for the same user.
+
+	TONY: This was a design choice, passwords can be reset thought the
+	rails console by an administrator on the server itself. Having a
+	"forgot password" feature can open a lot of vulnerabilities.
+
+  * Human verification is not done. Any computer can be used to register
+    the users.  A challenge- response scheme such as CAPTCHA should have
+    been used in order to ensure that the users have not been generated by
+    a computer.
+

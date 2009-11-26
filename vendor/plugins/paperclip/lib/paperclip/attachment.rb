@@ -76,17 +76,28 @@ module Paperclip
 
       return nil if uploaded_file.nil?
       @queued_for_write[:original]   = uploaded_file.to_tempfile
-      instance_write(:file_name,       uploaded_file.original_filename.strip.gsub(/[^A-Za-z\d\.\-_]+/, '_'))
-      # Use mimetype-fu plugin if it's installed
+
+      # Is there an extension on the original file name?
       file = uploaded_file.original_filename
       if file.rindex('.')
         ext = file[file.rindex('.')+1, file.size]
       else
         ext = ""
       end
+
+      # Use mimetype-fu plugin
       content_type = File.mime_type_ext(@queued_for_write[:original].path, ext)
+      # Use mimetype provided by the browser
       content_type = uploaded_file.content_type if content_type.nil? or content_type == "unknown/unknown"
 
+      file_name = uploaded_file.original_filename.strip.gsub(/[^A-Za-z\d\.\-_]+/, '_')
+      # Add an extension if one wasn't provided
+      if ext == ""
+        file_name += "."
+        file_name += Document.extension ( content_type )
+      end
+
+      instance_write(:file_name,       file_name)
       instance_write(:content_type,    content_type.to_s.strip)
       instance_write(:file_size,       uploaded_file.size.to_i)
       instance_write(:updated_at,      Time.now)

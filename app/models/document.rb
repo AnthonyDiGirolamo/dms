@@ -29,6 +29,7 @@ class Document < ActiveRecord::Base
     true
   end
 
+  # Given a document get an extension
   def file_extension
     # Use original
     file = self.document_file_name
@@ -52,6 +53,20 @@ class Document < ActiveRecord::Base
     end
   end
 
+  # Given a mime return an extension
+  def self.extension(mime)
+    if mime == "text/plain"
+      return "txt"
+    elsif mime == "image/x-ms-bmp"
+      return "bmp"
+    elsif mime == "image/vnd.adobe.photoshop"
+      return "psd"
+    else
+      return File.extensions.index( mime ).to_s
+    end
+  end
+
+  # Get the proper mimetype icon
   def mime_icon
     mime = self.document_content_type
     if mime == 'application/msword' or mime == 'application/vnd.oasis.opendocument.text'
