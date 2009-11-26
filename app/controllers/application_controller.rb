@@ -165,7 +165,7 @@ private
       @checkout_access = @share.can_checkout?
       @delete_access = @share_access = false
     else
-      # Should never get here
+      # Will get here on download attempts
       @edit_access = @delete_access = @checkout_access = @share_access = false
       flash[:error] = "You don't have access to that."
       redirect_to(documents_url) ; return

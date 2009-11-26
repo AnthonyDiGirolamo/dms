@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
 
   # For pre-loading the /document/:id parameter in a URL
   before_filter :find_document_by_id, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
-  before_filter :document_access, :only => [:edit, :show, :update, :destroy, :checkin, :checkout]
+  before_filter :document_access, :only => [:download, :edit, :show, :update, :destroy, :checkin, :checkout]
 
   if RAILS_ENV == 'production'
     SEND_FILE_METHOD = :nginx
@@ -16,7 +16,7 @@ class DocumentsController < ApplicationController
 
   def download
     head(:not_found) and return if (document = Document.find(params[:id])).nil?
-    head(:forbidden) and return unless document.downloadable?(current_user)
+    #head(:forbidden) and return unless document.downloadable?(current_user)
 
     path = document.document.path(params[:style])
     head(:bad_request) and return unless File.exist?(path) && params[:format].to_s == File.extname(path).gsub(/^\.+/, '')
