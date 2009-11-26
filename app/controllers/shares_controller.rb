@@ -38,6 +38,12 @@ class SharesController < ApplicationController
       if already_shared
         flash[:error] = 'You are already sharing this document with that user.'
         redirect_to(document_path(@document)) ; return
+      elsif user == current_user
+        flash[:error] = 'You cannot share a document with yourself.'
+        redirect_to(document_path(@document)) ; return
+      elsif !user.active? or user.has_role?("administrator")
+        flash[:error] = 'You cannot share with that user.'
+        redirect_to(document_path(@document)) ; return
       else
         @share = @document.shares.new
         @share.owner = current_user

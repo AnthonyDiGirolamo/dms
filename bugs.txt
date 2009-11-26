@@ -14,12 +14,12 @@ DOCUMENTS:
 SHARING:
 --------
 
-  * Document Sharing You can share a document with an admin, which then
-    shows you the admin’s email address.
+  * [FIXED] Document Sharing You can share a document with an admin, which
+    then shows you the admin’s email address.
 
-  * can share with pending/suspended/deleted users
+  * [FIXED] can share with pending/suspended/deleted users
 
-  * Can share with yourself
+  * [FIXED] Can share with yourself
 
   * NEW (Found by me) If an employee shares a doc with a manager/corp in their
     department the share privileges overwrite the manager ones.
