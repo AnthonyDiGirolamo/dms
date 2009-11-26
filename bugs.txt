@@ -6,10 +6,10 @@ DOCUMENTS:
 
   * [FIXED] Uploading a file with no extension works, downloading it doesn't
 
-  * Document downloads are not checked for ownership 
+  * [FIXED] Document downloads are not checked for ownership 
 	(the full path is NOT shown)
 
-  * Only authors should be able to delete their own documents
+  * [FIXED] Only authors should be able to delete their own documents
 
 SHARING:
 --------

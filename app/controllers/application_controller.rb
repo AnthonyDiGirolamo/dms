@@ -157,6 +157,9 @@ private
       end
       @delete_access = !@document.checked_out?
       @share_access = @checkout_access = true
+      if @corporate_access or @manager_access
+        @delete_access = false
+      end
     # If document shared with me
     elsif @document and @share and @shared_doc
       if @share.can_update? and (!@document.checked_out? or @my_checkout)
