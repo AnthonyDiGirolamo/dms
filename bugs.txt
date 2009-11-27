@@ -34,8 +34,8 @@ SESSIONS:
   * Failed login attempts are not logged (neither are regular login
     attempts), and don't lock the account.
 
-  * User is logged in, Admin deletes the user,User can still use the site
-    until logged out
+  * [FIXED] User is logged in, Admin deletes the user,User can still use
+    the site until logged out
 
   * Deleting a user should "Un-checkout" their documents?
 
