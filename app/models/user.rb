@@ -61,16 +61,16 @@ class User < ActiveRecord::Base
   #
   def self.authenticate(login, password)
     return nil if login.blank? || password.blank?
-    u = find_in_state :first, :active, :conditions => {:login => login.downcase} # need to get the salt
+    u = find_in_state :first, :active, :conditions => {:login => login} # need to get the salt
     u && u.authenticated?(password) ? u : nil
   end
 
   def login=(value)
-    write_attribute :login, (value ? value.downcase : nil)
+    write_attribute :login, (value ? value : nil)
   end
 
   def email=(value)
-    write_attribute :email, (value ? value.downcase : nil)
+    write_attribute :email, (value ? value : nil)
   end
 
   protected

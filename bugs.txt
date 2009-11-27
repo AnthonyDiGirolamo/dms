@@ -39,7 +39,7 @@ SESSIONS:
 
   * Deleting a user should "Un-checkout" their documents?
 
-  * Username is not case sensitive
+  * [FIXED] Username is not case sensitive
 
 Could not be reproduced
 =======================
