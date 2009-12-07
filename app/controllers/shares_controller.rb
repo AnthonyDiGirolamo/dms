@@ -30,7 +30,7 @@ class SharesController < ApplicationController
     else
 
       begin
-        already_shared = current_user.shares_by_me.find_by_user_id(user.id)
+        already_shared = @document.shares.find_by_user_id(user.id)
       rescue
         already_shared = nil
       end
