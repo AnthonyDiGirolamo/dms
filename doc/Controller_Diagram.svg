@@ -1,0 +1,2292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1260"
+   height="765"
+   id="svg8304"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="Controller_Diagram.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   inkscape:export-filename="/home/adigiro/work/dms.git/doc/Controller_Diagram.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
+  <defs
+     id="defs8306">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible">
+      <path
+         id="path9540"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z"
+         transform="scale(-0.6,-0.6)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible">
+      <path
+         id="path8877"
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL"
+       style="overflow:visible">
+      <path
+         id="path9011"
+         d="M 5.77,0 L -2.88,5 L -2.88,-5 L 5.77,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="scale(0.8,0.8)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible">
+      <path
+         id="path8871"
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path8868"
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(0.8,0,0,0.8,10,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 495 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="765 : 495 : 1"
+       inkscape:persp3d-origin="382.5 : 330 : 1"
+       id="perspective8313" />
+    <title
+       id="title7947">controllers_diagram</title>
+  </defs>
+  <sodipodi:namedview
+     inkscape:document-units="in"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.94920635"
+     inkscape:cx="673.12983"
+     inkscape:cy="382.5"
+     inkscape:current-layer="layer1"
+     id="namedview8308"
+     showgrid="true"
+     inkscape:window-width="1260"
+     inkscape:window-height="1024"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-guide="true"
+     inkscape:object-paths="true"
+     inkscape:object-nodes="true"
+     inkscape:snap-intersection-line-segments="true"
+     inkscape:snap-center="true"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10">
+    <sodipodi:guide
+       orientation="0,1"
+       position="-48.188839,753.71417"
+       id="guide7364" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="11.198815,763.21619"
+       id="guide7366" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="884.98118,11.518193"
+       id="guide7370" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="259.13029,793.41955"
+       id="guide7456" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="464.56713,742.92346"
+       id="guide7910" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="570.17476,544.13575"
+       id="guide7912" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="1249,492"
+       id="guide10312" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata8310">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.00841641;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect8442"
+       width="1265.8378"
+       height="771.2226"
+       x="-1.9907918"
+       y="-1.8402902"
+       ry="0" />
+    <g
+       class="node"
+       id="node1"
+       transform="matrix(0.8941256,0,0,0.8941256,-41.742974,440.97438)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title7952">UsersController</title>
+      <polyline
+         id="polyline7954"
+         points="349,-148 448,-148 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path7956"
+         d="M 448,-148 C 454,-148 460,-154 460,-160"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline7958"
+         points="460,-160 460,-456 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path7960"
+         d="M 460,-456 C 460,-462 454,-468 448,-468"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline7962"
+         points="448,-468 349,-468 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path7964"
+         d="M 349,-468 C 343,-468 337,-462 337,-456"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline7966"
+         points="337,-456 337,-160 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path7968"
+         d="M 337,-160 C 337,-154 343,-148 349,-148"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text7970"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-450.89999"
+         x="398">UsersController</text>
+      <polyline
+         id="polyline7972"
+         points="337,-443 460,-443 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text7974"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-425.89999"
+         x="344.5">activate</text>
+      <text
+         id="text7976"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-408.89999"
+         x="344.5">active</text>
+      <text
+         id="text7978"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-391.89999"
+         x="344.5">create</text>
+      <text
+         id="text7980"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-374.89999"
+         x="344.5">destroy</text>
+      <text
+         id="text7982"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-357.89999"
+         x="344.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7406">edit</tspan>
+      </text>
+      <text
+         id="text7984"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-340.89999"
+         x="344.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7408">index</tspan>
+      </text>
+      <text
+         id="text7986"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-323.89999"
+         x="344.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7410">new</tspan>
+      </text>
+      <text
+         id="text7988"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-306.89999"
+         x="344.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7412">pending</tspan>
+      </text>
+      <text
+         id="text7990"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-289.89999"
+         x="344.5">purge</text>
+      <text
+         id="text7992"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-272.89999"
+         x="344.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7414">show</tspan>
+      </text>
+      <text
+         id="text7994"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-255.89999"
+         x="344.5">suspend</text>
+      <text
+         id="text7996"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-238.89999"
+         x="344.5">unsuspend</text>
+      <text
+         id="text7998"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-221.89999"
+         x="344.5">update</text>
+      <polyline
+         id="polyline8000"
+         points="337,-214 460,-214 "
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8002"
+         points="337,-190 460,-190 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8004"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-173.39999"
+         x="344.5">find_user</text>
+      <text
+         id="text8006"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-156.39999"
+         x="344.5">users_by_state</text>
+    </g>
+    <g
+       class="node"
+       id="node2"
+       transform="matrix(0.8941256,0,0,0.8941256,-498.28628,1523.6585)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8009">UserRequestsController</title>
+      <g
+         id="g7918"
+         transform="translate(548.0617,-377.87421)">
+        <polyline
+           transform="matrix(0.8254135,0,0,1.0004959,80.787936,0.2856586)"
+           style="fill:none;stroke:#000000"
+           points="475,-484 630,-484 "
+           id="polyline8011" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1"
+           d="M 600.92134,-484 C 606.92134,-484 612.92134,-490 612.92134,-496"
+           id="path8013" />
+        <polyline
+           transform="translate(-29.078687,0)"
+           style="fill:none;stroke:#000000"
+           points="642,-496 642,-656 "
+           id="polyline8015" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1"
+           d="M 612.92134,-656 C 612.92134,-662 606.92134,-668 600.92134,-668"
+           id="path8017" />
+        <polyline
+           transform="matrix(0.8254135,0,0,1.0004959,80.787936,0.2856586)"
+           style="fill:none;stroke:#000000"
+           points="630,-668 475,-668 "
+           id="polyline8019" />
+        <path
+           style="fill:none;stroke:#000000"
+           d="M 475,-668 C 469,-668 463,-662 463,-656"
+           id="path8021" />
+        <polyline
+           style="fill:none;stroke:#000000"
+           points="463,-656 463,-496 "
+           id="polyline8023" />
+        <path
+           style="fill:none;stroke:#000000"
+           d="M 463,-496 C 463,-490 469,-484 475,-484"
+           id="path8025" />
+        <text
+           x="538.5791"
+           y="-650.90002"
+           style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+           id="text8027">UserRequestsController</text>
+        <polyline
+           transform="matrix(0.8254135,0,0,1.0004959,80.787936,0.2856586)"
+           style="fill:none;stroke:#000000"
+           points="463,-643 642,-643 "
+           id="polyline8029" />
+        <text
+           x="470.5"
+           y="-626.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8031">approve</text>
+        <text
+           x="470.5"
+           y="-609.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8033">create</text>
+        <text
+           x="470.5"
+           y="-592.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8035">
+          <tspan
+             id="tspan7430"
+             style="font-weight:bold;fill:#0000ff">index</tspan>
+        </text>
+        <text
+           x="470.5"
+           y="-575.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8037">
+          <tspan
+             id="tspan7432"
+             style="font-weight:bold;fill:#0000ff">new</tspan>
+        </text>
+        <text
+           x="470.5"
+           y="-558.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8039">reject</text>
+        <text
+           x="470.5"
+           y="-541.40002"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8041">revoke</text>
+        <polyline
+           transform="matrix(0.8254135,0,0,1.0004959,80.787936,0.2856586)"
+           style="fill:none;stroke:#000000"
+           points="463,-533 642,-533 "
+           id="polyline8043" />
+        <polyline
+           transform="matrix(0.8254135,0,0,1.0004959,80.787936,0.2856586)"
+           style="fill:none;stroke:#000000"
+           points="463,-509 642,-509 "
+           id="polyline8045" />
+        <text
+           x="470.5"
+           y="-491.89999"
+           style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+           id="text8047">find_request</text>
+      </g>
+    </g>
+    <g
+       class="node"
+       id="node3"
+       transform="matrix(0.8941256,0,0,0.8941256,258.68323,764.70245)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8050">SharesController</title>
+      <polyline
+         id="polyline8052"
+         points="13,-253 121,-253 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8054"
+         d="M 121,-253 C 127,-253 133,-259 133,-265"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8056"
+         points="133,-265 133,-475 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8058"
+         d="M 133,-475 C 133,-481 127,-487 121,-487"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8060"
+         points="121,-487 13,-487 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8062"
+         d="M 13,-487 C 7,-487 1,-481 1,-475"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8064"
+         points="1,-475 1,-265 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8066"
+         d="M 1,-265 C 1,-259 7,-253 13,-253"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8068"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-469.89999"
+         x="67">SharesController</text>
+      <polyline
+         id="polyline8070"
+         points="1,-462 133,-462 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8072"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-444.89999"
+         x="9">create</text>
+      <text
+         id="text8074"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-427.89999"
+         x="9">destroy</text>
+      <text
+         id="text8076"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-410.89999"
+         x="9">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7434">edit</tspan>
+      </text>
+      <text
+         id="text8078"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-393.89999"
+         x="9">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7436">index</tspan>
+      </text>
+      <text
+         id="text8080"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-376.89999"
+         x="9">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7438">new</tspan>
+      </text>
+      <text
+         id="text8082"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-359.89999"
+         x="9">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7440">show</tspan>
+      </text>
+      <text
+         id="text8084"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-342.89999"
+         x="9">toggle_checkout</text>
+      <text
+         id="text8086"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-325.89999"
+         x="9">toggle_update</text>
+      <text
+         id="text8088"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-308.89999"
+         x="9">update</text>
+      <polyline
+         id="polyline8090"
+         points="1,-301 133,-301 "
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8092"
+         points="1,-277 133,-277 "
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       class="node"
+       id="node4"
+       transform="matrix(0.8941256,0,0,0.8941256,260.02992,753.03474)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8095">SessionsController</title>
+      <polyline
+         id="polyline8097"
+         points="349,-0 469,-0 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8099"
+         d="M 469,0 C 475,0 481,-6 481,-12"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8101"
+         points="481,-12 481,-121 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8103"
+         d="M 481,-121 C 481,-127 475,-133 469,-133"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8105"
+         points="469,-133 349,-133 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8107"
+         d="M 349,-133 C 343,-133 337,-127 337,-121"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8109"
+         points="337,-121 337,-12 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8111"
+         d="M 337,-12 C 337,-6 343,0 349,0"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8113"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-115.9"
+         x="409">SessionsController</text>
+      <polyline
+         id="polyline8115"
+         points="337,-108 481,-108 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8117"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-90.900002"
+         x="345">create</text>
+      <text
+         id="text8119"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-73.900002"
+         x="345">destroy</text>
+      <text
+         id="text8121"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-56.900002"
+         x="345">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7404">new</tspan>
+      </text>
+      <polyline
+         id="polyline8123"
+         points="337,-49 481,-49 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8125"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-31.9"
+         x="345">note_failed_signin</text>
+      <polyline
+         id="polyline8127"
+         points="337,-24 481,-24 "
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       class="node"
+       id="node5"
+       transform="matrix(0.8941256,0,0,0.8941256,258.68323,766.86779)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8130">HomeController</title>
+      <polyline
+         id="polyline8132"
+         points="13,-126 114,-126 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8134"
+         d="M 114,-126 C 120,-126 126,-132 126,-138"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8136"
+         points="126,-138 126,-229 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8138"
+         d="M 126,-229 C 126,-235 120,-241 114,-241"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8140"
+         points="114,-241 13,-241 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8142"
+         d="M 13,-241 C 7,-241 1,-235 1,-229"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8144"
+         points="1,-229 1,-138 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8146"
+         d="M 1,-138 C 1,-132 7,-126 13,-126"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8148"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-223.89999"
+         x="63">HomeController</text>
+      <polyline
+         id="polyline8150"
+         points="1,-216 126,-216 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8152"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-199.39999"
+         x="8.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7400">about</tspan>
+      </text>
+      <text
+         id="text8154"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-182.39999"
+         x="8.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7402">index</tspan>
+      </text>
+      <polyline
+         id="polyline8156"
+         points="1,-174 126,-174 "
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8158"
+         points="1,-150 126,-150 "
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       class="node"
+       id="node6"
+       transform="matrix(0.8941256,0,0,0.8941256,302.83121,923.34229)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8161">ApplicationController</title>
+      <polyline
+         id="polyline8163"
+         points="160,-399 299,-399 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8165"
+         d="M 299,-399 C 305,-399 311,-405 311,-411"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8167"
+         points="311,-411 311,-674 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8169"
+         d="M 311,-674 C 311,-680 305,-686 299,-686"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8171"
+         points="299,-686 160,-686 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8173"
+         d="M 160,-686 C 154,-686 148,-680 148,-674"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8175"
+         points="148,-674 148,-411 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8177"
+         d="M 148,-411 C 148,-405 154,-399 160,-399"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8179"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-668.90002"
+         x="229">ApplicationController</text>
+      <polyline
+         id="polyline8181"
+         points="148,-661 311,-661 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8183"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-644.40002"
+         x="155.5">role_requirements</text>
+      <text
+         id="text8185"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-627.40002"
+         x="155.5">role_requirements=</text>
+      <polyline
+         id="polyline8187"
+         points="148,-619 311,-619 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8189"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-601.90002"
+         x="155.5">filter_parameters</text>
+      <polyline
+         id="polyline8191"
+         points="148,-594 311,-594 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8193"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-576.90002"
+         x="155.5">all_departments</text>
+      <text
+         id="text8195"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-559.90002"
+         x="155.5">all_roles</text>
+      <text
+         id="text8197"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-542.90002"
+         x="155.5">document_access</text>
+      <text
+         id="text8199"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-525.90002"
+         x="155.5">find_document_by_id</text>
+      <text
+         id="text8201"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-508.89999"
+         x="155.5">find_document_share</text>
+      <text
+         id="text8203"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-491.89999"
+         x="155.5">find_share_by_id</text>
+      <text
+         id="text8205"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-474.89999"
+         x="155.5">make_audit</text>
+      <text
+         id="text8207"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-457.89999"
+         x="155.5">session_expire</text>
+      <text
+         id="text8209"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-440.89999"
+         x="155.5">set_user_time_zone</text>
+      <text
+         id="text8211"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-423.89999"
+         x="155.5">update_activity_time</text>
+      <text
+         id="text8213"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-406.89999"
+         x="155.5">validate_sql_integer</text>
+    </g>
+    <g
+       class="node"
+       id="node7"
+       transform="matrix(0.8941256,0,0,0.8941256,258.99715,368.55021)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8216">DocumentsController</title>
+      <polyline
+         id="polyline8218"
+         points="160,-85 299,-85 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8220"
+         d="M 299,-85 C 305,-85 311,-91 311,-97"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8222"
+         points="311,-97 311,-375 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8224"
+         d="M 311,-375 C 311,-381 305,-387 299,-387"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8226"
+         points="299,-387 160,-387 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8228"
+         d="M 160,-387 C 154,-387 148,-381 148,-375"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8230"
+         points="148,-375 148,-97 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8232"
+         d="M 148,-97 C 148,-91 154,-85 160,-85"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8234"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-369.89999"
+         x="229">DocumentsController</text>
+      <polyline
+         id="polyline8236"
+         points="148,-362 311,-362 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8238"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-344.89999"
+         x="155.5">checkin</text>
+      <text
+         id="text8240"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-327.89999"
+         x="155.5">checkout</text>
+      <text
+         id="text8242"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-310.89999"
+         x="155.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7442">corporate</tspan>
+      </text>
+      <text
+         id="text8244"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-293.89999"
+         x="155.5">create</text>
+      <text
+         id="text8246"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-276.89999"
+         x="155.5">department</text>
+      <text
+         id="text8248"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-259.89999"
+         x="155.5">destroy</text>
+      <text
+         id="text8250"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-242.89999"
+         x="155.5">download</text>
+      <text
+         id="text8252"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-225.89999"
+         x="155.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7444">edit</tspan>
+      </text>
+      <text
+         id="text8254"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-208.89999"
+         x="155.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7446">index</tspan>
+      </text>
+      <text
+         id="text8256"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-191.89999"
+         x="155.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7448">new</tspan>
+      </text>
+      <text
+         id="text8258"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-174.89999"
+         x="155.5">shared</text>
+      <text
+         id="text8260"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-157.89999"
+         x="155.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7450">show</tspan>
+      </text>
+      <text
+         id="text8262"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-140.89999"
+         x="155.5">update</text>
+      <polyline
+         id="polyline8264"
+         points="148,-133 311,-133 "
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8266"
+         points="148,-109 311,-109 "
+         style="fill:none;stroke:#000000" />
+    </g>
+    <g
+       class="node"
+       id="node8"
+       transform="matrix(0.8941256,0,0,0.8941256,-173.17944,885.36533)"
+       inkscape:connector-avoid="true">
+      <title
+         id="title8269">AuditsController</title>
+      <polyline
+         id="polyline8271"
+         points="496,-148 601,-148 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8273"
+         d="M 601,-148 C 607,-148 613,-154 613,-160"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8275"
+         points="613,-160 613,-234 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8277"
+         d="M 613,-234 C 613,-240 607,-246 601,-246"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8279"
+         points="601,-246 496,-246 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8281"
+         d="M 496,-246 C 490,-246 484,-240 484,-234"
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8283"
+         points="484,-234 484,-160 "
+         style="fill:none;stroke:#000000" />
+      <path
+         id="path8285"
+         d="M 484,-160 C 484,-154 490,-148 496,-148"
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8287"
+         style="font-size:14px;text-anchor:middle;font-family:Times New Roman"
+         y="-228.89999"
+         x="548">AuditsController</text>
+      <polyline
+         id="polyline8289"
+         points="484,-221 613,-221 "
+         style="fill:none;stroke:#000000" />
+      <text
+         id="text8291"
+         style="font-size:14px;text-anchor:start;font-family:Times New Roman"
+         y="-203.89999"
+         x="491.5">
+        <tspan
+           style="font-weight:bold;fill:#0000ff"
+           id="tspan7398">index</tspan>
+      </text>
+      <polyline
+         id="polyline8293"
+         points="484,-196 613,-196 "
+         style="fill:none;stroke:#000000" />
+      <polyline
+         id="polyline8295"
+         points="484,-172 613,-172 "
+         style="fill:none;stroke:#000000" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+       x="10.355065"
+       y="27.949892"
+       id="text9135"><tspan
+         sodipodi:role="line"
+         id="tspan9137"
+         x="10.355065"
+         y="27.949892">Controller Diagram</tspan><tspan
+         sodipodi:role="line"
+         x="10.355065"
+         y="57.94989"
+         id="tspan9139">Group 9 - CSE 545</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+       x="11.518193"
+       y="85.426598"
+       id="text7376"><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="85.426598"
+         id="tspan7380">These are the controllers, they are responsible</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="100.4266"
+         id="tspan7384">for controlling the flow of data from the view</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="115.4266"
+         id="tspan7386">into the database and vice versa.</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="130.42661"
+         id="tspan7388" /><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="145.42659"
+         id="tspan7390"
+         style="font-weight:bold">Most methods correspond with a particular</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="160.42659"
+         id="tspan7392"><tspan
+   style="font-weight:bold"
+   id="tspan7526">page the user sees. </tspan>For example, the <tspan
+   style="font-weight:bold;fill:#0000ff"
+   id="tspan7428">new</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="175.42659"
+         id="tspan7394">method in the SessionController renders a</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="190.42659"
+         id="tspan7396">login page for the user. The methods that</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="205.42659"
+         id="tspan7416">correspond with views are shown in blue.</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="220.42659"
+         id="tspan7418">Other methods are those that the user may</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="235.42659"
+         id="tspan7420">use through links. For example, when the</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="250.42659"
+         id="tspan7422">user clicks Logout the <tspan
+   style="font-weight:bold;fill:#0000ff"
+   id="tspan7426">destroy</tspan> method in</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="265.42661"
+         id="tspan7424">the SessionsController is called.</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="280.42661"
+         id="tspan7458" /><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="295.42661"
+         id="tspan7460"
+         style="font-weight:bold">Every controller class inherits methods in the</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="310.42661"
+         id="tspan7462"><tspan
+   style="font-weight:bold"
+   id="tspan7524">ApplicationController. </tspan>Methods like </tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="325.42661"
+         id="tspan7464">find_document_by_id and document_access</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="340.42661"
+         id="tspan7468">are used to find a document and determine if </tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="355.42661"
+         id="tspan7472">a given user has access to it.</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="370.42661"
+         id="tspan7474" /><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="385.42661"
+         id="tspan7476"><tspan
+   style="font-weight:bold"
+   id="tspan7518">The role_requirements methods </tspan>in the</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="400.42661"
+         id="tspan7478">ApplicationController are used by every other</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="415.42661"
+         id="tspan7480">controller to specify which roles are allowed</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="430.42661"
+         id="tspan7482">access to each method. For example, one line</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="445.42661"
+         id="tspan7484">of code in the UsersController is:</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="460.42661"
+         id="tspan7486" /><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="475.17511"
+         id="tspan7490"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium">require_role &quot;administrator&quot;, </tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="490.17511"
+         id="tspan7492"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium">   :for_all_except =&gt; [:new, :create]</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="505.17511"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Inconsolata;-inkscape-font-specification:Inconsolata Medium"
+         id="tspan7496" /><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="520.42657"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         id="tspan7502">This means that every method within the Users</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="535.42657"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         id="tspan7506">Controller requires a user to have the </tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="550.42657"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         id="tspan7508">administrator role except for the new and create</tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="565.42657"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         id="tspan7510">methods. They require no roles so that new </tspan><tspan
+         sodipodi:role="line"
+         x="11.518193"
+         y="610.42657"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         id="tspan11406">users may sign up.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+       x="-263.95859"
+       y="357.064"
+       id="text7528"><tspan
+         sodipodi:role="line"
+         id="tspan7530"
+         x="-263.95859"
+         y="357.064" /></text>
+    <g
+       id="g7581"
+       transform="translate(-180.67064,-3.043042)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="228.50578"
+         x="785.21844"
+         height="320.81583"
+         width="161.71274"
+         id="rect7532"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1.12321782;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text7534"
+         y="244.2762"
+         x="810.03259"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="244.2762"
+           x="810.03259"
+           id="tspan7536"
+           sodipodi:role="line">AuthenticatedSystem</tspan></text>
+      <text
+         id="text7538"
+         y="268.56915"
+         x="794.96826"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="268.56915"
+           x="794.96826"
+           id="tspan7540"
+           sodipodi:role="line">logged_in?</tspan><tspan
+           id="tspan7542"
+           y="283.56915"
+           x="794.96826"
+           sodipodi:role="line">current_user</tspan><tspan
+           id="tspan7544"
+           y="298.56915"
+           x="794.96826"
+           sodipodi:role="line">current_user=</tspan><tspan
+           id="tspan7546"
+           y="313.56915"
+           x="794.96826"
+           sodipodi:role="line">authorized?</tspan><tspan
+           id="tspan7548"
+           y="328.56915"
+           x="794.96826"
+           sodipodi:role="line">login_required</tspan><tspan
+           id="tspan7550"
+           y="343.56915"
+           x="794.96826"
+           sodipodi:role="line">access_denied</tspan><tspan
+           id="tspan7552"
+           y="358.56915"
+           x="794.96826"
+           sodipodi:role="line">store_location</tspan><tspan
+           id="tspan7554"
+           y="373.56915"
+           x="794.96826"
+           sodipodi:role="line">redirect_back_or_default</tspan><tspan
+           id="tspan7556"
+           y="388.56915"
+           x="794.96826"
+           sodipodi:role="line">login_from_session</tspan><tspan
+           id="tspan7558"
+           y="403.56915"
+           x="794.96826"
+           sodipodi:role="line">login_from_basic_auth</tspan><tspan
+           id="tspan7560"
+           y="418.56915"
+           x="794.96826"
+           sodipodi:role="line">login_from_cookie</tspan><tspan
+           id="tspan7562"
+           y="433.56915"
+           x="794.96826"
+           sodipodi:role="line">logout_keeping_session!</tspan><tspan
+           id="tspan7564"
+           y="448.56915"
+           x="794.96826"
+           sodipodi:role="line">logout_killing_session!</tspan><tspan
+           id="tspan7566"
+           y="463.56915"
+           x="794.96826"
+           sodipodi:role="line">valid_remember_cookie?</tspan><tspan
+           id="tspan7568"
+           y="478.56915"
+           x="794.96826"
+           sodipodi:role="line">handle_remember_cookie!</tspan><tspan
+           id="tspan7570"
+           y="493.56915"
+           x="794.96826"
+           sodipodi:role="line">kill_remember_cookie!</tspan><tspan
+           id="tspan7572"
+           y="508.56915"
+           x="794.96826"
+           sodipodi:role="line">send_remember_cookie!</tspan></text>
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,365.73497,707.0006)"
+         style="fill:none;stroke:#000000"
+         points="463,-509 642,-509 "
+         id="polyline7574" />
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,365.84112,971.57436)"
+         style="fill:none;stroke:#000000"
+         points="463,-509 642,-509 "
+         id="polyline7577" />
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,366.0651,987.98904)"
+         style="fill:none;stroke:#000000"
+         points="463,-509 642,-509 "
+         id="polyline7579" />
+    </g>
+    <g
+       id="g7835"
+       transform="translate(34.900606,-881.14532)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="903.72186"
+         x="521.96545"
+         height="174.57539"
+         width="162.47603"
+         id="rect7609"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text7611"
+         y="919.63867"
+         x="538.92596"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="919.63867"
+           x="538.92596"
+           id="tspan7613"
+           sodipodi:role="line">RoleRequirementSystem</tspan></text>
+      <text
+         id="text7615"
+         y="945.93164"
+         x="531.86163"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           id="tspan7649"
+           y="945.93164"
+           x="531.86163"
+           sodipodi:role="line">reset_role_requirements!</tspan><tspan
+           y="960.93164"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7809">require_role</tspan><tspan
+           y="975.93164"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7811">user_authorized_for?</tspan><tspan
+           y="990.93164"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7813">render_optional_error_file</tspan><tspan
+           y="1005.9316"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7815">access_denied</tspan><tspan
+           y="1020.9316"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7817">check_roles</tspan><tspan
+           y="1035.9316"
+           x="531.86163"
+           sodipodi:role="line"
+           id="tspan7819">url_options_authenticate?</tspan></text>
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,102.62834,1382.3631)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7651" />
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,102.8467,1502.7434)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7653" />
+      <polyline
+         transform="matrix(0.9052988,0,0,0.8941256,102.95849,1519.047)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7655" />
+    </g>
+    <g
+       id="g7851"
+       transform="translate(216.49396,-764.09631)"
+       inkscape:connector-avoid="true">
+      <g
+         id="g8067"
+         transform="translate(-258,-449)">
+        <rect
+           style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect7853"
+           width="108.82227"
+           height="173.40347"
+           x="775.91632"
+           y="1235.6729"
+           ry="9" />
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+           x="790.92596"
+           y="1251.6387"
+           id="text7855"><tspan
+             sodipodi:role="line"
+             id="tspan7857"
+             x="790.92596"
+             y="1251.6387"
+             style="font-size:13px">Authentication</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+           x="781.86163"
+           y="1273.9316"
+           id="text7859"><tspan
+             id="tspan7873"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1273.9316">secure_digest</tspan><tspan
+             id="tspan7908"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1288.9316">make_token</tspan><tspan
+             id="tspan8057"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1303.9316">password_digest</tspan><tspan
+             id="tspan8059"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1318.9316">encrypt</tspan><tspan
+             id="tspan8061"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1333.9316">authenticated?</tspan><tspan
+             id="tspan8063"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1348.9316">encrypt_password</tspan><tspan
+             id="tspan8065"
+             sodipodi:role="line"
+             x="781.86163"
+             y="1363.9316">password_required?</tspan></text>
+        <polyline
+           id="polyline7875"
+           points="463,-509 642,-509 "
+           style="fill:none;stroke:#000000;stroke-width:1.36782396"
+           transform="matrix(0.6092292,0,0,0.8963137,493.62962,1715.3979)" />
+        <polyline
+           id="polyline7877"
+           points="463,-509 642,-509 "
+           style="fill:none;stroke:#000000;stroke-width:1.36782396"
+           transform="matrix(0.6092292,0,0,0.8963137,493.77656,1831.8911)" />
+        <polyline
+           id="polyline7879"
+           points="463,-509 642,-509 "
+           style="fill:none;stroke:#000000;stroke-width:1.36782396"
+           transform="matrix(0.6092292,0,0,0.8963137,493.85179,1848.2396)" />
+      </g>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1;display:inline"
+       d="M 368.22224,554.43303 L 434.71474,499.19151"
+       id="path7965"
+       inkscape:connector-type="polyline"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 370.00186,264.19355 L 387.88068,295.9966 L 434.71474,351.45676"
+       id="path7967"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node1"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 485.34918,292.9966 L 487.92987,309.52507"
+       id="path7969"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node7"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 378.049,435.25797 L 434.71474,436.57504"
+       id="path7973"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node3"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 598.1098,633.66897 L 567.39003,567.03324"
+       id="path7975"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node4"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 485.30402,588.06853 L 488.49591,567.03324"
+       id="path7977"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node2"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 366.6351,664.96337 L 374.79012,657.65503 L 402.28281,585.06853 L 434.71474,540.05054"
+       id="path7979"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#node8"
+       inkscape:connection-end="#node6" />
+    <g
+       id="g8024"
+       transform="translate(222.39062,-329.20227)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="903.55347"
+         x="521.79706"
+         height="114.96133"
+         width="107.06093"
+         id="rect8026"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text8028"
+         y="919.63867"
+         x="536.92596"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="919.63867"
+           x="536.92596"
+           id="tspan8030"
+           sodipodi:role="line">StatefulRoles</tspan></text>
+      <text
+         id="text8032"
+         y="941.93164"
+         x="527.86163"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="941.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan8036">recently_activated?</tspan><tspan
+           y="956.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan8046">do_delete</tspan><tspan
+           y="971.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan8048">do_activate</tspan></text>
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.62344,1383.4295)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline8038" />
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.76726,1441.9321)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline8040" />
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.84089,1458.282)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline8042" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 756.22625,196.48001 L 745.59868,224.90113"
+       id="path8855"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g7851"
+       inkscape:connection-end="#g7581" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 603.26782,197.65194 L 558.99097,309.52507"
+       id="path8857"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g7835"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.99000001;stroke-linecap:butt;stroke-linejoin:miter;marker-start:none;marker-end:url(#Arrow1Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 603.76783,409.99249 L 581.35133,416.61587"
+       id="path8863"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g7581"
+       inkscape:connection-end="#node6" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 771.20484,573.8512 L 758.8765,546.84018"
+       id="path17007"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g8024"
+       inkscape:connection-end="#g7581" />
+    <g
+       id="g17544"
+       transform="translate(122.54471,-205.99809)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="228.57463"
+         x="785.28729"
+         height="365.79105"
+         width="177.89249"
+         id="rect17546"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text17548"
+         y="242.83643"
+         x="846.58716"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="242.83643"
+           x="846.58716"
+           id="tspan17550"
+           sodipodi:role="line">Paperclip</tspan></text>
+      <text
+         id="text17552"
+         y="266.56915"
+         x="790.96826"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           id="tspan17586"
+           y="266.56915"
+           x="790.96826"
+           sodipodi:role="line">options</tspan><tspan
+           y="281.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17746">path_for_command</tspan><tspan
+           y="296.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17748">interpolates</tspan><tspan
+           y="311.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17750">run</tspan><tspan
+           y="326.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17752">bit_bucket</tspan><tspan
+           y="341.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17754">included</tspan><tspan
+           y="356.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17756">processor</tspan><tspan
+           y="371.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17758">log</tspan><tspan
+           y="386.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17760">logger</tspan><tspan
+           y="401.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17762">logging?</tspan><tspan
+           y="416.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17764">has_attached_file</tspan><tspan
+           y="431.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17766">validates_attachment_size</tspan><tspan
+           y="446.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17768">validates_attachment_presence</tspan><tspan
+           y="461.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17770">validates_attachment_thumbnails</tspan><tspan
+           y="476.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17772">validates_attachment_conent_type</tspan><tspan
+           y="491.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17774">attachment_definitions</tspan><tspan
+           y="506.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17776">attachment_for</tspan><tspan
+           y="521.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17778">each_attachment</tspan><tspan
+           y="536.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17780">save_attached_files</tspan><tspan
+           y="551.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17782">destroy_attached_files</tspan></text>
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.13405,706.37868)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17588" />
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.37357,1016.808)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17590" />
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.61926,1033.1994)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17592" />
+    </g>
+    <g
+       id="g17840"
+       transform="translate(317.08303,-205.99809)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="228.57463"
+         x="785.28729"
+         height="646.79102"
+         width="145.89252"
+         id="rect17842"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text17844"
+         y="242.83643"
+         x="826.58716"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="242.83643"
+           x="826.58716"
+           id="tspan17846"
+           sodipodi:role="line">Attachment</tspan></text>
+      <text
+         id="text17848"
+         y="266.56915"
+         x="790.96826"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="266.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan17888">initialize</tspan><tspan
+           y="281.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18105">assign</tspan><tspan
+           y="296.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18107">url</tspan><tspan
+           y="311.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18109">path</tspan><tspan
+           y="326.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18111">to_s</tspan><tspan
+           y="341.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18113">valid?</tspan><tspan
+           y="356.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18115">errors</tspan><tspan
+           y="371.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18117">dirty?</tspan><tspan
+           y="386.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18119">save</tspan><tspan
+           y="401.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18121">clear</tspan><tspan
+           y="416.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18123">destroy</tspan><tspan
+           y="431.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18125">original_filename</tspan><tspan
+           y="446.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18127">size</tspan><tspan
+           y="461.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18129">content_type</tspan><tspan
+           y="476.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18131">updated_at</tspan><tspan
+           y="491.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18133">reprocess!</tspan><tspan
+           y="506.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18135">file?</tspan><tspan
+           y="521.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18137">instance_write</tspan><tspan
+           y="536.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18139">instance_read</tspan><tspan
+           y="551.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18141">ensure_required_accessors!</tspan><tspan
+           y="566.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18143">log</tspan><tspan
+           y="581.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18145">valid_assignment?</tspan><tspan
+           y="596.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18147">validate</tspan><tspan
+           y="611.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18149">allow_validation?</tspan><tspan
+           y="626.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18151">check_guard</tspan><tspan
+           y="641.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18153">validate_size</tspan><tspan
+           y="656.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18155">validate_presence</tspan><tspan
+           y="671.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18157">validate_content_type</tspan><tspan
+           y="686.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18159">normailze_style_definitions</tspan><tspan
+           y="701.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18161">soldify_style_definitions</tspan><tspan
+           y="716.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18163">initialize_storage</tspan><tspan
+           y="731.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18165">extra_options_for</tspan><tspan
+           y="746.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18167">post_process</tspan><tspan
+           y="761.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18169">fire_events</tspan><tspan
+           y="776.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18171">callback</tspan><tspan
+           y="791.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18173">post_process_styles</tspan><tspan
+           y="806.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18175">interpolate</tspan><tspan
+           y="821.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18177">queue_existing_for_delete</tspan><tspan
+           y="836.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan18179">flush_errors</tspan></text>
+      <polyline
+         transform="matrix(0.8166506,0,0,0.8930013,406.75367,706.40293)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17890" />
+      <polyline
+         transform="matrix(0.8166506,0,0,0.8930013,406.95064,1296.927)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17892" />
+      <polyline
+         transform="matrix(0.8166506,0,0,0.8930013,407.15269,1313.3211)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline17894" />
+    </g>
+    <g
+       id="g7586"
+       transform="translate(261.3045,-522.18632)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="903.55347"
+         x="521.79706"
+         height="114.8158"
+         width="106.71127"
+         id="rect7588"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text7590"
+         y="919.63867"
+         x="560.92596"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="919.63867"
+           x="560.92596"
+           id="tspan7592"
+           sodipodi:role="line">File</tspan></text>
+      <text
+         id="text7594"
+         y="943.93164"
+         x="527.86163"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="943.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan7600">mime_type?</tspan><tspan
+           y="958.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan7614">mime_type_ext</tspan><tspan
+           y="973.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan7616">extensions</tspan></text>
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.62344,1383.4295)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline7602" />
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.76726,1441.9321)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline7604" />
+      <polyline
+         transform="matrix(0.596272,0,0,0.8963863,245.84089,1458.282)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline7606" />
+    </g>
+    <g
+       id="g7618"
+       transform="translate(123.86661,232.26043)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="228.57463"
+         x="785.28729"
+         height="292.64673"
+         width="177.89252"
+         id="rect7620"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text7622"
+         y="242.83643"
+         x="822.58716"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="242.83643"
+           x="822.58716"
+           id="tspan7624"
+           sodipodi:role="line">ActsAsStateMachine</tspan></text>
+      <text
+         id="text7626"
+         y="266.56915"
+         x="790.96826"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="266.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8499">next_states</tspan><tspan
+           y="281.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8515">transitions</tspan><tspan
+           y="296.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8517">set_initial_state</tspan><tspan
+           y="311.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8519">run_initial_state_actions</tspan><tspan
+           y="326.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8521">current_state</tspan><tspan
+           y="341.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8523">next_state_for_event</tspan><tspan
+           y="356.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8525">next_states_for_event</tspan><tspan
+           y="371.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8527">run_transition_action</tspan><tspan
+           y="386.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8529">states</tspan><tspan
+           y="401.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8531">event</tspan><tspan
+           y="416.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8533">state</tspan><tspan
+           y="431.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8535">find_in_state</tspan><tspan
+           y="446.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8537">count_in_state</tspan><tspan
+           y="461.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8539">calculate_in_state</tspan><tspan
+           y="476.56915"
+           x="790.96826"
+           sodipodi:role="line"
+           id="tspan8541">with_state_scope</tspan></text>
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.13405,706.37868)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7706" />
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.37357,942.808)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7708" />
+      <polyline
+         transform="matrix(0.9930401,0,0,0.892858,325.61926,959.1994)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline7710" />
+    </g>
+    <g
+       id="g8543"
+       transform="translate(-1.18226,-11.29753)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="228.57463"
+         x="785.28729"
+         height="134.27159"
+         width="103.02426"
+         id="rect8545"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text8547"
+         y="242.83643"
+         x="814.58716"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px"
+           y="242.83643"
+           x="814.58716"
+           id="tspan8549"
+           sodipodi:role="line">Storage</tspan></text>
+      <text
+         id="text8551"
+         y="268.56915"
+         x="792.96826"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="268.56915"
+           x="792.96826"
+           sodipodi:role="line"
+           id="tspan8581">exists?</tspan><tspan
+           y="283.56915"
+           x="792.96826"
+           sodipodi:role="line"
+           id="tspan8708">to_file</tspan><tspan
+           y="298.56915"
+           x="792.96826"
+           sodipodi:role="line"
+           id="tspan8710">flush_writes</tspan><tspan
+           y="313.56915"
+           x="792.96826"
+           sodipodi:role="line"
+           id="tspan8712">flush_deletes</tspan></text>
+      <polyline
+         transform="matrix(0.5776533,0,0,0.892858,517.23926,706.37868)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline8583" />
+      <polyline
+         transform="matrix(0.5736686,0,0,0.906214,519.55611,790.1486)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline8585" />
+      <polyline
+         transform="matrix(0.5736686,0,0,0.906214,519.69804,806.78519)"
+         style="fill:none;stroke:#000000;stroke-width:1.11148798"
+         points="463,-509 642,-509 "
+         id="polyline8587" />
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.99000001;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Mend);stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 908.25493,618.20493 L 851.74861,625.16787"
+       id="path8714"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g7618"
+       inkscape:connection-end="#g8024" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 1101.4713,287.96205 L 1086.2245,275.97157"
+       id="path10314"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g17840"
+       inkscape:connection-end="#g17544" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 887.62929,258.82263 L 906.93303,249.36995"
+       id="path10316"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g8543"
+       inkscape:connection-end="#g17544" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow1Mend);stroke-opacity:1"
+       d="M 876.21566,380.86715 L 906.93303,336.10529"
+       id="path10318"
+       inkscape:connector-type="polyline"
+       inkscape:connection-start="#g7586"
+       inkscape:connection-end="#g17544" />
+    <g
+       id="g11412"
+       transform="translate(-442.27768,-275.03413)"
+       inkscape:connector-avoid="true">
+      <rect
+         ry="9"
+         y="903.55347"
+         x="521.79706"
+         height="93.633438"
+         width="100.42246"
+         id="rect11414"
+         style="fill:#0000ff;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text11416"
+         y="917.63867"
+         x="536.92596"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           style="font-size:13px;font-weight:normal"
+           y="917.63867"
+           x="536.92596"
+           id="tspan11418"
+           sodipodi:role="line">Diagram Key</tspan></text>
+      <text
+         id="text11420"
+         y="941.93164"
+         x="527.86163"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="941.93164"
+           x="527.86163"
+           sodipodi:role="line"
+           id="tspan11445">public methods</tspan></text>
+      <polyline
+         transform="matrix(0.560602,0,0,0.8969615,262.12361,1383.7072)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline11428" />
+      <polyline
+         transform="matrix(0.560602,0,0,0.8969615,262.25883,1408.2256)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline11430" />
+      <polyline
+         transform="matrix(0.560602,0,0,0.8969615,262.32805,1430.5898)"
+         style="fill:none;stroke:#000000;stroke-width:1.36782396"
+         points="463,-509 642,-509 "
+         id="polyline11432" />
+      <text
+         xml:space="preserve"
+         style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         x="71.186981"
+         y="671.07275"
+         id="text11455"
+         transform="translate(456.27768,285.03413)"><tspan
+           sodipodi:role="line"
+           id="tspan11457"
+           x="71.186981"
+           y="671.07275" /></text>
+      <text
+         id="text11459"
+         y="966.2157"
+         x="527.66431"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="966.2157"
+           x="527.66431"
+           sodipodi:role="line"
+           id="tspan11461">protected methods</tspan></text>
+      <text
+         id="text11463"
+         y="988.39099"
+         x="527.44421"
+         style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Times New Roman;-inkscape-font-specification:'Times New Roman,'"
+         xml:space="preserve"><tspan
+           y="988.39099"
+           x="527.44421"
+           sodipodi:role="line"
+           id="tspan11465">private methods</tspan></text>
+    </g>
+  </g>
+</svg>
